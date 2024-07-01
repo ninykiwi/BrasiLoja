@@ -1,0 +1,88 @@
+.card_produto {
+    width: 235px;
+    height: 381px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 12px 16px 12px 16px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.fav {
+    align-self: flex-end;
+    width: 32px;
+    height: 29px;
+}
+
+.fav:hover, .comprar:hover, .addcarrinho:hover {
+    cursor: pointer;
+}
+
+.produto {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.img_produto {
+    width: 124px;
+    height: 183px;
+    align-self: center;
+}
+
+.main_produto {
+    display: flex;
+    flex-direction: column;
+}
+
+.info_produto {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    padding-bottom: 13px;
+}
+
+.nome_produto {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+.preco_produto {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.botoes_produto {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+}
+
+.addcarrinho {
+    width: 50px;
+    height: 46px;
+    background-color: #FFE768;
+    border-radius: 10px;
+    padding: 5px 7px 5px 7px;
+}
+
+.addcarrinho img {
+    width: 36px;
+    height: 36px;
+}
+
+.comprar {
+    width: 138px;
+    height: 52px;
+    background-color: #4062DB;
+    border-radius: 8px;
+    padding: 14px 17px 14px 17px;
+    color: white;
+    font-weight: 900;
+    font-size: 20px;
+}
