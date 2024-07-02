@@ -4,6 +4,37 @@
 
 
 @layer base {
+  /*-- TEXTO --*/
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 600;
+  }
+  h2 {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 2.5rem;
+  }
+  h4 {
+    font-size: 2rem;
+  }
+  h5 {
+    font-size: 1.75rem;
+  }
+  h6 {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+
+@layer base {
   /* --TEXTO-- */
   h1 {
     font-size: 3.5rem;
