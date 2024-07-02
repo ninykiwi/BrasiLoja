@@ -1,0 +1,71 @@
+{
+  "id": "hero",
+  "type": "SharedSlice",
+  "name": "Hero",
+  "description": "Hero",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "carousel": {
+          "type": "Group",
+          "config": {
+            "label": "Carousel",
+            "repeat": true,
+            "fields": {
+              "banner_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Banner Title",
+                  "placeholder": ""
+                }
+              },
+              "banner_subtitle": {
+                "type": "Text",
+                "config": {
+                  "label": "Banner Subtitle",
+                  "placeholder": "Optional"
+                }
+              },
+              "banner_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Banner Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "link_to_product": {
+                "type": "Link",
+                "config": {
+                  "label": "Link to Product",
+                  "placeholder": "Optional",
+                  "allowTargetBlank": true,
+                  "select": null
+                }
+              },
+              "banner_type": {
+                "type": "Select",
+                "config": {
+                  "label": "Banner Type",
+                  "placeholder": "",
+                  "options": [
+                    "Type 1 (image to the right)",
+                    "Type 2 (image to the left)"
+                  ],
+                  "default_value": "Type 1 (image to the right)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
