@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Produto from './Produto'
 import setaCarrossel from '../../public/icons/setaCarrossel.svg'
+import { createClient } from '@/prismicio'
 
 
 interface ContainerProdutosProps {
@@ -17,6 +18,9 @@ export default function ContainerProdutos({
   tipo
 }: ContainerProdutosProps) {
   const { List } = useFilter()
+  const client = createClient()
+  const destaques = client.getSingle('home')
+  const hero = destaques.then((response) => response.data.slices[0])
 
   switch (tipo) {
     default:
@@ -28,13 +32,12 @@ export default function ContainerProdutos({
           
           <Image className='fixed' src={setaCarrossel} alt='Seta para a esquerda' width={32} height={32} />
           <ul className='flex mt-[12px] gap-[50px] lg:gap-[80px]'>
-            {/* Lista &&
-              Lista.slice(0,4).map((item: any) => (
+            {hero.map((item: any) => (
                 <li key={item.id}>
                   <Produto {...} />
                 </li>
               ))
-            */}
+            }
             <Produto />
             <Produto />
             <Produto />
