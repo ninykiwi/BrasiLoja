@@ -1,5 +1,4 @@
-import './criarproduto.css';
-import Image from 'next/image';
+import Image from 'next/image'
 
 
 export default function CriarProduto () {

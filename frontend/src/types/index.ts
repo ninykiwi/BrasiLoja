@@ -6,6 +6,7 @@ export type FilterContextType = {
   Name: string | null
   Tags: any[]
   List: any[] | null
+  filterName: (item: string) => void
   filterTags: (item: any[]) => void
 }
 

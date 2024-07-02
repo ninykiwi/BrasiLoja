@@ -5,9 +5,10 @@ import { searchByName, filterByTag } from '@/services/api'
 
 // Estado inicial
 const initialState: FilterContextType = {
-  Name: null,
+  Name: '',
   Tags: [''],
   List: [{}],
+  filterName: (item: string) => {},
   filterTags: (item: any) => {},
 }
 
@@ -16,9 +17,13 @@ const FilterContext = createContext<FilterContextType>(initialState)
 
 // Criando o provider
 export const FilterProvider: React.FC<ContextProps> = ({ children }) => {
-  const [Name, setName] = useState(null)
+  const [Name, setName] = useState('')
   const [Tags, setTags] = useState([''])
   const [List, setList] = useState([{}])
+
+  const filterName = (input: any) => {
+    setName(input.target.value)
+  }
 
   const filterTags = (item: any) => {
     if ( !Tags.some(tag => tag === item) ) {
@@ -27,8 +32,16 @@ export const FilterProvider: React.FC<ContextProps> = ({ children }) => {
     }
   }
 
+  useEffect(() => {
+    Name !== ''?
+    searchByName(Name, setList)
+    :
+    filterByTag(Tags, setList)
+  }, [Name, Tags])
+
+  
   return (
-      <FilterContext.Provider value={{ Name, Tags, List, filterTags }}>
+      <FilterContext.Provider value={{ Name, Tags, List, filterName, filterTags }}>
         {children}
       </FilterContext.Provider>
   )
