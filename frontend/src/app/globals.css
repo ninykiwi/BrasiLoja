@@ -4,45 +4,12 @@
 
 
 @layer base {
-  /*-- TEXTO --*/
-  h1 {
-    font-size: 3.5rem;
-    font-weight: 600;
-  }
-  h2 {
-    font-size: 3rem;
-    font-weight: 700;
-  }
-  h3 {
-    font-size: 2.5rem;
-  }
-  h4 {
-    font-size: 2rem;
-  }
-  h5 {
-    font-size: 1.75rem;
-  }
-  h6 {
-    font-size: 1.5rem;
-  }
-  p {
-    font-size: 1rem;
-  }
-  .subtitle {
-    font-size: 1.25rem;
-  }
-}
-
-
-@layer base {
   /* --TEXTO-- */
   h1 {
-    font-size: 3.5rem;
-    font-weight: 600;
+    @apply text-[3.5rem] font-medium
   }
   h2 {
-    font-size: 3rem;
-    font-weight: 700;
+    @apply text-[3rem] font-bold
   }
   h3 {
     @apply text-[1.5rem] lg:text-[2.5rem];
@@ -62,13 +29,31 @@
   .subtitle {
     @apply text-[0.75rem] lg:text-[1.25rem];
   }
+  /*-- FORM --*/
+  label {
+    @apply mb-[7px] text-[0.75rem] lg:text-[1rem] font-bold leading-[-0.02rem];
+  }
+  button[type='submit'] {
+    @apply leading-[-0.02rem];
+  }
 }
+
 
 @layer components {
   .header-nav {
     @apply flex place-items-center place-content-center w-[95px] lg:w-[185px] h-[20px] lg:h-[28px] bg-white rounded-xl text-gray-500 text-[0.5rem] lg:text-[1rem] hover:bg-blue-500 hover:text-white active:bg-blue-500 active:text-white;
   }
+  .fav, .comprar, .addcarrinho {
+    @apply hover:cursor-pointer;
+  }
+  .criar_produto_imagens label {
+    @apply flex flex-col items-center;
+  }
+  upload_area {
+    @apply flex justify-center items-center w-[106px] h-[81px] bg-white;
+  }
 }
+
 
 @layer utilities {
   /*-- TEXTO --*/

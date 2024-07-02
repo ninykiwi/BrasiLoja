@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { SBNProps, FBTProps } from '../types'
 
 
 export const URL_BACK = `http://localhost:3005`
@@ -7,10 +6,10 @@ export const URL_SBN = `search_by_name`
 export const URL_FBT = `filter_by_tag`
 
 
-export const searchByName = ({
-  name,
-  setList
-}: SBNProps) => {
+export const searchByName = (
+  name: string,
+  setList: React.Dispatch<React.SetStateAction<{}[]>>
+) => {
   axios.get(`${URL_BACK}/${URL_SBN}`, {
     params: { name }
   })
@@ -22,12 +21,12 @@ export const searchByName = ({
     console.error('Pesquisa por nome deu ruim: ', error)
   })
 }
-export const filterByTag = ({
-  tags,
-  setList
-}: FBTProps) => {
+export const filterByTag = (
+  Tags: string[],
+  setList: React.Dispatch<React.SetStateAction<{}[]>>
+) => {
   axios.get(`${URL_BACK}/${URL_FBT}`, {
-    params: { tags }
+    params: { Tags }
   })
   .then(response => {
     setList(response.data.results)
