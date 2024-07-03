@@ -1,5 +1,6 @@
 
 //-- TYPEs
+export type ListTypes = 'Todos' | 'Ofertas' | 'VejaTambem' | 'VocePodeGostar' | 'VistosRecentemente' | 'OutrosProdutos' | 'ProdutosSimilares'
 export type FilterAny = (item: any) => void
 export type FilterString = (item: string) => void
 export type FilterContextType = {
@@ -14,4 +15,12 @@ export type FilterContextType = {
 //-- PROPSs
 export interface ContextProps {
   children: React.ReactNode
+}
+export interface ListValuesProps {
+  tipo?: ListTypes
+  carousel: boolean
+}
+export interface ContainerProdutosProps {
+  className?: string
+  tipo?: ListTypes
 }
