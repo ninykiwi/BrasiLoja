@@ -37,8 +37,8 @@ export const Pesquisar = ({
 }: BtnProps) => {
   
   return (
-    <button type='submit' className={clsx('py-[6px] lg:py-[11] px-[10px] lg:px-[12px] bg-yellow-500 rounded', className)} {...restProps}> 
-      <Image className='lg:w-[32px] lg:h-[32px]' src={searchIcon} alt='Pesquisar produto pelo nome' width={22} height={22} />
+    <button type='submit' className={clsx('py-[6px] lg:py-[11px] px-[10px] lg:px-[12px] bg-yellow-500 rounded', className)} {...restProps}> 
+      <Image className='lg:w-[30px] lg:h-[30px]' src={searchIcon} alt='Pesquisar produto pelo nome' width={22} height={22} />
     </button>
   )
 }
