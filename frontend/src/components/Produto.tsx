@@ -2,6 +2,9 @@ import Image from 'next/image'
 import addCart from '../../public/icons/addCart.svg'
 import heart from '../../public/icons/heart.svg'
 import fone from '../../public/images/fone.png'
+import squareFone from '../../public/images/squareFone.png'
+import EditarProduto from './EditarProduto'
+import { useState } from 'react'
 
 
 export default function Produto () {
@@ -22,5 +25,39 @@ export default function Produto () {
         </div>
       </div>
     </div>
+  );
+};
+
+export function ProdutoHorizontal () {
+  const [isEditarProdutoVisible, setIsEditarProdutoVisible] = useState(false);
+   
+  const handleEditarProdutoClick = () => {
+    setIsEditarProdutoVisible(true);
+  };
+  const closeEditarProduto = () => {
+    setIsEditarProdutoVisible(false);
+  };
+
+  return (
+    <>
+    <EditarProduto isVisible={isEditarProdutoVisible} onClose={closeEditarProduto}/>
+    <div className='flex items-end justify-between w-[1224px] lg:w-[1224px] h-[171px] lg:h-[260px] py-[53px] px-[27px] rounded-lg bg-white border-[#5D5D5D] border'>
+      <div className='flex gap-[55px] w-full h-full items-end'>
+        <Image className='self-center lg:w-[177px] lg:h-[175px]' src={squareFone} alt='Imagem do produto' width={70} height={70} />
+        
+        <div className='flex flex-col gap-[43px]'>
+            <p className='subtitle font-display'>Fone de ouvido</p>
+            <p className='subtitle font-display'>R$ 59,90</p>
+        </div>
+      </div> 
+
+        <button 
+        onClick={handleEditarProdutoClick}
+        className='bg-yellow-800 rounded-[10px] text-[20px] text-black font-black w-[390px] h-[81px] py-[22px] px-[63px]'>
+          EDITAR PRODUTO
+        </button>  
+
+    </div>
+    </>
   );
 };
