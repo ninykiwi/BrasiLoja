@@ -28,6 +28,25 @@ export default function ContainerProdutos({
   const client = createClient()
   const page = client.getSingle('home')
 
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+
   return (
     <section className={clsx(
       'flex flex-col mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] overflow-hidden',

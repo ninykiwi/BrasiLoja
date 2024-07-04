@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import close from '../../../public/icons/close.svg'
-import camera from '../../../public/images/camera.png'
+import close from '../../public/icons/close.svg'
+import camera from '../../public/images/camera.png'
 import { useState } from 'react';
 
 

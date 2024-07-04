@@ -2,7 +2,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useState } from 'react';
-import CriarProduto from '@/components/CriarProduto/CriarProduto';
+import CriarProduto from '@/components/CriarProduto';
 import ListaEditar from '@/components/ListaEditar';
 
 export default function Home() {
@@ -32,8 +32,6 @@ export default function Home() {
         <CriarProduto isVisible={isCriarProdutoVisible} onClose={closeCriarProduto} />
       </div>
 
-      <Header />
-
 
       <section >
         <div className='flex flex-col gap-[39px] w-[1440px] h-[1576px] items-center'> 
@@ -54,8 +52,6 @@ export default function Home() {
         </div>
       </section>
 
-        
-      <Footer />
     </main>
   );
 }
