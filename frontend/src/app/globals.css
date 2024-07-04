@@ -33,7 +33,7 @@
   label {
     @apply mb-[7px] text-[0.75rem] lg:text-[1rem] font-bold leading-[-0.02rem];
   }
-  button[type='submit'] {
+  button[type='submit'], .espacamento {
     @apply leading-[-0.02rem];
   }
 }
@@ -49,7 +49,7 @@
   .criar_produto_imagens label {
     @apply flex flex-col items-center;
   }
-  upload_area {
+  .upload_area {
     @apply flex justify-center items-center w-[106px] h-[81px] bg-white;
   }
 }

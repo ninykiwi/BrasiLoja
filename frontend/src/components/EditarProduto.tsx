@@ -1,16 +1,16 @@
 import Image from 'next/image'
-import close from '../../../public/icons/close.svg'
-import camera from '../../../public/images/camera.png'
-import { useState } from 'react';
+import close from '../../public/icons/close.svg'
+import camera from '../../public/images/camera.png'
+import { useEffect, useState } from 'react';
 
 
-interface CriarProdutoProps {
+interface EditarProdutoProps {
     isVisible: boolean;
     onClose: () => void;
 }
 
-const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }) => {
-    if (!isVisible) return null;
+const EditarProduto: React.FC<EditarProdutoProps> = ({ isVisible, onClose }) => {
+    if (!isVisible) return null; 
 
     const [images, setImages] = useState({
         fileUpload1: null,
@@ -20,24 +20,37 @@ const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }) => {
         fileUploadMain: null,
       });
 
+    useEffect(() => {
+        const savedImages = {
+          fileUpload1: localStorage.getItem('fileUpload1'),
+          fileUpload2: localStorage.getItem('fileUpload2'),
+          fileUpload3: localStorage.getItem('fileUpload3'),
+          fileUpload4: localStorage.getItem('fileUpload4'),
+          fileUploadMain: localStorage.getItem('fileUploadMain'),
+        };
+        setImages(savedImages);
+      }, []);
+
     const handleImageUpload = (event, inputId) => {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onloadend = () => {
+          const imageUrl = reader.result;
           setImages((prevImages) => ({
             ...prevImages,
-            [inputId]: reader.result,
+            [inputId]: imageUrl,
           }));
+          localStorage.setItem(inputId, imageUrl);
         };
         reader.readAsDataURL(file);
       }
     };
 
   return (
-    <section className='z-20 inset-0 w-full flex justify-center'>
-    <div className='flex absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
-      <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px] overflow-y'>
+    <section className='z-30 inset-0 w-full flex justify-center'>
+    <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
+      <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]'>
 
         <Image 
         onClick={onClose}
@@ -47,7 +60,7 @@ const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }) => {
         width={45} 
         height={45}
          />
-        <p className='px-8 mb-[74px] text-[40px] font-black self-start'>Criar Produto</p>
+        <p className='px-8 mb-[74px] text-[40px] font-black self-start'>Editar Produto</p>
 
         <div className='flex px-10 mb-[100px]'>
             <div className='flex gap-[20px]'>
@@ -163,8 +176,8 @@ const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }) => {
             </div>
         </div>
 
-        <button type='submit' className='self-center w-[369px] h-[81px] text-[32px] font-black bg-blue-600 mt-[134px] py-[22px] px-[63px] text-[#ffffff] rounded-[10px] cursor-pointer'>
-            CRIAR PRODUTO
+        <button type='submit' className='self-center w-[369px] h-[81px] text-[32px] font-black bg-yellow-800 mt-[134px] py-[22px] px-[63px] text-[#ffffff] rounded-[10px] cursor-pointer'>
+            EDITAR PRODUTO
         </button>
       </form>
     </div>
@@ -172,4 +185,4 @@ const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }) => {
   );
 };
 
-export default CriarProduto;
+export default EditarProduto;
