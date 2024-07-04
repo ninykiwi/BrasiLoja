@@ -24,12 +24,9 @@ import Produto from './Produto';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 //-- ASSETs
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-//-- ASSETs
 import setaCarrossel from '../../public/icons/setaCarrossel.svg';
 
-const calculateItemsToShow = (containerWidth) => {
+const calculateItemsToShow = (containerWidth: any) => {
   const itemWidth = 235;
   const spacing = 78;
   const availableWidth = containerWidth - spacing;
