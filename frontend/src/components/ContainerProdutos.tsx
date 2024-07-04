@@ -79,9 +79,6 @@ export default function ContainerProdutos({
         )
       }
 
-      <ul className='flex mt-[12px] gap-[50px] lg:gap-[80px]'>
-        
-      </ul>
 
       <Link className='underline font-black text-[11px]' href='/'> Ver mais </Link>
     </section>
