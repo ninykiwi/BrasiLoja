@@ -1,9 +1,7 @@
 "use client";
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import { useState } from 'react';
-// import CriarProduto from '@/components/CriarProduto';
 import ListaEditar from '@/components/ListaEditar';
+import CriarProduto from '@/components/CriarProduto';
 
 export default function Home() {
   const [isCriarProdutoVisible, setIsCriarProdutoVisible] = useState(false);
@@ -29,7 +27,7 @@ export default function Home() {
     <main>
       <div className='flex w-full justify-center items-center self-center'>
         <ListaEditar isVisible={isListaEditarVisible} onClose={closeListaEditar} />
-        {/* <CriarProduto isVisible={isCriarProdutoVisible} onClose={closeCriarProduto} /> */}
+        <CriarProduto isVisible={isCriarProdutoVisible} onClose={closeCriarProduto} />
       </div>
 
 

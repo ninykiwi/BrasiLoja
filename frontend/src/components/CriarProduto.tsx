@@ -35,32 +35,17 @@ export const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }
     };
 
   return (
-    <section className='z-20 inset-0 w-full flex justify-center'>
-    <div className='flex absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
-      <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px] overflow-y'>
-
-        <Image 
-        onClick={onClose}
-        src={close} 
-        className='self-end mr-[20px] mt-[45.9px] cursor-pointer' 
-        alt='...' 
-        width={45} 
-        height={45}
-         />
-
-
-export default function CriarProduto () {
-  return (
-    <div className='flex items-center justify-center w-[100%] h-[100%] bg-white'>
+    <section className='z-30 inset-0 w-full flex justify-center'>
+    <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
       <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]'>
 
-        <Image src='./images/close.png' className='self-end mr-[20px] mt-[45.9px] cursor-pointer' alt='...' width={45} height={45}/>
+        <Image src={close} className='self-end mr-[20px] mt-[45.9px] cursor-pointer' alt='...' width={45} height={45} onClick={onClose}/>
         <p className='px-8 mb-[74px] text-[40px] font-black self-start'>Criar Produto</p>
 
         <div className='flex px-10 mb-[100px]'>
             <div className='flex gap-[20px]'>
                 <div className='flex flex-col gap-8 mr-[63px]'>
-                {['fileUpload1', 'fileUpload2', 'fileUpload3', 'fileUpload4'].map((inputId) => (
+                  {['fileUpload1', 'fileUpload2', 'fileUpload3', 'fileUpload4'].map((inputId) => (
                     <label key={inputId}>
                       <div className='upload_area'>
                         {images[inputId] ? (
@@ -80,34 +65,6 @@ export default function CriarProduto () {
                       </div>
                     </label>
                   ))}
-                <div className='flex flex-col gap-8 mr-[63px] mr-[39px]'>
-                    <label className=''>
-                        <div className='upload_area'>
-                            <Image src='./images/camera.png' alt='UploadIcon' width={23} height={20} />
-                            <input id='fileUpload1' type='file' accept='image/*' className='hidden' />
-                        </div>
-                    </label>
-
-                    <label>
-                        <div className='upload_area'>
-                            <img src='./images/camera.png' alt='UploadIcon'  />
-                            <input id='fileUpload2' type='file' accept='image/*' className='hidden' />
-                        </div>
-                    </label>
-
-                    <label>
-                        <div className='upload_area'>
-                            <img src='./images/camera.png' alt='UploadIcon' />
-                            <input id='fileUpload3' type='file' accept='image/*' className='hidden' />
-                        </div>
-                    </label>
-
-                    <label>
-                        <div className='upload_area'>
-                            <img src='./images/camera.png' alt='UploadIcon' />
-                            <input id='fileUpload4' type='file' accept='image/*' className='hidden' />
-                        </div>
-                    </label>
                 </div>
 
                 <label>
@@ -127,9 +84,6 @@ export default function CriarProduto () {
                           className='hidden'
                           onChange={(event) => handleImageUpload(event, 'fileUploadMain')}
                         />
-
-                        <Image src='./images/camera.png' alt='UploadIcon' width={45} height={39}/>
-                        <input id='fileUploadMain' type='file' accept='image/*' className='hidden' />
 
                     </div>
                 </label>
@@ -213,7 +167,5 @@ export default function CriarProduto () {
     </section>
   );
 };
-export default CriarProduto;
 
-  );
-};
+export default CriarProduto;
