@@ -14,7 +14,6 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 //-- ASSETs
 import setaCarrossel from '../../../public/icons/setaCarrossel.svg'
-import SliceAlignment from "@/components/SliceAlignment";
 
 
 /**
@@ -29,9 +28,10 @@ const Lists = ({ slice }: ListsProps): JSX.Element => {
 
 
   return (
-    <SliceAlignment
+    <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className='w-full'
     >
 
       <h3> {slice.primary.title} </h3>   
@@ -48,10 +48,10 @@ const Lists = ({ slice }: ListsProps): JSX.Element => {
               </li>
             ))} */}
 
-            <Produto />
-            <Produto />
-            <Produto />
-            <Produto />
+            <Produto nome='fone de ouvido'  />
+            <Produto nome='headphone' />
+            <Produto nome='ascoltatore' />
+            <Produto nome='tototo' />
 
           </ul>
           <Image className='fixed lg:w-[32px] lg:h-[32px]' src={setaCarrossel} alt='icone de seta direita do carrossel' width={24} height={24} />
@@ -76,7 +76,7 @@ const Lists = ({ slice }: ListsProps): JSX.Element => {
 
       <Link className='underline font-black text-[11px] lg:text-[16px]' href={`/${slice.primary.filter}`}> Ver mais </Link>
 
-    </SliceAlignment>
+    </section>
   );
 };
 

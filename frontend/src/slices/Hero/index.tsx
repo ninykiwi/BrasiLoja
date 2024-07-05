@@ -10,7 +10,6 @@ import Produto from "@/components/Produto";
 import setaCarrossel from '../../public/icons/setaCarrossel.svg';
 import clsx from "clsx";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
-import SliceAlignment from "@/components/SliceAlignment";
 
 /**
  * Props for `Hero`.
@@ -23,11 +22,11 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 const Hero = ({ slice }: HeroProps): JSX.Element => {
 
   return (
-    <SliceAlignment>
-      <section
+    <section className='w-full'>
+      <div
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className='flex flex-col  lg:w-[280px] lg:h-[154px] mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] bg-gray-200 overflow-hidden'
+        className='flex flex-col lg:w-[280px] lg:h-[154px] mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] bg-gray-200 overflow-hidden'
       >
         
         <ul className='flex h-[450px] mt-[12px] gap-[20px] lg:gap-[40px] overflow-hidden'>
@@ -52,13 +51,13 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
             </div>
           ))}
-          
+
         </ul>
 
         <Link className='place-self-end underline font-black text-[11px]' href='/'> Ver mais </Link>
 
-      </section>
-    </SliceAlignment>
+      </div>
+    </section>
   );
 };
 
