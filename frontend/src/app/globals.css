@@ -65,6 +65,17 @@
   .upload_area {
     @apply flex justify-center items-center w-[106px] h-[81px] bg-white;
   }
+  .card {
+    @apply flex flex-col w-[100px] lg:w-[235px] h-[171px] lg:h-[381px] py-[9px] lg:py-[12px] px-[5px] lg:px-[16px] bg-white shadow-lg rounded-lg;
+  }
+  button {
+    .comprar {
+      @apply w-[60px] lg:w-[138px] h-[28px] lg:h-[52px] bg-blue-500 rounded-lg py-[14px] px-[17px] text-white font-black text-[11px] lg:text-[20px];
+    }
+    .add-cart {
+      @apply w-[50px] h-[46px] bg-yellow-500 rounded-xl py-[5px] px-[7px];
+    }
+  }
 }
 
 

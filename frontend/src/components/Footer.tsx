@@ -17,7 +17,7 @@ export default async function Footer() {
     return (
       <section className='footer' style={{backgroundColor: `${settings.data.header_color}` }}>
         <nav>
-          <legend className='mb-[20px] text-[1rem] lg:text-[1.5rem] lg:font-bold'> Departamentos </legend>
+          <legend> Departamentos </legend>
           <ul>
             <li> <Link href='/departamentos/hardware'> Hardware </Link> </li>
             <li> <Link href='/departamentos/Celular e Smartphone'> Celular e Smartphone </Link> </li>
@@ -47,11 +47,11 @@ export default async function Footer() {
         
         <div className='flex flex-col gap-[22px]'>
           <ul>
-            <legend className='mb-[20px] text-[1rem] lg:text-[1.5rem] lg:font-bold'> Formas de Pagamento </legend>
+            <legend> Formas de Pagamento </legend>
             <li> <Image src={formasPagamento} alt='Formas de Pagamento' width={250} height={60}/> </li>
           </ul>
           <nav>
-            <legend className='mb-[20px] text-[1rem] lg:text-[1.5rem] lg:font-bold'> Deixe-nos ajudar você </legend>
+            <legend> Deixe-nos ajudar você </legend>
             <ul>
               <li><Link href='/conta'> Sua conta </Link></li>
               <li><Link href='/Frete&Entrega'> Frete e prazo de entrega </Link></li>
