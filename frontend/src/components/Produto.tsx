@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import addCart from '../../public/icons/addCart.svg'
 import heart from '../../public/icons/heart.svg'
@@ -9,7 +10,7 @@ import { useState } from 'react'
 
 export default function Produto () {
   return (
-    <div className='flex flex-col w-[100px] lg:w-[235px] h-[171px] lg:h-[381px] py-[12px] px-[16px] rounded-lg bg-white'>
+    <div className='flex flex-col w-[100px] lg:w-[235px] h-[171px] lg:h-[381px] py-[9px] lg:py-[12px] px-[5px] lg:px-[16px] bg-white shadow-lg rounded-lg'>
       <Image className='self-end' src={heart} alt='Adicionar aos "favoritos"' width={32} height={29}/>
       <div className='flex flex-col justify-between w-full h-full'>
         <Image className='self-center lg:w-[124px] lg:h-[183px]' src={fone} alt='Imagem do produto' width={70} height={70} />

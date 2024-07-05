@@ -7,17 +7,23 @@ import userIcon from '../../public/icons/user.svg'
 import { Comprar, AddCarrinho } from './StaticButtons'
 import cartIcon from '../../public/icons/cart.svg'
 import chatIcon from '../../public/icons/chat.svg'
-import toggleMenu from '../../public/icons/toggleMenu.svg'
 import SearchBar from './SearchBar'
+import { createClient } from '@/prismicio'
+import { PrismicImage, PrismicLink } from '@prismicio/react'
+import NavBar from './NavBar'
+import { settingsCustomType } from '@/services/prismicio'
 
-export default function Header() {
+
+export default async function Header() {
+  const settings = await settingsCustomType()
+
   return (
     <section>
-      <div className='flex flex-col py-[22px] lg:pt-[34px] lg:pb-[52px] px-[26px] lg:px-[115px] gap-[16px] bg-gray-700'>
-        <div className='flex justify-between'>
-          <div className='w-fit'>
-            <Image src={logo} alt='.' width={115} height={35} />
-            <p className='text-white text-[8px] lg:text-[13px]'>www.brasiloja.com.br</p>
+      <div className='header'>
+        <div className='flex items-baseline justify-between'>
+          <div className='flex flex-col w-fit items-center'>
+            <PrismicImage className='lg:w-[175px] lg:h-[33px]' field={settings.data.site_logo} width={99} height={18} />
+            <Link className='text-white text-[8px] lg:text-[13px]' href={`${settings.data.site_address}`}> {settings.data.site_address} </Link>
           </div>
 
           <SearchBar desktop />
@@ -49,16 +55,8 @@ export default function Header() {
         <SearchBar />
       </div>
 
-      <nav className='flex w-full py-[13px] lg:py-[16px] px-[26px] lg:px-[140px] gap-[21px] gap-[54px] bg-gray-400 overflow-hidden'>
-        <Image src={toggleMenu} alt='menu de departamentos' width={22} height={18} />
-        <ul className='flex gap-[14px]'>
-          <li><Link className='header-nav' href='/departamentos'> Departamentos </Link></li>
-          <li><Link className='header-nav' href='/produtos'> Produtos </Link></li>
-          <li><Link className='header-nav' href='/novidades'> Novidades </Link></li>
-          <li><Link className='header-nav' href='/importados'> Importados </Link></li>
-          <li><Link className='header-nav' href='/promocoes'> Promoções </Link></li>
-        </ul>
-      </nav>
+      <NavBar />
+
     </section>
   )
 }

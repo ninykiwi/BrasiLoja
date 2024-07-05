@@ -9,7 +9,7 @@ interface CriarProdutoProps {
     onClose: () => void;
 }
 
-const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }) => {
+export const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }) => {
     if (!isVisible) return null;
 
     const [images, setImages] = useState({

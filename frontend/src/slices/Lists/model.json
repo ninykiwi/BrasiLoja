@@ -1,0 +1,43 @@
+{
+  "id": "lists",
+  "type": "SharedSlice",
+  "name": "Lists",
+  "description": "Lists",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "filter": {
+          "type": "Select",
+          "config": {
+            "label": "Filter",
+            "placeholder": "",
+            "options": [
+              "None",
+              "Ofertas",
+              "VejaTambem",
+              "VocePodeGostar",
+              "VistosRecentemente",
+              "OutrosProdutos",
+              "ProdutosSimilares"
+            ],
+            "default_value": "None"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
