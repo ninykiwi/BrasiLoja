@@ -6,6 +6,8 @@ import clsx from "clsx";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { useEffect, useRef } from "react";
 import Slider from "react-slick";
+import Arrow from '../../../public/icons/setaCarrossel.svg'
+import Image from 'next/image'; // Importe o componente Image do Next.js
 
 /**
  * Props for `Hero`.
@@ -20,9 +22,21 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
   useEffect(() => {
     if (sliderRef.current) {
-      sliderRef.current.slickGoTo(0); // Go to the first slide initially
+      sliderRef.current.slickGoTo(0); 
     }
   }, []);
+
+  const goToNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
+  const goToPrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
 
   const settings = {
     dots: true,
@@ -32,7 +46,8 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    arrows: true,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -61,12 +76,30 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
     ],
   };
 
+  function PrevArrow(props: any) {
+    const { className } = props;
+    return (
+      <div className={className} onClick={goToPrev} style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 1 }}>
+        <Image src={Arrow} alt="Previous" width={40} height={40} />
+      </div>
+    );
+  }
+
+  function NextArrow(props: any) {
+    const { className } = props;
+    return (
+      <div className={className} onClick={goToNext} style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", zIndex: 1 }}>
+        <Image src={Arrow} alt="Next" width={40} height={40}  style={{ transform: 'rotate(180deg)' }} />
+      </div>
+    );
+  }
+
   return (
     <section className='w-full'>
       <div
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className='flex flex-col lg:w-[100%] lg:h-[100%] mx-[100%] lg:mx-[100%] px-[100%] py-[100%] overflow-hidden'
+        className='flex flex-col lg:w-[100%] lg:h-[100%] mx-[100%] lg:mx-[100%] px-[100%] py-[100%] overflow-hidden relative'
       >
         <Slider ref={sliderRef} {...settings}>
           {slice.primary.carousel.map((item, index) => (
