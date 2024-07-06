@@ -114,7 +114,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 <h2 className="font-display">{item.banner_title}</h2>
                 <p className="subtitle font-display">{item.banner_subtitle}</p>
                 <PrismicNextLink field={item.link_to_product}>
-                  <button className="flex w-[60px] h-[28px] py-[5px] px-[1px] bg-blue-500 rounded-sm text-white text-[11px] font-black">
+                  <button className="flex w-[60px] h-[28px] py-[5px] px-[1px] bg-blue-500 rounded-[4px] text-white text-[11px] font-black">
                     COMPRAR
                   </button>
                 </PrismicNextLink>
