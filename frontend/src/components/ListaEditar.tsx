@@ -34,7 +34,7 @@ const ListaEditar: React.FC<ListaEditarProps> = ({ isVisible, onClose }) => {
 
     return (
         <section className='z-20 inset-0 w-full flex justify-center'>
-            <div className='flex absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
+            <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
                 <div className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-auto'>
                     <Image 
                         onClick={onClose}
