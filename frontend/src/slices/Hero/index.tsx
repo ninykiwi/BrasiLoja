@@ -99,12 +99,12 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       <div
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className='flex flex-col lg:w-[100%] lg:h-[100%] mx-[100%] lg:mx-[100%] px-[100%] py-[100%] overflow-hidden relative'
+        className='flex flex-col lg:w-[280px] lg:h-[154px] mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] bg-gray-200 overflow-hidden'
       >
-        <Slider ref={sliderRef} {...settings}>
+        <Slider ref={sliderRef} {...settings} className='flex h-[450px] mt-[12px] gap-[20px] lg:gap-[40px] overflow-hidden'>
           {slice.primary.carousel.map((item, index) => (
             <div
-              className={clsx('flex w-full h-[450px] lg:h-[450px] py-[12px] lg:py-[20px] px-[14px] lg:px-[70px]',
+              className={clsx('flex w-[280px] lg:w-[1224px] h-[154px] lg:h-[450px] py-[12px] lg:py-[20px] px-[14px] lg:px-[70px]',
                 item.banner_type === 'Type 1 (image to the right)' && 'flex-row',
                 item.banner_type === 'Type 2 (image to the left)' && 'flex-row-reverse'
               )}
@@ -114,7 +114,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 <h2 className="font-display">{item.banner_title}</h2>
                 <p className="subtitle font-display">{item.banner_subtitle}</p>
                 <PrismicNextLink field={item.link_to_product}>
-                  <button className="bg-blue-500 text-white py-2 px-4 rounded">
+                  <button className="flex w-[60px] h-[28px] py-[5px] px-[1px] bg-blue-500 rounded-sm text-white text-[11px] font-black">
                     COMPRAR
                   </button>
                 </PrismicNextLink>
