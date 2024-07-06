@@ -40,7 +40,7 @@ export default async function Header() {
               </Link>
             </li>
             <li>
-              <Link href='/'>
+              <Link href='/carrinho'>
                 <Image src={cartIcon} alt='icone de "carrinho"' width={22} height={22} />
               </Link>
             </li>
