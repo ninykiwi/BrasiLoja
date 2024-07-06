@@ -4,6 +4,8 @@ import addCart from '../../public/icons/addCart.svg'
 import heart from '../../public/icons/heart.svg'
 import fone from '../../public/images/fone.png'
 import squareFone from '../../public/images/squareFone.png'
+import lixo from '../../public/icons/lixo.svg'
+import nintendo from '../../public/images/nintendo0.png'
 import EditarProduto from './EditarProduto'
 import { useState } from 'react'
 
@@ -58,6 +60,42 @@ export function ProdutoHorizontal () {
           EDITAR PRODUTO
         </button>  
 
+    </div>
+    </>
+  );
+};
+
+
+export function ProdutoCarrinho () {
+  
+  return (
+    <>
+    <div className="flex flex-col bg-white w-[912px] h-[226px] rounded-[10px] pt-[20px] pl-[74px] pr-[31px] mb-[34px]">
+        <div className="flex w-full items-center justify-end">
+            <p className='font-semibold text-[16px]'>Excluir item</p>
+            <button className='bg-blue-500 w-[31px] h-[32px] rounded-[4px] py-[6] px-[7px] ml-[2px]'>
+                <Image 
+                    src={lixo} 
+                    alt='excluir produto'
+                    width={17}
+                    height={20}
+                     />
+            </button>
+        </div>
+
+        <div className="flex items-center h-full">
+            <Image 
+            src={nintendo} 
+            alt='produto'
+            width={94}
+            height={100}
+             />
+            <p className='font-black text-[16px] ml-[54px] mr-[64px]'>Console Nintendo Switch Oled 64GB</p>
+            <div className="flex flex-col items-center font-semibold text-[16px]">
+                <p>Quantidade:</p>
+                <input type='number' className='w-[48px] h-[36px]'/>
+            </div>
+        </div>
     </div>
     </>
   );
