@@ -1,10 +1,9 @@
 "use client";
 import Image from 'next/image'
 import frete from '../../../public/icons/frete.svg'
-import lixo from '../../../public/icons/lixo.svg'
 import cart from '../../../public/icons/cart.svg'
 import etapas from '../../../public/icons/etapas.svg'
-import nintendo from '../../../public/images/nintendo0.png'
+import { ProdutoCarrinho } from '@/components/Produto';
 
 export default function Home() {
   return (
@@ -32,32 +31,11 @@ export default function Home() {
 
                 <div className="flex gap-[24px]">
                     <div className="flex flex-col">
-                        <div className="flex flex-col bg-white w-[912px] h-[226px] rounded-[10px] pt-[20px] pl-[74px] pr-[31px] mb-[34px]">
-                            <div className="flex w-full items-center justify-end">
-                                <p className='font-semibold text-[16px]'>Excluir item</p>
-                                <button className='bg-blue-500 w-[31px] h-[32px] rounded-[4px] py-[6] px-[7px] ml-[2px]'>
-                                    <Image 
-                                        src={lixo} 
-                                        alt='excluir produto'
-                                        width={17}
-                                        height={20}
-                                         />
-                                </button>
-                            </div>
-
-                            <div className="flex items-center h-full">
-                                <Image 
-                                src={nintendo} 
-                                alt='produto'
-                                width={94}
-                                height={100}
-                                 />
-                                <p className='font-black text-[16px] ml-[54px] mr-[64px]'>Console Nintendo Switch Oled 64GB</p>
-                                <div className="flex flex-col items-center font-semibold text-[16px]">
-                                    <p>Quantidade:</p>
-                                    <input type='number' className='w-[48px] h-[36px]'/>
-                                </div>
-                            </div>
+                        <div className='h-auto gap-[20px]'>
+                            <ProdutoCarrinho />
+                            <ProdutoCarrinho />
+                            <ProdutoCarrinho />
+                            <ProdutoCarrinho />
                         </div>
 
                         <div>
