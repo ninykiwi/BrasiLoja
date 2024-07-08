@@ -21,7 +21,7 @@ export const Icons = ({
   onClick,
 }: IconsProps) => {
 
-  if (href) {
+  if (href !== undefined) {
     return (
       <Link className={className} onClick={onClick} href={href}>
 
@@ -31,11 +31,11 @@ export const Icons = ({
     )
   } else {
     return (
-      <div className={className} onClick={onClick}>
+      <button className={className} onClick={() => onClick}>
 
         <Image className={iconStyle} src={src} alt={`icone de ${src}`} width={width} height={width} />
 
-      </div>
+      </button>
     )
   }
 }

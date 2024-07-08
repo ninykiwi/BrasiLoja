@@ -3,7 +3,7 @@ export interface FilterContextType {
   Tags: any[]
   MainList: any[] | null
   filterName: (item: string) => void
-  filterTags: (item: any[]) => void
+  filterTags: (item: any | any[]) => void
 }
 export interface ModalContextType {
   CreateProductModal: boolean,

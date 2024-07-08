@@ -31,10 +31,12 @@ export const FilterProvider: React.FC<ContextProps> = ({ children }) => {
   }
 
   useEffect(() => {
-    Name !== ''?
-    filterByName(Name, setMainList)
-    :
-    filterByTag(Tags, setMainList)
+    if (Name !== '') {
+      filterByName(Name, setMainList)
+    }
+    if (Tags.length > 0) {
+      filterByTag(Tags, setMainList)
+    }
   }, [Name, Tags])
 
   

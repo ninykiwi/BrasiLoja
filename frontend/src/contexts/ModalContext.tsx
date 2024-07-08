@@ -40,6 +40,7 @@ export const ModalProvider: React.FC<ContextProps> = ({ children }) => {
   }
   const toggleUserModal = () => {
     setUserModal(!UserModal)
+    console.log('working')
   }
 
   

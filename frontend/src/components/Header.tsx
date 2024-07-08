@@ -1,25 +1,17 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-import logo from '@/public/images/logo.png'
-import homeIcon from '@/public/icons/home.svg'
-import userIcon from '@/public/icons/user.svg'
-import { Comprar, AddCarrinho } from './StaticButtons'
-import cartIcon from '@/public/icons/cart.svg'
-import chatIcon from '@/public/icons/chat.svg'
 import { SearchBar } from './SearchBar'
-import { createClient } from '@/prismicio'
-import { PrismicImage, PrismicLink } from '@prismicio/react'
+import { PrismicImage } from '@prismicio/react'
 import NavBar from './NavBar'
-import { settingsCustomType } from '@/services/prismicio'
 import { Icons } from './Icons'
 import { icon } from '@/lib/icons'
-import { redirect } from 'next/navigation'
-import ToggleMenu from './ToggleMenu'
+import { UserMenu } from './ToggleMenus'
+import { createClient } from '@/prismicio'
 
 
 export default async function Header() {
-  const settings = await settingsCustomType()
+  const client = createClient()
+  const settings = await client.getSingle('settings')
 
   return (
     <section>
@@ -38,7 +30,7 @@ export default async function Header() {
             </li>
 
             <li>
-              <Icons iconStyle='lg:w-[40px] lg:h-[40px]' src={icon.user} width={22} href='/' />
+              <UserMenu />
             </li>
 
             <li>
@@ -55,8 +47,6 @@ export default async function Header() {
       </div>
 
       <NavBar />
-
-      <ToggleMenu />
 
     </section>
   )

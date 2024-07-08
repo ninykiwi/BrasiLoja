@@ -1,20 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { PrismicLink } from '@prismicio/react'
 import toggleMenu from '@/public/icons/toggleMenu.svg'
-import { settingsCustomType } from '@/services/prismicio'
-import { Icons } from './Icons'
-import { icon } from '@/lib/icons'
-import { useModal } from '@/contexts/ModalContext'
+import { fetchDataPrismic, PrismicResponse } from '@/services/prismicio'
+import { createClient } from '@/prismicio'
+import { DepartmentsMenu } from './ToggleMenus'
 
+
+interface HomePageProps {
+  data: PrismicResponse | null;
+  error: string | null;
+}
+
+
+export interface NavBarProps {
+  settings: any
+}
 export default async function NavBar() {
-  const settings = await settingsCustomType()
-  const { toggleDepartmentsModal } = useModal()
+  const client = createClient()
+  const settings = await client.getSingle('settings')
+
+  // useEffect(() => {
+  //   const fetchPrismicData = () => {
+  //     const client = createClient()
+  //     client.getSingle('settings')
+  //       .then((response) => {
+  //         console.log(response)
+  //         setPrismicData(response)
+  //       })
+  //       .catch((error) => {
+  //         console.error('Erro ao tentar obter custom type "settings" do prismic: ', error)
+  //       })
+  //   }
+
+  //   fetchPrismicData()
+  // }, [])
 
   return (
-    <nav className='header-nav' style={{backgroundColor: `${settings.data.navbar_color}`}}>
+    <nav className='header-nav'>
 
-      <Icons src={icon.toggleMenu} width={22} onClick={toggleDepartmentsModal} />
+      <DepartmentsMenu />
 
       <ul className='flex gap-[14px]'>
         

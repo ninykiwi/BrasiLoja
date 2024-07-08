@@ -24,6 +24,15 @@ export const departmentsList = [
   'Escritório'
 ]
 
+export const userOptionsList = [
+  'Entrar',
+  'Minha Conta',
+  'Favoritos',
+  'Meus Pedidos',
+  'Lista de Desejos',
+  'Cadastro'
+]
+
 export const tagList = [
   'Produtos',
   'Ofertas',

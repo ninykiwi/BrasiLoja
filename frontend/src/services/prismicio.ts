@@ -1,7 +1,18 @@
-import { createClient } from "@/prismicio"
+import axios from 'axios';
 
-export const settingsCustomType = async () => {
-  const client = createClient()
-  const settings = await client.getSingle('settings')
-  return (settings)
+export interface PrismicResponse {
+  results: any[];
+}
+
+export function fetchDataPrismic(
+  endpoint: string,
+  callback: (error: Error | null, data: PrismicResponse | null) => void
+): void {
+  axios.get<PrismicResponse>(endpoint)
+    .then(response => {
+      callback(null, response.data);
+    })
+    .catch(error => {
+      callback(error, null);
+    });
 }

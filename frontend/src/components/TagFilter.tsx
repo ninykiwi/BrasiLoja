@@ -1,6 +1,7 @@
 import React from 'react'
 import { SearchProduct, SearchBrand } from '@/components/SearchBar'
 import { useFilter } from '@/contexts/FilterContexts'
+import { departmentsList } from '@/lib/lists'
 
 
 export default function TagFilter() {
@@ -13,7 +14,23 @@ export default function TagFilter() {
       <div>
         <h4>Categoria</h4>
 
-        <form>
+        <form className='p-[4px] border-2 border-black rounded'>
+          <fieldset>
+            {departmentsList &&
+              departmentsList.map((item, index) => {
+                const itemFilter = item.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '-')
+
+                return (
+                  <div className='flex gap-2' key={index}>
+                    <input id={`${itemFilter}`} type='checkbox' name='department' value={`${itemFilter}`} onClick={() => filterTags(`${itemFilter}`)} />
+
+                    <label htmlFor={`${itemFilter}`}>
+                      {item}
+                    </label>
+                  </div>
+                )
+            })}
+          </fieldset>
           <input type='checkbox' name='tag' value='Hardware' />
           <label htmlFor='Hardware'>Hardware</label>
 
