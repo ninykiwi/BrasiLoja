@@ -1,12 +1,12 @@
 'use client'
 import Image from 'next/image'
-import addCart from '../../public/icons/addCart.svg'
-import heart from '../../public/icons/heart.svg'
-import fone from '../../public/images/fone.png'
-import squareFone from '../../public/images/squareFone.png'
-import lixo from '../../public/icons/lixo.svg'
-import nintendo from '../../public/images/nintendo0.png'
-import EditarProduto from './EditarProduto'
+import addCart from '@/public/icons/addCart.svg'
+import heart from '@/public/icons/heart.svg'
+import fone from '@/public/images/fone.png'
+import squareFone from '@/public/images/squareFone.png'
+import lixo from '@/public/icons/lixo.svg'
+import nintendo from '@/public/images/nintendo0.png'
+import EditarProduto from '@/containers/EditarProduto'
 import { useState } from 'react'
 
 
@@ -43,7 +43,7 @@ export function ProdutoHorizontal () {
 
   return (
     <>
-    <EditarProduto isVisible={isEditarProdutoVisible} onClose={closeEditarProduto}/>
+    <EditarProduto />
     <div className='flex items-end justify-between w-[1224px] lg:w-[1224px] h-[171px] lg:h-[260px] py-[53px] px-[27px] rounded-lg bg-white border-[#5D5D5D] border'>
       <div className='flex gap-[55px] w-full h-full items-end'>
         <Image className='self-center lg:w-[177px] lg:h-[175px]' src={squareFone} alt='Imagem do produto' width={70} height={70} />

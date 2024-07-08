@@ -1,16 +1,13 @@
 import Image from 'next/image'
-import close from '../../public/icons/close.svg'
-import camera from '../../public/images/camera.png'
+import close from '@/public/icons/close.svg'
+import camera from '@/public/images/camera.png'
 import { useEffect, useState } from 'react';
+import { useModal } from '@/contexts/ModalContext';
+import clsx from 'clsx';
 
 
-interface EditarProdutoProps {
-    isVisible: boolean;
-    onClose: () => void;
-}
-
-const EditarProduto: React.FC<EditarProdutoProps> = ({ isVisible, onClose }) => {
-    if (!isVisible) return null; 
+const EditarProduto: React.FC = () => {
+  const { EditProductModal, toggleEditProductModal } = useModal();
 
     const [images, setImages] = useState({
         fileUpload1: null,
@@ -31,12 +28,13 @@ const EditarProduto: React.FC<EditarProdutoProps> = ({ isVisible, onClose }) => 
         setImages(savedImages);
       }, []);
 
-    const handleImageUpload = (event, inputId) => {
+    const handleImageUpload = (event: any, inputId: any) => {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          const imageUrl = reader.result;
+          const imageUrl = typeof reader.result === 'string' && reader.result;
+          if (!imageUrl) return;
           setImages((prevImages) => ({
             ...prevImages,
             [inputId]: imageUrl,
@@ -48,12 +46,15 @@ const EditarProduto: React.FC<EditarProdutoProps> = ({ isVisible, onClose }) => 
     };
 
   return (
-    <section className='z-30 inset-0 w-full flex justify-center'>
+    <section className={clsx(
+      'z-30 inset-0 w-full justify-center',
+      EditProductModal ? 'flex' : 'hidden',
+    )}>
     <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
       <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]'>
 
         <Image 
-        onClick={onClose}
+        onClick={toggleEditProductModal}
         src={close} 
         className='self-end mr-[20px] mt-[45.9px] cursor-pointer' 
         alt='...' 
@@ -176,7 +177,7 @@ const EditarProduto: React.FC<EditarProdutoProps> = ({ isVisible, onClose }) => 
             </div>
         </div>
 
-        <button type='submit' className='self-center w-[369px] h-[81px] text-[32px] font-black bg-yellow-800 mt-[134px] py-[22px] px-[63px] text-[#ffffff] rounded-[10px] cursor-pointer'>
+        <button type='submit' className='editar-produto'>
             EDITAR PRODUTO
         </button>
       </form>

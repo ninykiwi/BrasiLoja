@@ -1,16 +1,15 @@
 import Image from 'next/image'
-import close from '../../public/icons/close.svg'
-import camera from '../../public/images/camera.png'
+import close from '@/public/icons/close.svg'
+import camera from '@/public/images/camera.png'
 import { useState } from 'react';
+import { useModal } from '@/contexts/ModalContext';
+import clsx from 'clsx';
+import { create } from 'domain';
+import { Icons } from '@/components/Icons';
+import { icon } from '@/lib/icons'
 
-
-interface CriarProdutoProps {
-    isVisible: boolean;
-    onClose: () => void;
-}
-
-export const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }) => {
-    if (!isVisible) return null;
+export const CriarProduto: React.FC = ()  => {
+  const { CreateProductModal, toggleCreateProductModal } = useModal();
 
     const [images, setImages] = useState({
         fileUpload1: null,
@@ -18,9 +17,9 @@ export const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }
         fileUpload3: null,
         fileUpload4: null,
         fileUploadMain: null,
-      });
+    });
 
-    const handleImageUpload = (event, inputId) => {
+    const handleImageUpload = (event: any, inputId: any) => {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
@@ -35,12 +34,15 @@ export const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }
     };
 
   return (
-    <section className='z-30 inset-0 w-full flex justify-center'>
+    <section className={clsx(
+      'z-30 inset-0 w-full justify-center',
+      CreateProductModal ? 'flex' : 'hidden',  
+    )}>
     <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
-      <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]'>
+      <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[320px] lg:w-[1224px] h-auto lg:h-[2566px]'>
 
-        <Image src={close} className='self-end mr-[20px] mt-[45.9px] cursor-pointer' alt='...' width={45} height={45} onClick={onClose}/>
-        <p className='px-8 mb-[74px] text-[40px] font-black self-start'>Criar Produto</p>
+        <Icons src={icon.close} className='self-end mr-[24 px] mt-[34.5px] cursor-pointer' width={45} onClick={toggleCreateProductModal}/>
+        <p className='px-8 mb-[30px] lg:mb-[74px] text-[16px] lg:text-[40px] font-black'>Criar Produto</p>
 
         <div className='flex px-10 mb-[100px]'>
             <div className='flex gap-[20px]'>
@@ -94,7 +96,7 @@ export const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }
             <div className='flex flex-col gap-8 ml-6'>
                 <div className='flex flex-col'>
                     <label>Nome do produto</label>
-                    <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-2'/>
+                    <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-1'/>
                 </div>
 
                 <div className='flex flex-col'>
@@ -158,7 +160,7 @@ export const CriarProduto: React.FC<CriarProdutoProps> = ({ isVisible, onClose }
             </div>
         </div>
 
-        <button type='submit' className='self-center w-[369px] h-[81px] text-[32px] font-black bg-blue-600 mt-[134px] py-[22px] px-[63px] text-[#ffffff] rounded-[10px] cursor-pointer'>
+        <button type='submit' className='criar-produto'>
             CRIAR PRODUTO
         </button>
       </form>

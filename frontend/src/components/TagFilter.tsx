@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from './SearchBar'
+import { SearchProduct, SearchBrand } from '@/components/SearchBar'
 import { useFilter } from '@/contexts/FilterContexts'
 
 
@@ -23,7 +23,7 @@ export default function TagFilter() {
           <input type='checkbox' name='tag' value='Games' />
           <label htmlFor='Games'>Games</label>
 
-          <input type='checkbox' name='tag' value='Perifericos' onClick={ () => filterTags(this.value) } />
+          <input type='checkbox' name='tag' value='Perifericos' />
           <label htmlFor='Perifericos'>Perifericos</label>
 
           <input type='checkbox' name='tag' value='TV' />

@@ -6,7 +6,7 @@ export const URL_SBN = `search_by_name`
 export const URL_FBT = `filter_by_tag`
 
 
-export const searchByName = (
+export const filterByName = (
   name: string,
   setList: React.Dispatch<React.SetStateAction<{}[]>>
 ) => {
@@ -21,15 +21,21 @@ export const searchByName = (
     console.error('Pesquisa por nome deu ruim: ', error)
   })
 }
+
 export const filterByTag = (
   Tags: string[],
-  setList: React.Dispatch<React.SetStateAction<{}[]>>
+  setList?: React.Dispatch<React.SetStateAction<{}[]>>
 ) => {
   axios.get(`${URL_BACK}/${URL_FBT}`, {
     params: { Tags }
   })
   .then(response => {
-    setList(response.data.results)
+    if (!setList) {
+      console.log('Pesquisa por categoria realizada com sucesso')
+      return (response.data.results)
+    } else {
+      setList(response.data.results)
+    }
     console.log('Pesquisa por categoria realizada com sucesso')
   })
   .catch(error => {

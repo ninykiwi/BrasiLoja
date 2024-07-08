@@ -1,17 +1,21 @@
 import React from 'react'
 import Image from 'next/image'
 import { PrismicLink } from '@prismicio/react'
-import toggleMenu from '../../public/icons/toggleMenu.svg'
-import { createClient } from '@/prismicio'
+import toggleMenu from '@/public/icons/toggleMenu.svg'
 import { settingsCustomType } from '@/services/prismicio'
-
+import { Icons } from './Icons'
+import { icon } from '@/lib/icons'
+import { useModal } from '@/contexts/ModalContext'
 
 export default async function NavBar() {
   const settings = await settingsCustomType()
+  const { toggleDepartmentsModal } = useModal()
 
   return (
     <nav className='header-nav' style={{backgroundColor: `${settings.data.navbar_color}`}}>
-      <Image src={toggleMenu} alt='menu de departamentos' width={22} height={18} />
+
+      <Icons src={icon.toggleMenu} width={22} onClick={toggleDepartmentsModal} />
+
       <ul className='flex gap-[14px]'>
         
         {settings.data.navbar.map((item: any, index: number) => (

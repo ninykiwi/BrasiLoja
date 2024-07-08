@@ -1,43 +1,44 @@
 import Image from 'next/image'
-import React, { useState } from 'react';
-import close from '../../public/icons/close.svg'
-import rightArrow from '../../public/icons/leftArrow.svg'
-import leftArrow from '../../public/icons/rightArrow.svg'
-import { ProdutoHorizontal } from './Produto';
+import React, { useEffect, useState } from 'react';
+import close from '@/public/icons/close.svg'
+import rightArrow from '@/public/icons/leftArrow.svg'
+import leftArrow from '@/public/icons/rightArrow.svg'
+import { ProdutoHorizontal } from '@/components/Produto';
 import ReactPaginate from 'react-paginate';
+import { useModal } from '@/contexts/ModalContext';
+import clsx from 'clsx';
 
-interface ListaEditarProps {
-    isVisible: boolean;
-    onClose: () => void;
-}
 
-const ListaEditar: React.FC<ListaEditarProps> = ({ isVisible, onClose }) => {
-    if (!isVisible) return null;
+const ListaEditar: React.FC = () => {
+    const { EditListModal, toggleEditListModal } = useModal();
 
     const items = Array.from({ length: 10 }, (_, index) => <ProdutoHorizontal key={index} />);
 
-    const [currentItems, setCurrentItems] = useState([]);
-    const [pageCount, setPageCount] = useState(0);
-    const [itemOffset, setItemOffset] = useState(0);
+    const [currentItems, setCurrentItems] = useState<any[]>([]);
+    const [pageCount, setPageCount] = useState<number>(0);
+    const [itemOffset, setItemOffset] = useState<number>(0);
     const itemsPerPage = 8;
 
-    React.useEffect(() => {
-        const endOffset = itemOffset + itemsPerPage;
-        setCurrentItems(items.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(items.length / itemsPerPage));
-      }, [itemOffset, itemsPerPage]);
+    // useEffect(() => {
+    //     const endOffset = itemOffset + itemsPerPage;
+    //     setCurrentItems(items.slice(itemOffset, endOffset));
+    //     setPageCount(Math.ceil(items.length / itemsPerPage));
+    // }, [items, itemOffset, itemsPerPage]);
     
-      const handlePageClick = (event) => {
+      const handlePageClick = (event: any) => {
         const newOffset = (event.selected * itemsPerPage) % items.length;
         setItemOffset(newOffset);
       };
 
     return (
-        <section className='z-20 inset-0 w-full flex justify-center'>
+        <section className={clsx(
+          'z-20 inset-0 w-full justify-center',
+          EditListModal ? 'flex' : 'hidden',
+        )}>
             <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
                 <div className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-auto'>
                     <Image 
-                        onClick={onClose}
+                        onClick={toggleEditListModal}
                         src={close} 
                         className='self-end mr-[20px] mt-[45.9px] cursor-pointer' 
                         alt='...' 

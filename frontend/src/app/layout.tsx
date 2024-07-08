@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { PrismicPreview } from "@prismicio/next";
 import clsx from "clsx";
 import { FilterProvider } from "@/contexts/FilterContexts";
+import { ModalProvider } from "@/contexts/ModalContext";
 
 
 const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], display:'swap', variable:'--font-inter' });
@@ -30,9 +31,11 @@ export default function RootLayout({
           <Header />
           
           <main>
-            
+
             <FilterProvider>
-              {children}
+              <ModalProvider>
+                {children}
+              </ModalProvider>
             </FilterProvider>
 
           </main>

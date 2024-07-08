@@ -4,7 +4,7 @@ import { components } from '@/slices';
 import { Metadata } from 'next';
 
 
-export default async function Home() {
+export default async function page() {
   const client = createClient()
   const home = await client.getSingle('home')
 

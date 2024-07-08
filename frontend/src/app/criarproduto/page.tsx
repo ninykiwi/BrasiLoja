@@ -1,33 +1,18 @@
-"use client";
+"use client"
 import { useState } from 'react';
-import ListaEditar from '@/components/ListaEditar';
-import CriarProduto from '@/components/CriarProduto';
+import ListaEditar from '@/containers/ListaEditar';
+import CriarProduto from '@/containers/CriarProduto';
+import { useModal } from '@/contexts/ModalContext';
 
-export default function Home() {
-  const [isCriarProdutoVisible, setIsCriarProdutoVisible] = useState(false);
-  const [isListaEditarVisible, setIsListaEditarVisible] = useState(false);
 
-  const handleCriarProdutoClick = () => {
-    setIsCriarProdutoVisible(true);
-  };
-
-  const closeCriarProduto = () => {
-    setIsCriarProdutoVisible(false);
-  };
-
-  const handleListaEditarClick = () => {
-    setIsListaEditarVisible(true);
-  };
-
-  const closeListaEditar = () => {
-    setIsListaEditarVisible(false);
-  };
+export default function Create() {
+  const { toggleCreateProductModal, toggleEditProductModal, toggleEditListModal } = useModal();
 
   return (
     <main>
       <div className='flex w-full justify-center items-center self-center'>
-        <ListaEditar isVisible={isListaEditarVisible} onClose={closeListaEditar} />
-        <CriarProduto isVisible={isCriarProdutoVisible} onClose={closeCriarProduto} />
+        <ListaEditar />
+        <CriarProduto />
       </div>
 
 
@@ -36,14 +21,14 @@ export default function Home() {
 
           <div className='gap-[39px] flex flex-row'>       
           <button 
-          onClick={handleCriarProdutoClick}
-          className='espacamento self-center w-[369px] h-[81px] text-[32px] font-black bg-blue-600 py-[22px] px-[58px] text-white rounded-[10px] cursor-pointer'>
+          onClick={toggleCreateProductModal}
+          className='criar-produto'>
             CRIAR PRODUTO
           </button>
           
           <button 
-          onClick={handleListaEditarClick}
-          className='espacamento self-center w-[369px] h-[81px] text-[32px] font-black bg-yellow-800 py-[22px] px-[52px] text-black rounded-[10px] cursor-pointer'>
+          onClick={toggleEditProductModal}
+          className='editar-produto bg-yellow-800'>
             EDITAR PRODUTO
           </button>
           </div>

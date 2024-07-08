@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import formasPagamento from '../../public/images/formasPagamento.svg'
+import formasPagamento from '@/public/images/formasPagamento.svg'
 import { createClient } from '@/prismicio'
 
 export default async function Footer() {

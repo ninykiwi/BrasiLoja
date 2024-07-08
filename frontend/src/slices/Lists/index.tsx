@@ -4,8 +4,7 @@ import clsx from 'clsx'
 //-- CONTEXTs
 import { useFilter } from '@/contexts/FilterContexts';
 //-- TYPEs & FUNCTIONs 
-import { ContainerProdutosProps } from '@/types'
-import { calculateItemsToShow, responsive } from '@/lib';
+import { ContainerProdutosProps } from '@/types/props'
 //-- COMPONENTs
 import Link from 'next/link';
 import Image from 'next/image';
@@ -13,7 +12,7 @@ import Produto from '@/components/Produto';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 //-- ASSETs
-import setaCarrossel from '../../../public/icons/setaCarrossel.svg'
+import setaCarrossel from '@/public/icons/setaCarrossel.svg'
 
 
 /**

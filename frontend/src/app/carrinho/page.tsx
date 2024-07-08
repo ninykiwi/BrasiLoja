@@ -1,11 +1,12 @@
 "use client";
 import Image from 'next/image'
-import frete from '../../../public/icons/frete.svg'
-import cart from '../../../public/icons/cart.svg'
-import etapas from '../../../public/icons/etapas.svg'
+import frete from '@/public/icons/frete.svg'
+import cart from '@/public/icons/cart.svg'
+import etapas from '@/public/icons/etapas.svg'
 import { ProdutoCarrinho } from '@/components/Produto';
 
-export default function Home() {
+export default function Cart() {
+
   return (
     <main className='w-full flex justify-center'>
         <div className="pt-[72px] bg-[#F0EFEF] rounded-[10px] flex flex-col w-[1224px] h-auto">
