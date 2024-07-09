@@ -2,14 +2,16 @@ import Image from 'next/image'
 import close from '@/public/icons/close.svg'
 import camera from '@/public/images/camera.png'
 import { useState } from 'react';
-import { useModal } from '@/contexts/ModalContext';
 import clsx from 'clsx';
 import { create } from 'domain';
 import { Icons } from '@/components/Icons';
 import { icon } from '@/lib/icons'
 
 export const CriarProduto: React.FC = () => {
-  const { CreateProductModal, toggleCreateProductModal } = useModal();
+  const [CreateProductModal, setCreateProductModal] = useState<boolean>(false)
+  const toggleCreateProductModal: () => void = () => {
+    setCreateProductModal(!CreateProductModal)
+  }
 
     const [images, setImages] = useState<any>({
         fileUpload1: null,

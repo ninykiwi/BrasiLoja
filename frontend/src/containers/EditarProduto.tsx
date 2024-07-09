@@ -2,12 +2,14 @@ import Image from 'next/image'
 import close from '@/public/icons/close.svg'
 import camera from '@/public/images/camera.png'
 import { useEffect, useState } from 'react';
-import { useModal } from '@/contexts/ModalContext';
 import clsx from 'clsx';
 
 
 const EditarProduto: React.FC = () => {
-  const { EditProductModal, toggleEditProductModal } = useModal();
+  const [EditProductModal, setEditProductModal] = useState<boolean>(false)
+  const toggleEditProductModal: () => void = () => {
+    setEditProductModal(!EditProductModal)
+  }
 
     const [images, setImages] = useState({
         fileUpload1: null,

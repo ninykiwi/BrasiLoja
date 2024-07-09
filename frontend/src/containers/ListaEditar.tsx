@@ -5,12 +5,14 @@ import rightArrow from '@/public/icons/leftArrow.svg'
 import leftArrow from '@/public/icons/rightArrow.svg'
 import { ProdutoHorizontal } from '@/components/Produto';
 import ReactPaginate from 'react-paginate';
-import { useModal } from '@/contexts/ModalContext';
 import clsx from 'clsx';
 
 
 const ListaEditar: React.FC = () => {
-    const { EditListModal, toggleEditListModal } = useModal();
+  const [EditListModal, setEditListModal] = useState<boolean>(false)
+  const toggleEditListModal: () => void = () => {
+    setEditListModal(!EditListModal)
+  }
 
     const items = Array.from({ length: 10 }, (_, index) => <ProdutoHorizontal key={index} />);
 
