@@ -30,14 +30,14 @@ export const FilterProvider: React.FC<ContextProps> = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    if (Name !== '') {
-      filterByName(Name, setMainList)
-    }
-    if (Tags.length > 0) {
-      filterByTag(Tags, setMainList)
-    }
-  }, [Name, Tags])
+  // useEffect(() => {
+  //   if (Name !== '') {
+  //     filterByName(Name, setMainList)
+  //   }
+  //   if (Tags.length > 0) {
+  //     filterByTag(Tags, setMainList)
+  //   }
+  // }, [Name, Tags])
 
   
   return (

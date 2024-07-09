@@ -8,10 +8,10 @@ import { create } from 'domain';
 import { Icons } from '@/components/Icons';
 import { icon } from '@/lib/icons'
 
-export const CriarProduto: React.FC = ()  => {
+export const CriarProduto: React.FC = () => {
   const { CreateProductModal, toggleCreateProductModal } = useModal();
 
-    const [images, setImages] = useState({
+    const [images, setImages] = useState<any>({
         fileUpload1: null,
         fileUpload2: null,
         fileUpload3: null,
@@ -24,7 +24,7 @@ export const CriarProduto: React.FC = ()  => {
       if (file) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          setImages((prevImages) => ({
+          setImages((prevImages: any) => ({
             ...prevImages,
             [inputId]: reader.result,
           }));

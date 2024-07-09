@@ -23,8 +23,6 @@ export const ModalProvider: React.FC<ContextProps> = ({ children }) => {
   const [CreateProductModal, setCreateProductModal] = useState(false)
   const [EditProductModal, setEditProductModal] = useState(false)
   const [EditListModal, setEditListModal] = useState(false)
-  const [DepartmentsModal, setDepartmentsModal] = useState(false)
-  const [UserModal, setUserModal] = useState(false)
 
   const toggleCreateProductModal = () => {
     setCreateProductModal(!CreateProductModal)
@@ -35,17 +33,10 @@ export const ModalProvider: React.FC<ContextProps> = ({ children }) => {
   const toggleEditListModal = () => {
     setEditListModal(!EditListModal)
   }
-  const toggleDepartmentsModal = () => {
-    setDepartmentsModal(!DepartmentsModal)
-  }
-  const toggleUserModal = () => {
-    setUserModal(!UserModal)
-    console.log('working')
-  }
 
   
   return (
-      <ModalContext.Provider value={{ CreateProductModal, EditProductModal, EditListModal, DepartmentsModal, UserModal, toggleCreateProductModal, toggleEditProductModal, toggleEditListModal, toggleDepartmentsModal, toggleUserModal }}>
+      <ModalContext.Provider value={{ CreateProductModal, EditProductModal, EditListModal, toggleCreateProductModal, toggleEditProductModal, toggleEditListModal}}>
         {children}
       </ModalContext.Provider>
   )

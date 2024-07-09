@@ -37,15 +37,15 @@ export default async function NavBar() {
   // }, [])
 
   return (
-    <nav className='header-nav'>
+    <nav className='header-nav' style={{ backgroundColor: `${settings.data.navbar_color}`}}>
 
       <DepartmentsMenu />
 
       <ul className='flex gap-[14px]'>
         
         {settings.data.navbar.map((item: any, index: number) => (
-          <li className='header-nav-list-items' key={index}>
-            <PrismicLink field={item.link}>
+          <li key={index}>
+            <PrismicLink className='header-nav-list-items' field={item.link}>
               {item.name}
             </PrismicLink>
           </li>

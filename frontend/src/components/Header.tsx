@@ -15,7 +15,7 @@ export default async function Header() {
 
   return (
     <section>
-      <div className='header'>
+      <div className='header' style={{ backgroundColor: `${settings.data.header_color}`}}>
         <div className='flex content-baseline justify-between'>
           <Link className='flex flex-col w-fit text-white text-center text-[8px] lg:text-[13px]' href="/">
             <PrismicImage className='lg:w-[175px] lg:h-[33px]' field={settings.data.site_logo} width={99} height={18} />
@@ -34,7 +34,7 @@ export default async function Header() {
             </li>
 
             <li>
-              <Icons iconStyle='lg:w-[40px] lg:h-[40px]' src={icon.cart} width={22} href='/' />
+              <Icons iconStyle='lg:w-[40px] lg:h-[40px]' src={icon.cart} width={22} href='/carrinho' />
             </li>
 
             <li>
