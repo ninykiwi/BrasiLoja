@@ -5,11 +5,10 @@ import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 
-const EditarProduto: React.FC = () => {
-  const [EditProductModal, setEditProductModal] = useState<boolean>(false)
-  const toggleEditProductModal: () => void = () => {
-    setEditProductModal(!EditProductModal)
-  }
+interface EditarProdutoProps {
+  onClick?: () => void
+}
+const EditarProduto = ({ onClick }: EditarProdutoProps) => {
 
     const [images, setImages] = useState({
         fileUpload1: null,
@@ -48,15 +47,12 @@ const EditarProduto: React.FC = () => {
     };
 
   return (
-    <section className={clsx(
-      'z-30 inset-0 w-full justify-center',
-      EditProductModal ? 'flex' : 'hidden',
-    )}>
+    <section className='z-30 flex inset-0 w-full justify-center'>
     <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
       <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]'>
 
         <Image 
-        onClick={toggleEditProductModal}
+        onClick={onClick}
         src={close} 
         className='self-end mr-[20px] mt-[45.9px] cursor-pointer' 
         alt='...' 

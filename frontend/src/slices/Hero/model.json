@@ -60,6 +60,13 @@
                   ],
                   "default_value": "Type 1 (image to the right)"
                 }
+              },
+              "banner_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Banner Color",
+                  "placeholder": ""
+                }
               }
             }
           }

@@ -7,11 +7,11 @@ import { create } from 'domain';
 import { Icons } from '@/components/Icons';
 import { icon } from '@/lib/icons'
 
-export const CriarProduto: React.FC = () => {
-  const [CreateProductModal, setCreateProductModal] = useState<boolean>(false)
-  const toggleCreateProductModal: () => void = () => {
-    setCreateProductModal(!CreateProductModal)
-  }
+
+interface CriarProdutoProps {
+  onClick?: () => void
+}
+export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
 
     const [images, setImages] = useState<any>({
         fileUpload1: null,
@@ -36,14 +36,11 @@ export const CriarProduto: React.FC = () => {
     };
 
   return (
-    <section className={clsx(
-      'z-30 inset-0 w-full justify-center',
-      CreateProductModal ? 'flex' : 'hidden',  
-    )}>
+    <section className='z-30 flex inset-0 w-full justify-center'>
     <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
       <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[320px] lg:w-[1224px] h-auto lg:h-[2566px]'>
 
-        <Icons src={icon.close} className='self-end mr-[24 px] mt-[34.5px] cursor-pointer' width={45} onClick={toggleCreateProductModal}/>
+        <Icons src={icon.close} className='self-end mr-[24 px] mt-[34.5px] cursor-pointer' width={45} onClick={onClick}/>
         <p className='px-8 mb-[30px] lg:mb-[74px] text-[16px] lg:text-[40px] font-black'>Criar Produto</p>
 
         <div className='flex px-10 mb-[100px]'>

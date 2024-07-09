@@ -1,7 +1,6 @@
 "use client";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import Link from "next/link";
 import clsx from "clsx";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { useEffect, useRef } from "react";
@@ -28,22 +27,20 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         <Carousel>
           {slice.primary.carousel.map((item, index) => (
             <div
-              className={clsx('flex w-[280px] lg:w-[1224px] h-[154px] lg:h-[450px] py-[12px] lg:py-[20px] px-[14px] lg:px-[70px]',
-                item.banner_type === 'Type 1 (image to the right)' && 'flex-row',
-                item.banner_type === 'Type 2 (image to the left)' && 'flex-row-reverse'
-              )}
-              key={index}
-            >
-              <div className="flex flex-col w-fit max-w-[40%]">
-                <h2 className="font-display">{item.banner_title}</h2>
-                <p className="subtitle font-display">{item.banner_subtitle}</p>
+              className='opacity-0 w-[280px] lg:w-[1224px] h-[154px] lg:h-[450px] py-[12px] lg:py-[20px] px-[14px] lg:px-[70px]' key={index} style={{ backgroundColor: `${item.banner_color}` }} >
+
+              <div className="flex flex-col max-w-[40%]">
+                <h2 className="font-display max-w-full">{item.banner_title}</h2>
+                <p className="subtitle font-display max-w-full">{item.banner_subtitle}</p>
                 <PrismicNextLink field={item.link_to_product}>
                   <button className="flex w-[60px] h-[28px] py-[5px] px-[1px] bg-blue-500 rounded-[4px] text-white text-[11px] font-black">
                     COMPRAR
                   </button>
                 </PrismicNextLink>
               </div>
+
               <PrismicNextImage className='w-fit max-w-[40%]' field={item.banner_image} />
+
             </div>
           ))}
         </Carousel>

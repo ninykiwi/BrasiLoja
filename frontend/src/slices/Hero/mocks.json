@@ -68,6 +68,14 @@
 									"value": "Type 2 (image to the left)",
 									"type": "Select"
 								}
+							],
+							[
+								"banner_color",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "#a06778",
+									"type": "Color"
+								}
 							]
 						]
 					}

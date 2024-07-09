@@ -4,6 +4,56 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type HomeDocumentDataSlicesSlice = ListsSlice | HeroSlice;
+
+/**
+ * Content for home documents
+ */
+interface HomeDocumentData {
+  /**
+   * Slice Zone field in *home*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<HomeDocumentDataSlicesSlice> /**
+   * Meta Title field in *home*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: home.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *home*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: home.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+}
+
+/**
+ * home document from Prismic
+ *
+ * - **API ID**: `home`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type HomeDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
+
 /**
  * Item in *Settings → NavBar*
  */
@@ -133,7 +183,9 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  contact_info: prismic.GroupField<Simplify<SettingsDocumentDataContactInfoItem>>;
+  contact_info: prismic.GroupField<
+    Simplify<SettingsDocumentDataContactInfoItem>
+  >;
 }
 
 /**
@@ -152,57 +204,7 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomeDocumentDataSlicesSlice = ListsSlice | HeroSlice;
-
-/**
- * Content for home documents
- */
-interface HomeDocumentData {
-  /**
-   * Slice Zone field in *home*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<HomeDocumentDataSlicesSlice> /**
-   * Meta Title field in *home*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: home.meta_title
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  meta_title: prismic.KeyTextField;
-
-  /**
-   * Meta Description field in *home*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: home.meta_description
-   * - **Tab**: SEO & Metadata
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_description: prismic.KeyTextField;
-}
-
-/**
- * home document from Prismic
- *
- * - **API ID**: `home`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type HomeDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
-
-export type AllDocumentTypes = SettingsDocument | HomeDocument;
+export type AllDocumentTypes = HomeDocument | SettingsDocument;
 
 /**
  * Item in *Hero → Default → Primary → Carousel*
@@ -261,6 +263,16 @@ export interface HeroSliceDefaultPrimaryCarouselItem {
     "Type 1 (image to the right)" | "Type 2 (image to the left)",
     "filled"
   >;
+
+  /**
+   * Banner Color field in *Hero → Default → Primary → Carousel*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.carousel[].banner_color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  banner_color: prismic.ColorField;
 }
 
 /**
@@ -377,13 +389,13 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
-      settingsDocument,
-      settingsDocumentData,
-      settingsDocumentDataNavbarItem,
-      settingsDocumentDataContactInfoItem,
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
+      SettingsDocument,
+      SettingsDocumentData,
+      SettingsDocumentDataNavbarItem,
+      SettingsDocumentDataContactInfoItem,
       AllDocumentTypes,
       HeroSlice,
       HeroSliceDefaultPrimaryCarouselItem,

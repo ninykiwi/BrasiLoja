@@ -2,22 +2,29 @@
 import { useState } from 'react';
 import ListaEditar from '@/containers/ListaEditar';
 import CriarProduto from '@/containers/CriarProduto';
-import { useModal } from '@/contexts/ModalContext';
+import EditarProduto from '@/containers/EditarProduto';
 
 
 export default function Create() {
-  const { toggleCreateProductModal, toggleEditProductModal, toggleEditListModal } = useModal();
+  const [CreateProductModal, setCreateProductModal] = useState<boolean>(false)
+  const [EditProductModal, setEditProductModal] = useState<boolean>(false)
+  const toggleCreateProductModal: () => void = () => {
+    setCreateProductModal(!CreateProductModal)
+  }
+  const toggleEditProductModal = () => {
+    setEditProductModal(!EditProductModal)
+  }
 
   return (
     <main>
       <div className='flex w-full justify-center items-center self-center'>
-        <ListaEditar />
-        <CriarProduto />
+        {CreateProductModal && <CriarProduto onClick={toggleCreateProductModal} />}
+        {EditProductModal && <EditarProduto onClick={toggleEditProductModal} />}
       </div>
 
 
       <section >
-        <div className='flex flex-col gap-[39px] w-[1440px] h-[1576px] items-center'> 
+        <div className='flex flex-col gap-[39px] w-full h-[1576px] items-center'> 
 
           <div className='gap-[39px] flex flex-row'>       
           <button 
@@ -25,6 +32,7 @@ export default function Create() {
           className='criar-produto'>
             CRIAR PRODUTO
           </button>
+
           
           <button 
           onClick={toggleEditProductModal}
@@ -34,6 +42,7 @@ export default function Create() {
           </div>
         </div>
       </section>
+
 
     </main>
   );
