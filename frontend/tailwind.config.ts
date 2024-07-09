@@ -50,7 +50,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        display: 'Inter, sans-serif',
+        body: ['var(--font-roboto)'],
+        display: ['var(--font-inter)'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

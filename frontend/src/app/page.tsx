@@ -1,27 +1,23 @@
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import Produto from '@/components/Produto'
-import ContainerProdutos from '@/components/ContainerProdutos';
 import { createClient } from '@/prismicio';
 import { SliceZone } from '@prismicio/react';
-import Hero from '@/slices/Hero';
+import { components } from '@/slices';
+import { Metadata } from 'next';
 
 
-export default async function Home() {
+export default async function page() {
   const client = createClient()
   const home = await client.getSingle('home')
 
-  return (
-    <main>
+  return <SliceZone slices={home.data.slices} components={components} />
+}
 
-      <section className='flex flex-col gap-[8px]'>
-        {/* <Hero slice={home.data.slices} />
-        <SliceZone slices={home.data.slices} components={Hero} /> */}
-        <ContainerProdutos tipo='Ofertas' />
-        <ContainerProdutos tipo='VejaTambem' />
-        <ContainerProdutos tipo='VocePodeGostar' />
-      </section>
 
-    </main>
-  );
+export async function generateMetadata(): Promise<Metadata> {
+  const client = createClient();
+  const page = await client.getSingle('home');
+
+  return {
+    title: page.data.meta_title,
+    description: page.data.meta_description
+  };
 }

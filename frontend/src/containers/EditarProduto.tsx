@@ -1,50 +1,109 @@
 import Image from 'next/image'
+import close from '@/public/icons/close.svg'
+import camera from '@/public/images/camera.png'
+import { useEffect, useState } from 'react';
+import { useModal } from '@/contexts/ModalContext';
+import clsx from 'clsx';
 
 
-export default function CriarProduto () {
+const EditarProduto: React.FC = () => {
+  const { EditProductModal, toggleEditProductModal } = useModal();
+
+    const [images, setImages] = useState({
+        fileUpload1: null,
+        fileUpload2: null,
+        fileUpload3: null,
+        fileUpload4: null,
+        fileUploadMain: null,
+      });
+
+    useEffect(() => {
+        const savedImages = {
+          fileUpload1: localStorage.getItem('fileUpload1'),
+          fileUpload2: localStorage.getItem('fileUpload2'),
+          fileUpload3: localStorage.getItem('fileUpload3'),
+          fileUpload4: localStorage.getItem('fileUpload4'),
+          fileUploadMain: localStorage.getItem('fileUploadMain'),
+        };
+        setImages(savedImages);
+      }, []);
+
+    const handleImageUpload = (event: any, inputId: any) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const imageUrl = typeof reader.result === 'string' && reader.result;
+          if (!imageUrl) return;
+          setImages((prevImages) => ({
+            ...prevImages,
+            [inputId]: imageUrl,
+          }));
+          localStorage.setItem(inputId, imageUrl);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
   return (
-    <div className='flex items-center justify-center w-[100%] h-[100%] bg-white'>
+    <section className={clsx(
+      'z-30 inset-0 w-full justify-center',
+      EditProductModal ? 'flex' : 'hidden',
+    )}>
+    <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
       <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]'>
 
-        <Image src='./images/close.png' className='self-end mr-[20px] mt-[45.9px] cursor-pointer' alt='...' width={45} height={45}/>
-        <p className='px-8 mb-[74px] text-[40px] font-black self-start'>Criar Produto</p>
+        <Image 
+        onClick={toggleEditProductModal}
+        src={close} 
+        className='self-end mr-[20px] mt-[45.9px] cursor-pointer' 
+        alt='...' 
+        width={45} 
+        height={45}
+         />
+        <p className='px-8 mb-[74px] text-[40px] font-black self-start'>Editar Produto</p>
 
         <div className='flex px-10 mb-[100px]'>
             <div className='flex gap-[20px]'>
-                <div className='flex flex-col gap-8 mr-[63px] mr-[39px]'>
-                    <label className=''>
-                        <div className='upload_area'>
-                            <Image src='./images/camera.png' alt='UploadIcon' width={23} height={20} />
-                            <input id='fileUpload1' type='file' accept='image/*' className='hidden' />
-                        </div>
+                <div className='flex flex-col gap-8 mr-[63px]'>
+                {['fileUpload1', 'fileUpload2', 'fileUpload3', 'fileUpload4'].map((inputId) => (
+                    <label key={inputId}>
+                      <div className='upload_area'>
+                        {images[inputId] ? (
+                          <div className='image_preview'>
+                            <Image src={images[inputId]} alt='Selected' width={106} height={81} />
+                          </div>
+                        ) : (
+                          <Image src={camera} alt='UploadIcon' width={23} height={20} />
+                        )}
+                        <input
+                          id={inputId}
+                          type='file'
+                          accept='image/*'
+                          className='hidden'
+                          onChange={(event) => handleImageUpload(event, inputId)}
+                        />
+                      </div>
                     </label>
-
-                    <label>
-                        <div className='upload_area'>
-                            <img src='./images/camera.png' alt='UploadIcon'  />
-                            <input id='fileUpload2' type='file' accept='image/*' className='hidden' />
-                        </div>
-                    </label>
-
-                    <label>
-                        <div className='upload_area'>
-                            <img src='./images/camera.png' alt='UploadIcon' />
-                            <input id='fileUpload3' type='file' accept='image/*' className='hidden' />
-                        </div>
-                    </label>
-
-                    <label>
-                        <div className='upload_area'>
-                            <img src='./images/camera.png' alt='UploadIcon' />
-                            <input id='fileUpload4' type='file' accept='image/*' className='hidden' />
-                        </div>
-                    </label>
+                  ))}
                 </div>
 
                 <label>
                     <div className='flex items-center justify-center w-[600px] h-[572px] bg-white rounded-[10px]'>
-                        <Image src='./images/camera.png' alt='UploadIcon' width={45} height={39}/>
-                        <input id='fileUploadMain' type='file' accept='image/*' className='hidden' />
+                        {images.fileUploadMain ? (
+                          <div className='image_preview'>
+                            <Image src={images.fileUploadMain} alt='Selected' width={600} height={572} />
+                          </div>
+                        ) : (
+                          <Image src={camera} alt='UploadIcon' width={45} height={39} />
+                        )}
+                        <input
+                          id='fileUploadMain'
+                          type='file'
+                          accept='image/*'
+                          className='hidden'
+                          onChange={(event) => handleImageUpload(event, 'fileUploadMain')}
+                        />
                     </div>
                 </label>
             </div>
@@ -118,10 +177,13 @@ export default function CriarProduto () {
             </div>
         </div>
 
-        <button type='submit' className='self-center w-[369px] h-[81px] text-[32px] font-black bg-blue-600 mt-[134px] py-[22px] px-[63px] text-[#ffffff] rounded-[10px] cursor-pointer'>
-            CRIAR PRODUTO
+        <button type='submit' className='editar-produto'>
+            EDITAR PRODUTO
         </button>
       </form>
     </div>
+    </section>
   );
 };
+
+export default EditarProduto;

@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { PrismicPreview } from "@prismicio/next";
+import clsx from "clsx";
+import { FilterProvider } from "@/contexts/FilterContexts";
+import { ModalProvider } from "@/contexts/ModalContext";
 
 
-const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
-const roboto = Roboto({ subsets: ["latin"], weight: ["100", "300", "400", "500", "700", "900"] });
+const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], display:'swap', variable:'--font-inter' });
+const roboto = Roboto({ subsets: ["latin"], weight: ["100", "300", "400", "500", "700", "900"], display:'swap', variable:'--font-roboto' });
 
 
 export const metadata: Metadata = {
@@ -21,11 +25,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
+    <html lang="pt-br" className={clsx(roboto.variable, inter.variable)}>
 
-        <body className={roboto.className}>
+        <body >
           <Header />
-          {children}
+          
+          <main>
+
+            <FilterProvider>
+              <ModalProvider>
+                {children}
+              </ModalProvider>
+            </FilterProvider>
+
+          </main>
+
           <Footer />
         </body>
 

@@ -1,47 +1,44 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-import logo from '../../public/images/logo.png'
-import homeIcon from '../../public/icons/home.svg'
-import userIcon from '../../public/icons/user.svg'
-import { Comprar, AddCarrinho } from './StaticButtons'
-import cartIcon from '../../public/icons/cart.svg'
-import chatIcon from '../../public/icons/chat.svg'
-import toggleMenu from '../../public/icons/toggleMenu.svg'
-import SearchBar from './SearchBar'
+import { SearchBar } from './SearchBar'
+import { PrismicImage } from '@prismicio/react'
+import NavBar from './NavBar'
+import { Icons } from './Icons'
+import { icon } from '@/lib/icons'
+import { UserMenu } from './ToggleMenus'
+import { createClient } from '@/prismicio'
 
-export default function Header() {
+
+export default async function Header() {
+  const client = createClient()
+  const settings = await client.getSingle('settings')
+
   return (
     <section>
-      <div className='flex flex-col py-[22px] lg:pt-[34px] lg:pb-[52px] px-[26px] lg:px-[115px] gap-[16px] bg-gray-700'>
-        <div className='flex justify-between'>
-          <div className='w-fit'>
-            <Image src={logo} alt='.' width={115} height={35} />
-            <p className='text-white text-[8px] lg:text-[13px]'>www.brasiloja.com.br</p>
-          </div>
+      <div className='header'>
+        <div className='flex content-baseline justify-between'>
+          <Link className='flex flex-col w-fit text-white text-center text-[8px] lg:text-[13px]' href="/">
+            <PrismicImage className='lg:w-[175px] lg:h-[33px]' field={settings.data.site_logo} width={99} height={18} />
+            {settings.data.site_address} 
+          </Link>
 
           <SearchBar desktop />
 
           <nav> <ul className='flex w-fit gap-[18px]'>
             <li>
-              <Link href='/'>
-                <Image src={homeIcon} alt='icone de "início"' width={22} height={22} />
-              </Link>
+              <Icons iconStyle='lg:w-[40px] lg:h-[40px]' src={icon.home} width={22} href='/' />
             </li>
+
             <li>
-              <Link href='/'>
-                <Image src={userIcon} alt='icone de "usuário"' width={22} height={22} />
-              </Link>
+              <UserMenu />
             </li>
+
             <li>
-              <Link href='/'>
-                <Image src={cartIcon} alt='icone de "carrinho"' width={22} height={22} />
-              </Link>
+              <Icons iconStyle='lg:w-[40px] lg:h-[40px]' src={icon.cart} width={22} href='/' />
             </li>
+
             <li>
-              <Link href='/'>
-                <Image src={chatIcon} alt='icone de "chat"' width={22} height={22} />
-              </Link>
+              <Icons iconStyle='lg:w-[40px] lg:h-[40px]' src={icon.chat} width={22} href='/' />
             </li>
           </ul> </nav>
         </div>
@@ -49,16 +46,8 @@ export default function Header() {
         <SearchBar />
       </div>
 
-      <nav className='flex w-full py-[13px] lg:py-[16px] px-[26px] lg:px-[140px] gap-[21px] gap-[54px] bg-gray-400 overflow-hidden'>
-        <Image src={toggleMenu} alt='menu de departamentos' width={22} height={18} />
-        <ul className='flex gap-[14px]'>
-          <li><Link className='header-nav' href='/departamentos'> Departamentos </Link></li>
-          <li><Link className='header-nav' href='/produtos'> Produtos </Link></li>
-          <li><Link className='header-nav' href='/novidades'> Novidades </Link></li>
-          <li><Link className='header-nav' href='/importados'> Importados </Link></li>
-          <li><Link className='header-nav' href='/promocoes'> Promoções </Link></li>
-        </ul>
-      </nav>
+      <NavBar />
+
     </section>
   )
 }
