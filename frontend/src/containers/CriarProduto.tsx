@@ -25,7 +25,8 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
     const [prodName, setProdName] = useState<string>('')
     const [prodPrice, setProdPrice] = useState<number>(0)
     const [prodQuant, setProdQuant] = useState<number>(0)
-    const [prodCat, setProdCat] = useState<productCategories>('')
+    const [prodCat, setProdCat] = useState<productCategories>(" ")
+    const [prodCat, setProdCat] = useState<string>('')
     const [prodBrand, setProdBrand] = useState< string>('')
 
 

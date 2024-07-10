@@ -19,8 +19,8 @@ export default function Create() {
   return (
     <main>
       <div className='flex w-full justify-center items-center self-center'>
-        {CreateProductModal && <CriarProdutoMob />}
-        {/* {CreateProductModal && <CriarProduto onClick={toggleCreateProductModal} />} */}
+        {/* {CreateProductModal && <CriarProdutoMob />} */}
+        {CreateProductModal && <CriarProduto onClick={toggleCreateProductModal} />}
         {EditProductModal && <EditarProduto onClick={toggleEditProductModal} />}
       </div>
 

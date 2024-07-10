@@ -146,4 +146,20 @@ export async function add_main_img(req:Request, res: Response) {
     }
 }
 
+export async function get_product_by_id (req:Request, res:Response) {
+  try {
+    const { id } = req.params
 
+    const idExists = await prisma.product.findUnique({
+      where: { id: Number(id) }
+    })
+
+    if (!idExists) {
+      return console.log('Id de produto inválida')
+    }
+    
+    return res.send(idExists)
+  } catch (error: any) {
+    console.error('Deu ruim na recuperação do produto pelo id: ', error)
+  }
+}
