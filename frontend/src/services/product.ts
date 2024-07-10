@@ -12,7 +12,7 @@ export const createProduct = (
   prodName: string,
   prodPrice: number,
   prodQuant: number,
-  prodCat: productCategories,
+  prodCat: string,
   prodBrand: string
 ) => {
   axios.post(`${URL_BACK}/${URL_MP}`, {
