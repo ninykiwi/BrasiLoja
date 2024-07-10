@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ListaEditar from '@/containers/ListaEditar';
 import CriarProduto from '@/containers/CriarProduto';
 import EditarProduto from '@/containers/EditarProduto';
+import CriarProdutoMob from '@/containers/CriarProdutoMob';
 
 
 export default function Create() {
@@ -18,7 +19,8 @@ export default function Create() {
   return (
     <main>
       <div className='flex w-full justify-center items-center self-center'>
-        {CreateProductModal && <CriarProduto onClick={toggleCreateProductModal} />}
+        {CreateProductModal && <CriarProdutoMob />}
+        {/* {CreateProductModal && <CriarProduto onClick={toggleCreateProductModal} />} */}
         {EditProductModal && <EditarProduto onClick={toggleEditProductModal} />}
       </div>
 

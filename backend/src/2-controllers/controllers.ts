@@ -1,5 +1,6 @@
 import prisma from './../prisma'
 import { Response, Request } from 'express'
+import upload from './multer'
 /*  Funções do Servidor - Protocolo HTTP ---> Por enquanto são apenas as funções CRUD dos Produtos. 
     Feito (E por enquanto mantido) por Cristiano Santos Ribeiro Filho A.K.A. Cris - Find me on @cristiano-s-r-filho in Github 
     1 - Rota de Post de um Produto: */
@@ -22,13 +23,13 @@ export async function make_product(req:Request, res:Response){
         // Resposta padrão: 
         const MakeProduct = await prisma.product.create({
             data:{
-                name:prod_name,
-                price:prod_price,
-                quantity:prod_quant,
-                category:prod_cat,
-                brand:prod_brand
+                name: prod_name,
+                price: Number(prod_price),
+                quantity: Number(prod_quant),
+                category: prod_cat,
+                brand: prod_brand
         }})
-        res.status(200).json({msg:'Produto cadastrado na Database', prouct: MakeProduct})
+        res.status(200).json({msg:'Produto cadastrado na Database', product: MakeProduct})
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:"ERRO! Ocorreu um erro ao cadastrar seu produto", err: error})
@@ -95,7 +96,7 @@ export async function delete_product (req:Request, res:Response){
             throw new Error('Registro do produto inexistente!')
         }*/ 
         // Resposta Padrão 
-        const DeleteRegister = await prisma.product.delete({where:{id:prod_id}})
+        const DeleteRegister = await prisma.product.delete({ where:{ id: Number(prod_id) } })
         res.status(200).json({msg:'Registro de Produto deletado com sucesso', register: DeleteRegister})
     } catch (error:any) {
         console.log(error)
@@ -121,4 +122,20 @@ export async function get_product_by_category(req:Request, res:Response) {
     }
 }
 
+export async function get_product_by_id (req:Request, res:Response) {
+  try {
+    const { id } = req.params
 
+    const idExists = await prisma.product.findUnique({
+      where: { id: Number(id) }
+    })
+
+    if (!idExists) {
+      return console.log('Id de produto inválida')
+    }
+    
+    return res.send(idExists)
+  } catch (error: any) {
+    console.error('Deu ruim na recuperação do produto pelo id: ', error)
+  }
+}
