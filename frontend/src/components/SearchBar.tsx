@@ -39,8 +39,8 @@ export const SearchBar = ({
 
 export const SearchProduct = () => {
   return (
-    <form className='flex w-fit h-fit flex-col gap-[16px]'>
-      <input />
+    <form className='flex justify-between w-full h-[32px] -py-[9px] px-[12px] bg-white shadow-lg rounded-[10px]'>
+      <input type='text' placeholder='Produto...' />
       <Icons src={icon.search} width={16} />
     </form>
   )
@@ -48,8 +48,8 @@ export const SearchProduct = () => {
 
 export const SearchBrand = () => {
   return (
-    <form className='flex w-fit h-fit flex-col gap-[16px]'>
-      <input />
+    <form className='flex justify-between w-full h-[32px] -py-[9px] px-[12px] bg-white shadow-lg rounded-[10px]'>
+      <input type='text' placeholder='Marca...' />
       <Icons src={icon.search} width={16} />
     </form>
   )

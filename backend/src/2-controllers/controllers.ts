@@ -22,13 +22,13 @@ export async function make_product(req:Request, res:Response){
         // Resposta padrão: 
         const MakeProduct = await prisma.product.create({
             data:{
-                name:prod_name,
-                price:prod_price,
-                quantity:prod_quant,
-                category:prod_cat,
-                brand:prod_brand
+                name: prod_name,
+                price: Number(prod_price),
+                quantity: Number(prod_quant),
+                category: prod_cat,
+                brand: prod_brand
         }})
-        res.status(200).json({msg:'Produto cadastrado na Database', prouct: MakeProduct})
+        res.status(200).json({msg:'Produto cadastrado na Database', product: MakeProduct})
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:"ERRO! Ocorreu um erro ao cadastrar seu produto", err: error})
@@ -95,7 +95,7 @@ export async function delete_product (req:Request, res:Response){
             throw new Error('Registro do produto inexistente!')
         }*/ 
         // Resposta Padrão 
-        const DeleteRegister = await prisma.product.delete({where:{id:prod_id}})
+        const DeleteRegister = await prisma.product.delete({ where:{ id: Number(prod_id) } })
         res.status(200).json({msg:'Registro de Produto deletado com sucesso', register: DeleteRegister})
     } catch (error:any) {
         console.log(error)

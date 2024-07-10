@@ -19,7 +19,7 @@ export const DepartmentsMenu: React.FC = () => {
       <Icons src={icon.toggleMenu} width={22} onClick={toggleDepartmentsModal}/>
 
       <ul className={clsx(
-        'absolute top-[200px] left-[0] flex-col flex-wrap justify-center w-[606px] max-h-[372px] py-[30px] px-[50px] gap-[16px] bg-white rounded-r-[20px]',
+        'z-30 absolute top-[195px] left-[0] flex-col flex-wrap justify-center w-[606px] max-h-[372px] py-[30px] px-[50px] gap-[16px] bg-white rounded-r-[20px] shadow-lg',
         DepartmentsModal === true ? 'flex' : 'hidden',
       )}>
         {departmentsList.map((item, index) => {
@@ -49,7 +49,7 @@ export const UserMenu = () => {
       <Icons iconStyle='lg:w-[44px] lg:h-[44px]' src={icon.user} width={22} onClick={toggleUserModal} />
 
       <ul className={clsx(
-        'z-30 absolute top-[90px] right-[100px] flex-col items-center justify-center max-w-[606px] py-[21px] px-[15px] gap-[4px] bg-white rounded-[20px]',
+        'z-30 absolute top-[90px] right-[100px] flex-col items-center justify-center max-w-[606px] py-[21px] px-[15px] gap-[4px] bg-white rounded-[20px] shadow-lg',
         UserModal === true ? 'flex' : 'hidden',
       )}>
         {userOptionsList.map((item, index) => {

@@ -32,6 +32,7 @@ export default function Produto ({ nome }: any) {
 };
 
 export function ProdutoHorizontal () {
+  
   const [isEditarProdutoVisible, setIsEditarProdutoVisible] = useState(false);
    
   const handleEditarProdutoClick = () => {

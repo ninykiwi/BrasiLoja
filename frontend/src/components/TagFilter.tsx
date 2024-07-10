@@ -8,45 +8,31 @@ export default function TagFilter() {
   const { filterTags } = useFilter()
 
   return (
-    <section className='flex w-fit h-fit flex-col gap-[16px]'>
+    <section className='flex w-fit h-fit flex-col mx-[6px] gap-[16px]'>
+
       <SearchProduct />
 
-      <div>
-        <h4>Categoria</h4>
+      <form className='flex flex-col w-fit h-[197px] py-[5px] px-[10px] bg-white rounded-[10px] shadow-lg overflow-auto'>
+        <legend className='text-[16px] font-semibold text-[#3C3B3B]'>Categoria</legend>
+        
+        <fieldset className='flex flex-col mt-[27px] px-[30px] gap-[10px]'>
+          {departmentsList &&
+            departmentsList.map((item, index) => {
+              const itemFilter = item.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '-')
 
-        <form className='p-[4px] border-2 border-black rounded'>
-          <fieldset>
-            {departmentsList &&
-              departmentsList.map((item, index) => {
-                const itemFilter = item.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '-')
+              return (
+                <div className='flex gap-[7px]' key={index}>
+                  <input id={`${itemFilter}`} className='appearance-none w-[20px] h-[20px] rounded-[4px] border-[1px] border-black' type='checkbox' name='department' value={`${itemFilter}`} onClick={() => filterTags(`${itemFilter}`)} />
 
-                return (
-                  <div className='flex gap-2' key={index}>
-                    <input id={`${itemFilter}`} type='checkbox' name='department' value={`${itemFilter}`} onClick={() => filterTags(`${itemFilter}`)} />
+                  <label className='text-[12px] font-normal text-[#3B3B3B]' htmlFor={`${itemFilter}`}>
+                    {item}
+                  </label>
+                </div>
+              )
+          })}
 
-                    <label htmlFor={`${itemFilter}`}>
-                      {item}
-                    </label>
-                  </div>
-                )
-            })}
-          </fieldset>
-          <input type='checkbox' name='tag' value='Hardware' />
-          <label htmlFor='Hardware'>Hardware</label>
-
-          <input type='checkbox' name='tag' value='Audio' />
-          <label htmlFor='Audio'>Audio</label>
-
-          <input type='checkbox' name='tag' value='Games' />
-          <label htmlFor='Games'>Games</label>
-
-          <input type='checkbox' name='tag' value='Perifericos' />
-          <label htmlFor='Perifericos'>Perifericos</label>
-
-          <input type='checkbox' name='tag' value='TV' />
-          <label htmlFor='TV'>TV</label>
-        </form>
-      </div>
+        </fieldset>
+      </form>
 
       <SearchBrand />
     </section>

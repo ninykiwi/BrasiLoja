@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import formasPagamento from '@/public/images/formasPagamento.svg'
 import { createClient } from '@/prismicio'
+import { departmentsList } from '@/lib/lists'
 
 export default async function Footer() {
   const client = createClient()
@@ -19,29 +20,17 @@ export default async function Footer() {
         <nav>
           <legend> Departamentos </legend>
           <ul>
-            <li> <Link href='/departamentos/hardware'> Hardware </Link> </li>
-            <li> <Link href='/departamentos/Celular e Smartphone'> Celular e Smartphone </Link> </li>
-            <li> <Link href='/departamentos/Periféricos'> Periféricos </Link> </li>
-            <li> <Link href='/departamentos/Teclado e Mouse'> Teclado e Mouse </Link> </li>
-            <li> <Link href='/departamentos/Computadores'> Computadores </Link> </li>
-            <li> <Link href='/departamentos/Placa de Vídeo'> Placa de Vídeo </Link> </li>
-            <li> <Link href='/departamentos/Monitores'> Monitores </Link> </li>
-            <li> <Link href='/departamentos/Consoles e Games'> Consoles e Games </Link> </li>
-            <li> <Link href='/departamentos/Audio'> Áudio </Link> </li>
-            <li> <Link href='/departamentos/TV'> TV </Link> </li>
-            <li> <Link href='/departamentos/Eletrodomesticos'> Eletrodomésticos </Link> </li>
-            <li> <Link href='/departamentos/Eletroportateis'> Eletroportáteis </Link> </li>
-            <li> <Link href='/departamentos/SmartHome'> Smart Home </Link> </li>
-            <li> <Link href='/departamentos/Ferramentas'> Ferramentas </Link> </li>
-            <li> <Link href='/departamentos/Ar&Ventilação'> Ar e Ventilação </Link> </li>
-            <li> <Link href='/departamentos/Segurança'> Segurança </Link> </li>
-            <li> <Link href='/departamentos/Notebook'> Notebook </Link> </li>
-            <li> <Link href='/departamentos/Câmeras&Drones'> Câmeras e Drones </Link> </li>
-            <li> <Link href='/departamentos/Conectividade'> Conectividade </Link> </li>
-            <li> <Link href='/departamentos/Processadores'> Processadores </Link> </li>
-            <li> <Link href='/departamentos/Geek'> Geek </Link> </li>
-            <li> <Link href='/departamentos/EspacoGamer'> Espaço Gamer </Link> </li>
-            <li> <Link href='/departamentos/Escritorio'> Escritório </Link> </li>
+
+            {departmentsList.map((item, index) => {
+              const link = item.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '-')
+
+              return (
+                <li key={index}> 
+                  <Link className='hover:underline hover:underline-offset-4' href={`/departamentos/${link}`}> {item} </Link>
+                </li>
+              )
+            })}
+            
           </ul>
         </nav>
         
@@ -53,14 +42,14 @@ export default async function Footer() {
           <nav>
             <legend> Deixe-nos ajudar você </legend>
             <ul>
-              <li><Link href='/conta'> Sua conta </Link></li>
-              <li><Link href='/Frete&Entrega'> Frete e prazo de entrega </Link></li>
-              <li><Link href='/Devoluções&Reembolsos'> Devoluções e reembolsos </Link></li>
-              <li><Link href='/Conteúdo&Dispositivos'> Gerencie seu conteúdo e dispositivos </Link></li>
+              <li><Link className='hover:underline hover:underline-offset-4' href='/conta'> Sua conta </Link></li>
+              <li><Link className='hover:underline hover:underline-offset-4' href='/Frete&Entrega'> Frete e prazo de entrega </Link></li>
+              <li><Link className='hover:underline hover:underline-offset-4' href='/Devoluções&Reembolsos'> Devoluções e reembolsos </Link></li>
+              <li><Link className='hover:underline hover:underline-offset-4' href='/Conteúdo&Dispositivos'> Gerencie seu conteúdo e dispositivos </Link></li>
 
               <li> <ul>
-                <li><Link href='/FAQ'> FAQ </Link></li>
-                <li><Link href='/Orientações'> Orientações </Link></li>
+                <li><Link className='hover:underline hover:underline-offset-4' href='/FAQ'> FAQ </Link></li>
+                <li><Link className='hover:underline hover:underline-offset-4' href='/Orientações'> Orientações </Link></li>
               </ul> </li>
             </ul>
           </nav>
@@ -74,7 +63,7 @@ export default async function Footer() {
                   <table>
                     <thead>
                       <tr>
-                        <th className='font-bold'> {item.info_type} </th>
+                        <th className='font-bold'> {item.info_type}: </th>
                       </tr>
                     </thead>
                     <tbody>
