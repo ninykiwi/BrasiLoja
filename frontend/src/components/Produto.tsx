@@ -1,8 +1,5 @@
 'use client'
 import Image from 'next/image'
-import addCart from '@/public/icons/addCart.svg'
-import heart from '@/public/icons/heart.svg'
-import fone from '@/public/images/fone.png'
 import squareFone from '@/public/images/squareFone.png'
 import lixo from '@/public/icons/lixo.svg'
 import nintendo from '@/public/images/nintendo0.png'
@@ -12,18 +9,24 @@ import { icon } from '@/lib/icons'
 import { Icons } from './Icons'
 import clsx from 'clsx'
 
+interface ProdutoProps {
+  nome: string;
+  imagem: string;
+  preco: string;
+  className?: string;
+}
 
-export default function Produto ({ nome, className }: any) {
+export default function Produto({ nome, imagem, preco, className }: ProdutoProps) {
   return (
     <div className={clsx('card', className)}>
       <Icons className='self-end' iconStyle='lg:w-[32px] lg:h-[32px]' src={icon.heart} width={14}/>
       <div className='flex flex-col justify-between w-full h-full'>
-        <Image className='self-center lg:w-[124px] lg:h-[183px]' src={fone} alt='Imagem do produto' width={70} height={70} />
+        <Image className='self-center lg:w-[124px] lg:h-[183px]' src={imagem} alt='Imagem do produto' width={70} height={70} />
 
         <div className='flex flex-col gap-[10px]'>
             <div className='flex flex-col gap-[8px]'>
                 <p className='font-display'>{nome}</p>
-                <p className='subtitle font-display'>R$ 59,90</p>
+                <p className='subtitle font-display'>R$ {preco}</p>
             </div>
 
 
@@ -50,7 +53,7 @@ export const ProdutoHorizontal = () => {
 
   return (
     <>
-    <EditarProduto />
+    {isEditarProdutoVisible && <EditarProduto onClick={closeEditarProduto}/>}
     <div className='flex items-end justify-between w-[1224px] lg:w-[1224px] h-[171px] lg:h-[260px] py-[53px] px-[27px] rounded-lg bg-white border-[#5D5D5D] border'>
       <div className='flex gap-[55px] w-full h-full items-end'>
         <Image className='self-center lg:w-[177px] lg:h-[175px]' src={squareFone} alt='Imagem do produto' width={70} height={70} />
