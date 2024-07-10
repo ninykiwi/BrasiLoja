@@ -1,6 +1,6 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import clsx from 'clsx'
+import '@/styles/globals.css'
 //-- CONTEXTs
 import { useFilter } from '@/contexts/FilterContexts';
 //-- TYPEs & FUNCTIONs 
@@ -9,10 +9,8 @@ import { ContainerProdutosProps } from '@/types/props'
 import Link from 'next/link';
 import Image from 'next/image';
 import Produto from '@/components/Produto';
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-//-- ASSETs
-import setaCarrossel from '@/public/icons/setaCarrossel.svg'
+import Carousel from "@/components/Carousel";
+import clsx from "clsx";
 
 
 /**
@@ -30,50 +28,30 @@ const Lists = ({ slice }: ListsProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className='w-full'
+      style={{ backgroundColor: `${slice.primary.color}` }}  
     >
+      <div className='flex flex-col w-[calc(100vw - 40px)] h-fit my-[2px] mx-[20px] py-[17px] px-[14px] rounded-[4px]'>
+        <h3 className="text-[16px] font-black"> {slice.primary.title} </h3>   
 
-      <h3> {slice.primary.title} </h3>   
+        <ul className='flex w-full mt-[12px] gap-[50px] lg:gap-[80px] justify-evenly'>
 
-      { 2===2 ? (
-        <> 
-          <Image className='fixed lg:w-[32px] lg:h-[32px]' src={setaCarrossel} alt='icone de seta esquerda do carrossel' width={24} height={24} />
-          <ul className='flex mt-[12px] gap-[50px] lg:gap-[80px]'>
-
-              {/* { Lista &&
-            Lista.slice(0,4).map((item: any) => (
-              <li key={item.id}>
-                <Produto {...} />
-              </li>
-            ))} */}
-
-            <Produto nome='fone de ouvido'  />
-            <Produto nome='headphone' />
-            <Produto nome='ascoltatore' />
-            <Produto nome='tototo' />
-
-          </ul>
-          <Image className='fixed lg:w-[32px] lg:h-[32px]' src={setaCarrossel} alt='icone de seta direita do carrossel' width={24} height={24} />
-        </>
-        ) : (
-        <ul className='flex mt-[12px] gap-[50px] lg:gap-[80px]'>
-
-          {/* { Lista &&
+            {/* { Lista &&
           Lista.slice(0,4).map((item: any) => (
             <li key={item.id}>
               <Produto {...} />
             </li>
           ))} */}
 
-          <Produto />
-          <Produto />
-          <Produto />
-          <Produto />
+          <Produto nome='fone de ouvido'  />
+          <Produto nome='headphone' />
+
+          <Produto className='hidden lg:flex' />
+          <Produto className='hidden lg:flex' />
 
         </ul>
-      )}
-
-      <Link className='underline font-black text-[11px] lg:text-[16px]' href={`/${slice.primary.filter}`}> Ver mais </Link>
+          
+        <Link className='flex self-end underline font-black text-[11px] lg:text-[16px]' href={`/${slice.primary.filter}`}> Ver mais </Link>
+      </div>
 
     </section>
   );

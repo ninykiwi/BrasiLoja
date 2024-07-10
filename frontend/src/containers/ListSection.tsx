@@ -27,11 +27,7 @@ export default function ListSection({
   const link = typeof title === 'string' ? title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, '-') : false
 
   return (
-    <section className={clsx('w-full', className)}>
-
-      <h3 className='text-[16px] font-bold'> Filtro </h3>   
-
-      <TagFilter />
+    <section className={clsx('w-full px-[5px]', className)}>
 
       { carousel ? (
         <Carousel>
@@ -61,7 +57,7 @@ export default function ListSection({
           </ul>
         </Carousel>
         ) : (
-        <ul className='flex flex-wrap mx-[16px] mt-[12px] gap-[50px] lg:gap-[80px]'>
+        <ul className='flex flex-row flex-wrap justify-between w-full h-max mx-[16px] mt-[12px] gap-[50px] lg:gap-[80px]'>
 
           <Produto />
           <Produto />

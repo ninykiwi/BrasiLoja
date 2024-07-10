@@ -17,7 +17,7 @@ export default function Create() {
   }
 
   return (
-    <main>
+    <section>
       <div className='flex w-full justify-center items-center self-center'>
         {/* {CreateProductModal && <CriarProdutoMob />} */}
         {CreateProductModal && <CriarProduto onClick={toggleCreateProductModal} />}
@@ -46,6 +46,6 @@ export default function Create() {
       </section>
 
 
-    </main>
+    </section>
   );
 }

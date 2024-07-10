@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { SearchProduct, SearchBrand } from '@/components/SearchBar'
 import { useFilter } from '@/contexts/FilterContexts'
@@ -9,6 +10,8 @@ export default function TagFilter() {
 
   return (
     <section className='flex w-fit h-fit flex-col mx-[6px] gap-[16px]'>
+
+    <h3 className='text-[16px] font-bold'> Filtro </h3> 
 
       <SearchProduct />
 

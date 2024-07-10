@@ -139,3 +139,17 @@ export async function get_product_by_id (req:Request, res:Response) {
     console.error('Deu ruim na recuperação do produto pelo id: ', error)
   }
 }
+
+export async function get_all_products (req:Request, res:Response) {
+  try {
+    const allProducts = await prisma.product.findMany()
+
+    if (!allProducts) {
+      return console.log('Não há produtos cadastrados')
+    }
+
+    return res.send(allProducts)
+  } catch (error: any) {
+    console.error('Deu ruim na recuperação de todos os produtos: ', error)
+  }
+}

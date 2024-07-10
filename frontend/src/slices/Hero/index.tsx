@@ -22,15 +22,15 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       <div
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className='flex flex-col lg:w-[280px] lg:h-[154px] mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] bg-gray-200 overflow-hidden'
+        className='flex flex-col w-full lg:w-[280px] lg:h-[154px] py-[17px] gap-[14px] overflow-hidden'
       >
         <Carousel>
           {slice.primary.carousel.map((item, index) => (
             <div
-              className='opacity-0 w-[280px] lg:w-[1224px] h-[154px] lg:h-[450px] py-[12px] lg:py-[20px] px-[14px] lg:px-[70px]' key={index} style={{ backgroundColor: `${item.banner_color}` }} >
+              className='flex flex-row w-[280px] lg:w-[1224px] h-[154px] lg:h-[450px] py-[12px] lg:py-[20px] px-[14px] lg:px-[70px]' key={index} style={{ backgroundColor: `${item.banner_color}` }} >
 
-              <div className="flex flex-col max-w-[40%]">
-                <h2 className="font-display max-w-full">{item.banner_title}</h2>
+              <div className="flex flex-col w-[40vw]">
+                <h2 className="font-display max-w-[90%]">{item.banner_title}</h2>
                 <p className="subtitle font-display max-w-full">{item.banner_subtitle}</p>
                 <PrismicNextLink field={item.link_to_product}>
                   <button className="flex w-[60px] h-[28px] py-[5px] px-[1px] bg-blue-500 rounded-[4px] text-white text-[11px] font-black">

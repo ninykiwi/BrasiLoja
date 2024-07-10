@@ -135,7 +135,7 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
                       <input type='number' className='h-[51px] w-[104px] rounded-[10px] px-2' onChange={setInputs(setProdQuant)} required/>
                   </div>
 
-                  <select name='product-category' className='w-[392px] h-[62px] rounded-[10px] px-2' >
+                  <select name='product-category' className='w-[392px] h-[62px] rounded-[10px] px-2' onClick={setInputs(setProdCat)}>
                       <option value=''>Categorias</option>
 
                       {departmentsList.map((item, index) => {

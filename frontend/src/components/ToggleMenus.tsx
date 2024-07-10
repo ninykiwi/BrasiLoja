@@ -19,7 +19,7 @@ export const DepartmentsMenu: React.FC = () => {
       <Icons src={icon.toggleMenu} width={22} onClick={toggleDepartmentsModal}/>
 
       <ul className={clsx(
-        'z-30 absolute top-[195px] left-[0] flex-col flex-wrap justify-center w-[606px] max-h-[372px] py-[30px] px-[50px] gap-[16px] bg-white rounded-r-[20px] shadow-lg',
+        'z-30 absolute top-[170px] lg:top-[195px] left-[0] flex-col flex-wrap justify-center w-[90%] lg:w-[606px] max-h-[372px] py-[30px] px-[50px] gap-[16px] bg-white rounded-r-[20px] shadow-lg',
         DepartmentsModal === true ? 'flex' : 'hidden',
       )}>
         {departmentsList.map((item, index) => {

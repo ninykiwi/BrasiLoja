@@ -28,9 +28,8 @@ export default function RootLayout({
         <body >
           <Header />
           
-          <main>
-
-                {children}
+          <main className='flex flex-col mx-[20px] px-[15px] bg-[#F3F3F3]'>
+            {children}
           </main>
 
           <Footer />
