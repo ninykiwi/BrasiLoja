@@ -25,3 +25,10 @@ model Product {
     img3 String? 
     img4 String? 
 }
+
+model Carrinho {
+  id Int @id @default(autoincrement())
+  name String 
+  quantity String
+  price Int
+}

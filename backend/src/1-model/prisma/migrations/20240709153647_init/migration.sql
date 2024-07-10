@@ -14,3 +14,11 @@ CREATE TABLE "Product" (
     "img3" TEXT,
     "img4" TEXT
 );
+
+-- CreateTable
+CREATE TABLE "Carrinho" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "quantity" TEXT NOT NULL,
+    "price" INTEGER NOT NULL
+);
