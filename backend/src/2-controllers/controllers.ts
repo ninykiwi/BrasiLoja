@@ -1,6 +1,6 @@
 import prisma from './../prisma'
 import { Response, Request } from 'express'
-import upload from './multer'
+
 /*  Funções do Servidor - Protocolo HTTP ---> Por enquanto são apenas as funções CRUD dos Produtos. 
     Feito (E por enquanto mantido) por Cristiano Santos Ribeiro Filho A.K.A. Cris - Find me on @cristiano-s-r-filho in Github 
     1 - Rota de Post de um Produto: */
@@ -119,6 +119,30 @@ export async function get_product_by_category(req:Request, res:Response) {
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! Ocorreu um erro ao tentar pegar os produtos da categoria', err: error})
+    }
+}
+// Rota 6 - Fetch em todos os produtos da database 
+export async function get_all(req:Request,res:Response) {
+    try {
+        const GetAll = await prisma.product.findMany()
+        res.status(200).json({msg:'Seguem abaixo todos os produtos da database:', lista: GetAll})
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg: "ERRO! Ocorreu um erro ao tentar pegar os produtos da categoria", err: error})
+    }
+}
+// ON TEST - Rota de adicionar imagem a um produto pelo Multer 
+export async function add_main_img(req:Request, res: Response) {
+    try {
+        const id_for_edit = req.body
+        const imagePathMain = req.file?.path
+        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+            mainImg:imagePathMain
+        }})
+        res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser colocada no server!', err:error})
     }
 }
 
