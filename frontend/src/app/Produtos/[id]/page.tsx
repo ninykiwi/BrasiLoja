@@ -18,11 +18,17 @@ import { useEffect, useState } from 'react';
 import { getProductById } from '@/services/product';
 import { Icons } from '@/components/Icons';
 import { icon } from '@/lib/icons';
+import ListSection from '@/containers/ListSection';
 
 
 export default function Page({ params }: { params: { id: string } }) {
+  const [cart, setCart] = useState<any>([])
   const [product, setProduct] = useState<any>(null)
   const id = Number(params.id)
+
+  const addToTheCart = (prodId: number) => {
+    setCart([...cart, prodId])
+  }
 
   useEffect(() => {
     getProductById(id, setProduct)
@@ -149,8 +155,8 @@ export default function Page({ params }: { params: { id: string } }) {
             </fieldset>
           </div>
 
+          <legend>Modelos:</legend>
           <fieldset>
-            <legend>Modelos:</legend>
 
             <label>
               <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
@@ -166,12 +172,78 @@ export default function Page({ params }: { params: { id: string } }) {
             </label>
           </fieldset>
 
-          <button className='criar-produto'>COMPRAR</button>
-
-          <Icons className='bg-yellow-500' src={icon.addCart} alt='Adicionar ao carrinho' width={36} height={36} />
+          <div className='flex justify-between'>
+            <button className='criar-produto' type='submit'>COMPRAR</button>
+            <Icons className='bg-yellow-500' src={icon.addCart}  width={36} onClick={() => setCart(product.id)} />
+          </div>
         </form>
 
+        <form>
+          <label>Calcular frente:</label>
+
+          <div>
+            <input type='number' placeholder='CEP...' minLength={8} maxLength={8} />
+            <button className='flex items-center justify-center w-[27px] h-[23px] bg-gray-500 rounded-[10px]' type='submit'> OK </button>
+          </div>
+
+          <Link className='underline hover:text-blue-500' href=''> Não lembro meu CEP </Link>
+
+        </form>
+        
+        <div className='flex gap-[2px]'>
+          <img />
+          <p> Frete grátis para compras acima de R$199,99 </p>
+        </div>
+
+        <div className='flex justify-evenly'>
+          <Icons src={icon.heart} width={40} />
+          <Icons src={icon.share} width={35} />
+        </div>
+
       </section>
+
+      <ListSection />
+
+      {product.description && (
+        <section>
+          <h4>Descrição do Produto</h4>
+          <div className='flex p-[16px] bg-white rounded-[8px]'>
+            <p> {product.description} </p>
+          </div>
+        </section>
+      )}
+
+      {product.spec && (
+        <section>
+          <h4>Informações Técnicas </h4>
+          <div className='flex p-[16px] bg-white rounded-[8px]'>
+            <p> {product.spec} </p>
+          </div>
+        </section>
+      )}
+
+      {/* {todosComentarios.length > 0 && (
+        <section>
+          <h4>Avaliação dos Clientes</h4>
+
+          <div className='flex flex-wrap gap-[20px]'>
+
+            {comentariosExibidos.map((comentario) => (
+              <div key={comentario.id} className='flex flex-col w-[520px] h-auto bg-white rounded-[10px] px-[12px] pb-[21px] pt-[14px]'>
+                <div className='flex w-full'>
+                  <p className='mr-5 font-medium'>{comentario.nome}</p>
+                  <p className='font-medium'>{comentario.dataCompleta}</p>
+                  <p className='ml-auto font-medium'>{`Nota ${comentario.notaEstrelas} estrelas`}</p>
+                </div>
+
+                <p className='font-light'>{comentario.comentario}</p>
+              </div>
+            )
+          )} */}
+
+          </div>
+        </section>
+      )}
 
     </main>
   )
