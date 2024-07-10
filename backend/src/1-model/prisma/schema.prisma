@@ -15,7 +15,7 @@ model Product {
     name String 
     price Int 
     quantity Int
-    category String
+    category String?
     brand String
     description String? 
     spec String? 

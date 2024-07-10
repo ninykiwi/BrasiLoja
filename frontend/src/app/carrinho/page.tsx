@@ -8,7 +8,7 @@ import { ProdutoCarrinho } from '@/components/Produto';
 export default function Cart() {
 
   return (
-    <main className='w-full flex justify-center'>
+    <section className='w-full flex justify-center'>
         <div className="pt-[72px] bg-[#F0EFEF] rounded-[10px] flex flex-col w-[1224px] h-auto">
             <div className="flex flex-col mb-[128px]">
                 <div className="flex mb-[67px] mr-[58px] justify-between">
@@ -95,7 +95,7 @@ export default function Cart() {
             <p>outros produtos</p>
             <p>vistos recentemente</p>
         </div>
-    </main>
+    </section>
   );
 };
 

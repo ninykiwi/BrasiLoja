@@ -8,22 +8,28 @@ import lixo from '@/public/icons/lixo.svg'
 import nintendo from '@/public/images/nintendo0.png'
 import EditarProduto from '@/containers/EditarProduto'
 import { useState } from 'react'
+import { icon } from '@/lib/icons'
+import { Icons } from './Icons'
+import clsx from 'clsx'
 
 
-export default function Produto ({ nome }: any) {
+export default function Produto ({ nome, className }: any) {
   return (
-    <div className='card'>
-      <Image className='self-end' src={heart} alt='Adicionar aos "favoritos"' width={32} height={29}/>
+    <div className={clsx('card', className)}>
+      <Icons className='self-end' iconStyle='lg:w-[32px] lg:h-[32px]' src={icon.heart} width={14}/>
       <div className='flex flex-col justify-between w-full h-full'>
         <Image className='self-center lg:w-[124px] lg:h-[183px]' src={fone} alt='Imagem do produto' width={70} height={70} />
-        <div className='flex flex-col'>
-            <div className='flex flex-col gap-[13px] pb-[13px]'>
+
+        <div className='flex flex-col gap-[10px]'>
+            <div className='flex flex-col gap-[8px]'>
                 <p className='font-display'>{nome}</p>
                 <p className='subtitle font-display'>R$ 59,90</p>
             </div>
-            <div className='flex w-full gap-[15px]'>
-                <button className='comprar'>COMPRAR</button>
-                <button className='add-cart'><Image src={addCart} alt='Adicionar ao carrinho' width={36} height={36} /></button>
+
+
+            <div className='flex justify-center w-full gap-[7px] lg:gap-[15px]'>
+                <button className='flex items-center justify-center w-[60px] lg:w-[138px]  h-[28px] lg:h-[52px] rounded-[4px] lg:rounded-[8px] bg-blue-500 text-[11px] lg:font-display lg:text-[20px] font-black text-white leading-[-0.2em]'>COMPRAR</button>
+                <Icons className='flex items-center justify-center w-[28px] lg:w-[52px] h-[28px] lg:h-[52px] bg-yellow-500 rounded-[4px] lg:rounded-[10px]' iconStyle='lg:w-[36px] lg:h-[36px]' src={icon.addCart} width={17} />
             </div>
         </div>
       </div>
@@ -31,8 +37,8 @@ export default function Produto ({ nome }: any) {
   );
 };
 
-export function ProdutoHorizontal () {
-  
+export const ProdutoHorizontal = () => {
+
   const [isEditarProdutoVisible, setIsEditarProdutoVisible] = useState(false);
    
   const handleEditarProdutoClick = () => {

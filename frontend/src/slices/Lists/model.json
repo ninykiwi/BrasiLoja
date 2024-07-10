@@ -35,6 +35,13 @@
             ],
             "default_value": "None"
           }
+        },
+        "color": {
+          "type": "Color",
+          "config": {
+            "label": "Color",
+            "placeholder": ""
+          }
         }
       },
       "items": {}

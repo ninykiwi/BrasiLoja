@@ -131,7 +131,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
 
   return (
-    <main className='mx-[20px]'>
+    <section className='mx-[20px]'>
       <h2> {product.name} </h2>
 
       <section className='flex flex-col gap-[7px]'>
@@ -254,7 +254,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
       <ListSection title='OutrosProdutos' carousel />
 
-    </main>
+    </section>
   )
 
 

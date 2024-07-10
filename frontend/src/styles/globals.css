@@ -44,7 +44,12 @@
     @apply flex flex-col w-full py-[22px] lg:pt-[34px] lg:pb-[52px] px-[26px] lg:px-[115px] gap-[16px] bg-gray-700;
   }
   .header-nav {
-    @apply flex w-full py-[13px] lg:py-[16px] px-[26px] lg:px-[140px] gap-[21px] lg:gap-[54px] bg-gray-400 overflow-hidden;
+    @apply flex w-full py-[13px] lg:py-[16px] px-[26px] lg:px-[140px] gap-[21px] lg:gap-[50px];
+
+    ul {
+      scrollbar-color: rgb(53, 53, 53) transparent;
+      scrollbar-width: thin;
+    }
   }
   .header-nav-list-items {
     @apply flex place-items-center place-content-center w-[95px] lg:w-[185px] h-[20px] lg:h-[28px] bg-white rounded-xl text-gray-500 text-[0.5rem] lg:text-[1rem] hover:bg-blue-500 hover:text-white active:bg-blue-500 active:text-white;
@@ -66,7 +71,7 @@
     @apply flex justify-center items-center w-[106px] h-[81px] bg-white;
   }
   .card {
-    @apply flex flex-col w-[100px] lg:w-[235px] h-[171px] lg:h-[381px] py-[9px] lg:py-[12px] px-[5px] lg:px-[16px] bg-white shadow-lg rounded-lg;
+    @apply flex flex-col w-[120px] lg:w-[235px] h-[200px] lg:h-[381px] my-[12px] mx-[10px] py-[9px] lg:py-[12px] px-[5px] lg:px-[16px] bg-white shadow-lg rounded-lg;
   }
   .criar-produto {
     input {

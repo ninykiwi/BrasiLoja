@@ -12,6 +12,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "ProdutosSimilares",
 				"type": "Select"
+			},
+			"color": {
+				"__TYPE__": "FieldContent",
+				"value": "#9de095",
+				"type": "Color"
 			}
 		},
 		"items": []

@@ -350,6 +350,16 @@ export interface ListsSliceDefaultPrimary {
     | "ProdutosSimilares",
     "filled"
   >;
+
+  /**
+   * Color field in *Lists → Default → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lists.default.primary.color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  color: prismic.ColorField;
 }
 
 /**

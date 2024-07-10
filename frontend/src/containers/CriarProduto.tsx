@@ -25,6 +25,7 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
     const [prodName, setProdName] = useState<string>('')
     const [prodPrice, setProdPrice] = useState<number>(0)
     const [prodQuant, setProdQuant] = useState<number>(0)
+    const [prodCat, setProdCat] = useState<productCategories>(" ")
     const [prodCat, setProdCat] = useState<string>('')
     const [prodBrand, setProdBrand] = useState< string>('')
 
@@ -135,7 +136,7 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
                       <input type='number' className='h-[51px] w-[104px] rounded-[10px] px-2' onChange={setInputs(setProdQuant)} required/>
                   </div>
 
-                  <select name='product-category' className='w-[392px] h-[62px] rounded-[10px] px-2' >
+                  <select name='product-category' className='w-[392px] h-[62px] rounded-[10px] px-2' onClick={setInputs(setProdCat)}>
                       <option value=''>Categorias</option>
 
                       {departmentsList.map((item, index) => {

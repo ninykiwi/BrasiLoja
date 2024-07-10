@@ -41,7 +41,7 @@ export default async function NavBar() {
 
       <DepartmentsMenu />
 
-      <ul className='flex gap-[14px]'>
+      <ul className='flex gap-[14px] overflow-auto'>
         
         {settings.data.navbar.map((item: any, index: number) => (
           <li key={index}>
