@@ -182,8 +182,8 @@ export default function Page({ params }: { params: { id: string } }) {
           <label>Calcular frente:</label>
 
           <div>
-            <input type='number' placeholder='CEP...' minLength={8} maxLength={8} />
-            <button className='flex items-center justify-center w-[27px] h-[23px] bg-gray-500 rounded-[10px]' type='submit'> OK </button>
+            <input className='flex w-[260px] h-[42px] rounded-l-[10px]' type='number' placeholder='CEP...' minLength={8} maxLength={8} />
+            <button className='flex items-center justify-center w-[27px] h-[23px] bg-gray-500 rounded-r-[10px]' type='submit'> OK </button>
           </div>
 
           <Link className='underline hover:text-blue-500' href=''> Não lembro meu CEP </Link>
@@ -202,7 +202,9 @@ export default function Page({ params }: { params: { id: string } }) {
 
       </section>
 
-      <ListSection />
+
+      <ListSection title='ProdutosSimilares' carousel />
+
 
       {product.description && (
         <section>
@@ -213,6 +215,7 @@ export default function Page({ params }: { params: { id: string } }) {
         </section>
       )}
 
+
       {product.spec && (
         <section>
           <h4>Informações Técnicas </h4>
@@ -221,6 +224,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </div>
         </section>
       )}
+
 
       {/* {todosComentarios.length > 0 && (
         <section>
@@ -239,11 +243,16 @@ export default function Page({ params }: { params: { id: string } }) {
                 <p className='font-light'>{comentario.comentario}</p>
               </div>
             )
-          )} */}
+          )}
 
           </div>
+
+          <Link className='underline text-[1rem] lg:text-[16px]' href=''> Ver mais </Link>
         </section>
-      )}
+      )} */}
+
+
+      <ListSection title='OutrosProdutos' carousel />
 
     </main>
   )
