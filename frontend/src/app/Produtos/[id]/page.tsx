@@ -1,19 +1,19 @@
 "use client";
 import Image from 'next/image'
-import heart from '../../../../public/icons/heart.svg'
-import share from '../../../../public/icons/share.svg'
-import frete from '../../../../public/icons/frete.svg'
-import addCart from '../../../../public/icons/addCart.svg'
+import heart from '@/public/icons/heart.svg'
+import share from '@/public/icons/share.svg'
+import frete from '@/public/icons/frete.svg'
+import addCart from '@/public/icons/addCart.svg'
 import Link from 'next/link';
 
-import nintendo0 from '../../../../public/images/nintendo0.png'
-import nintendo1 from '../../../../public/images/nintendo1.png'
-import nintendo2 from '../../../../public/images/nintendo2.png'
-import nintendo3 from '../../../../public/images/nintendo3.png'
-import nintendo4 from '../../../../public/images/nintendo4.png'
-import nintendo5 from '../../../../public/images/nintendo5.png'
-import nintendo6 from '../../../../public/images/nintendo6.png'
-import nintendo7 from '../../../../public/images/nintendo7.png'
+import nintendo0 from '@/public/images/nintendo0.png'
+import nintendo1 from '@/public/images/nintendo1.png'
+import nintendo2 from '@/public/images/nintendo2.png'
+import nintendo3 from '@/public/images/nintendo3.png'
+import nintendo4 from '@/public/images/nintendo4.png'
+import nintendo5 from '@/public/images/nintendo5.png'
+import nintendo6 from '@/public/images/nintendo6.png'
+import nintendo7 from '@/public/images/nintendo7.png'
 import { useEffect, useState } from 'react';
 import { getProductById } from '@/services/product';
 import { Icons } from '@/components/Icons';
@@ -24,16 +24,16 @@ import ItemsCarousel from '@/components/ItemsCarousel';
 
 export default function Page({ params }: { params: { id: string } }) {
   const [cart, setCart] = useState<any>([])
-  const [product, setProduct] = useState<any>(null)
+  const [product, setProduct] = useState<any>([])
   const id = Number(params.id)
 
   const addToTheCart = (prodId: number) => {
     setCart([...cart, prodId])
   }
 
-  useEffect(() => {
-    getProductById(id, setProduct)
-  }, [id])
+  // useEffect(() => {
+  //   getProductById(id, setProduct)
+  // }, [id])
 
   const images = {
     imagem1: nintendo1,
@@ -130,75 +130,91 @@ export default function Page({ params }: { params: { id: string } }) {
 
   const comentariosExibidos = todosComentarios.slice(0, comentariosVisiveis);
 
+  useEffect(() => {
+    setProduct([{
+      id: 1,
+      name: 'Console Nintendo Switch Oled 64 GB',
+      mainImg: nintendo0,
+      img1: nintendo1,
+      img2: nintendo2,
+      img3: nintendo3,
+      img4: nintendo4,
+      img5: nintendo5,
+      img6: nintendo6,
+      img7: nintendo7,
+      price: 'R$ 2.253,60',
+      description: 'Equipado com uma tela OLED vibrante de 7 polegadas, o console oferece cores mais ricas e um contraste nítido para uma experiência visual incrível. Com um armazenamento interno de 64 GB, suporte a modo portátil, mesa e TV, e um dock com porta LAN integrada, o Nintendo Switch OLED é perfeito para jogar em qualquer lugar e a qualquer momento. Aproveite ao máximo seus jogos favoritos com gráficos deslumbrantes e um som aprimorado.',
+      spec: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor, nunc non ullamcorper pellentesque, massa turpis hendrerit ligula, a euismod nisi leo ut tortor. Integer a augue nec nulla lacinia interdum. Aenean venenatis, nisi nec fermentum aliquam, enim felis feugiat lectus, non ultrices ex augue at justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus elementum magna in neque pretium, ut egestas nisl sollicitudin. Integer mollis, dolor non bibendum scelerisque, velit nunc fermentum nisi, sit amet vulputate purus orci non lectus. Cras ac ex vitae nisi eleifend tincidunt. Aenean dapibus leo a ex efficitur, et hendrerit risus ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor, nunc non ullamcorper pellentesque, massa turpis hendrerit ligula, a euismod nisi leo ut tortor. Integer a augue nec nulla lacinia interdum. Aenean venenatis, nisi nec fermentum aliqua'
+    }])
+  }, [])
+
 
   return (
-    <section className='mx-[20px]'>
-      <h2> {product.name} </h2>
+    <section className='w-full'>
+      <h3 className='my-[24px] font-black'> Console Nintendo Switch Oled 64gb </h3>
 
-      <section className='flex flex-col gap-[7px]'>
+      <section className='flex flex-col items-center gap-[7px]'>
 
-        <Image className='rounded-[8px]' src={product.mainImg} alt={`Imagem principal do produto`} width={211} height={216} />
+        <Image className='rounded-[8px]' src={nintendo0} alt={`Imagem principal do produto`} width={211} height={216} />
 
         <div className='flex gap-[6px]'>
-          <Image className='rounded-[4px]' src={product.img1} alt={`Imagem do produto`} width={64} height={45} />
-          <Image className='rounded-[4px]' src={product.img2} alt={`Imagem do produto`} width={64} height={45} />
-          <Image className='rounded-[4px]' src={product.img3} alt={`Imagem do produto`} width={64} height={45} />
-          <Image className='rounded-[4px]' src={product.img4} alt={`Imagem do produto`} width={64} height={45} />
+          <Image className='rounded-[4px]' src={nintendo0} alt={`Imagem do produto`} width={64} height={45} />
+          <Image className='rounded-[4px]' src={nintendo1} alt={`Imagem do produto`} width={64} height={45} />
+          <Image className='rounded-[4px]' src={nintendo2} alt={`Imagem do produto`} width={64} height={45} />
+          <Image className='rounded-[4px]' src={nintendo3} alt={`Imagem do produto`} width={64} height={45} />
         </div>
+      </section>
 
+      <section className='mt-[14px] mb-[14px]'>
         <form>
-          <div>
-            <h2> {product.price} </h2>
-
-            <fieldset>
-              <label> Quantidade: </label>
-              <input type="number" value={1} min={1} />
+          <div className='flex items-center justify-between w-full'>
+            <legend className='w-fit h1 font-black'> R$ 2.253,60 </legend>
+            <fieldset className='flex flex-col gap-0'>
+              <label className='font-display font-light text-[12px] leading-[2px]'> Quantidade: </label>
+              <input className='w-[64px] h-[32px] py-[14px] px-[8px] rounded-[10px] text-[12px]' type="number" placeholder='1' />
             </fieldset>
           </div>
 
-          <legend>Modelos:</legend>
-          <fieldset>
-
+          <legend className='font-display font-light text-[12px]'>Modelos:</legend>
+          <fieldset className='flex gap-[20px] mt-[9px]'>
             <label>
               <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
-              <input type="radio" name="model" value={product.img5} />
+              <input className='hidden' type="radio" name="model" value={product.img5} />
             </label>
             <label>
               <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
-              <input type="radio" name="model" value={product.img5} />
+              <input className='hidden' type="radio" name="model" value={product.img5} />
             </label>
             <label>
               <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
-              <input type="radio" name="model" value={product.img5} />
+              <input className='hidden' type="radio" name="model" value={product.img5} />
             </label>
           </fieldset>
 
-          <div className='flex justify-between'>
-            <button className='criar-produto' type='submit'>COMPRAR</button>
-            <Icons className='bg-yellow-500' src={icon.addCart}  width={36} onClick={() => setCart(product.id)} />
+          <div className='flex gap-[23px]'>
+            <button className='flex items-center justify-center w-[205px] h-[44px] bg-blue-500 rounded-[10px] text-[20px] font-black text-white hover:bg-blue-600' type='submit'>COMPRAR</button>
+            <Icons className='flex items-center justify-center w-[50px] h-[46px] bg-yellow-500 rounded-[10px] hover:bg-yellow-600' src={icon.addCart}  width={36} onClick={() => setCart(product.id)} />
           </div>
         </form>
 
-        <form>
-          <label>Calcular frente:</label>
+        <form className='flex flex-col mt-[16px]'>
+          <label className='font-display text-[12px] font-light'>Calcular frente:</label>
 
-          <div>
-            <input className='flex w-[260px] h-[42px] rounded-l-[10px]' type='number' placeholder='CEP...' minLength={8} maxLength={8} />
-            <button className='flex items-center justify-center w-[27px] h-[23px] bg-gray-500 rounded-r-[10px]' type='submit'> OK </button>
+          <div className='flex'>
+            <input className='flex w-[225px] h-[42px] p-[12px] rounded-l-[10px]' type='number' placeholder='CEP...' minLength={8} maxLength={8} />
+            <button className='flex items-center justify-center w-[53px] h-[42px] bg-gray-500 rounded-r-[10px] text-[20px] font-semibold text-white hover:bg-gray-600' type='submit'> OK </button>
           </div>
 
-          <Link className='underline hover:text-blue-500' href=''> Não lembro meu CEP </Link>
+          <Link className='mt-[6px] underline text-[12px] hover:text-blue-500' href=''> Não lembro meu CEP </Link>
 
         </form>
         
-        <div className='flex gap-[2px]'>
-          <img />
+        <div className='flex flex-col mt-[19px] mb-[60px] gap-[30px]'>
           <p> Frete grátis para compras acima de R$199,99 </p>
-        </div>
-
-        <div className='flex justify-evenly'>
-          <Icons src={icon.heart} width={40} />
-          <Icons src={icon.share} width={35} />
+          <div className='flex justify-evenly'>
+            <Icons src={icon.heart} width={26} />
+            <Icons src={icon.share} width={26} />
+          </div>
         </div>
 
       </section>
@@ -207,24 +223,88 @@ export default function Page({ params }: { params: { id: string } }) {
       <ItemsCarousel tipo="ProdutosSimilares" />
 
 
-      {product.description && (
-        <section>
-          <h4>Descrição do Produto</h4>
-          <div className='flex p-[16px] bg-white rounded-[8px]'>
-            <p> {product.description} </p>
-          </div>
-        </section>
-      )}
+      <section className='flex flex-col mt-[60px] gap-[10px]'>
+        <h3 className='text-[14px] font-bold'>Descrição do Produto</h3>
+        <div className='flex p-[16px] bg-white rounded-[8px]'>
+          <p> Equipado com uma tela OLED vibrante de 7 polegadas, o console oferece cores mais ricas e um contraste nítido para uma experiência visual incrível. Com um armazenamento interno de 64 GB, suporte a modo portátil, mesa e TV, e um dock com porta LAN integrada, o Nintendo Switch OLED é perfeito para jogar em qualquer lugar e a qualquer momento. Aproveite ao máximo seus jogos favoritos com gráficos deslumbrantes e um som aprimorado. </p>
+        </div>
+      </section>
 
 
-      {product.spec && (
-        <section>
-          <h4>Informações Técnicas </h4>
-          <div className='flex p-[16px] bg-white rounded-[8px]'>
-            <p> {product.spec} </p>
-          </div>
-        </section>
-      )}
+      <section className='flex flex-col mt-[60px] gap-[10px]'>
+        <h3 className='text-[14px] font-bold'>Especificações Técnicas</h3>
+        <div className='flex p-[16px] bg-white rounded-[8px]'>
+          <p>
+            Nintendo Switch OLED  
+            Resolução: 1280 x 720 (HD)
+            Tela OLED de 7 polegadas
+            <br/><br/>
+            Armazenamento Interno: 64 GB (expansível via cartão microSD)
+            <br/><br/>
+            Modos de Jogo:
+            Modo TV: Conecta-se à TV via dock
+            Modo Mesa: Suporte traseiro ajustável para jogatina em superfícies planas
+            Modo Portátil: Jogue em qualquer lugar com controles acoplados
+            <br/><br/>
+            Controles: Joy-Con destacáveis
+            Inclui controles Joy-Con (L) e Joy-Con (R)
+            <br/><br/>
+            Bateria: Íon-lítio (4310mAh)
+            Duração da bateria: Aproximadamente 4,5 a 9 horas (varia conforme o uso e os jogos)    
+            <br/><br/>
+            Conectividade:
+            Wi-Fi (IEEE 802.11 a/b/g/n/ac)
+            Bluetooth 4.1
+            Dock com porta LAN integrada para conexão com fio à internet
+            <br/><br/>
+            Áudio:
+            Alto-falantes integrados aprimorados
+            Saída de áudio estéreo
+            <br/><br/>
+            Portas:
+            1x USB Type-C (para carregamento e conexão com o dock)
+            3x USB (na base do dock)
+            Slot para cartão microSD (compatível com microSDXC)
+            <br/><br/>
+            Dimensões:
+            Console: 102 mm x 242 mm x 13,9 mm (com Joy-Con acoplados)          
+            Dock: 104 mm x 173 mm x 54 mm
+            <br/><br/>
+            Peso:
+            Console: Aproximadamente 320g
+            Com Joy-Con acoplados: Aproximadamente 420g
+            <br/><br/>
+            Conteúdo da Embalagem:
+            Console Nintendo Switch OLED
+            Joy-Con (L) e Joy-Con (R)
+            Suporte para Joy-Con
+            Dock do Nintendo Switch com porta LAN
+            Adaptador AC
+            Cabo HDMI
+            Alças para Joy-Con
+          </p>
+        </div>
+      </section>
+
+      <section className='flex flex-col mt-[60px] mb-[60px] gap-[10px]'>
+        <h3 className='text-[14px] font-bold'>Avaliação dos clientes</h3>
+
+        <ul>
+          <li className='flex flex-col p-[10px] gap-[8px] bg-white rounded-[8px]'>
+            <div className='flex justify-between text-[12px] font-medium'>
+              <div className='flex gap-[40px]'>
+                <h4>Luís H.</h4>
+                <h4>24 de março de 2023</h4>
+              </div>
+              <h4>stars</h4>
+            </div>
+
+            <p> Melhor compra da minha vida. Chegou antes do prazo e tudo certinho.</p>
+          </li>
+        </ul>
+
+        <Link className='self-center underline text-[11px] font-bold  hover:text-blue-500' href={`/Produtos/${id}/comentários`}>Ver mais</Link>
+      </section>
 
 
       {/* {todosComentarios.length > 0 && (

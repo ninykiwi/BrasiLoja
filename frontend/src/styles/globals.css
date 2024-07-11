@@ -5,29 +5,59 @@
 
 @layer base {
   /* --TEXTO-- */
-  h1 {
-    @apply text-[20px] lg:text-[56px] font-medium
+  h1.font-display, h2.font-display, .subtitle.font-display {
+    @apply font-black;
   }
-  h2 {
-    @apply text-[16px] lg:text-[48px] font-bold
+  h3.font-display, h4.font-display, h5.font-display, h6.font-display, p.font-display {
+    @apply font-thin;
   }
-  h3 {
-    @apply text-[14px] lg:text-[40px];
+  h1, .h1 {
+    @apply text-[24px] lg:text-[56px] font-medium;
+
+    &.font-display {
+      @apply text-[20px] lg:text-[72px];
+    }
+  }
+  h2, .h2 {
+    @apply text-[20px] lg:text-[48px] font-bold;
+
+    &.font-display {
+      @apply text-[16px] lg:text-[64px];
+    }
+  }
+  h3, .h3 {
+    @apply text-[16px] lg:text-[40px];
+
+    &.font-display {
+      @apply text-[14px] lg:text-[40px];
+    }
   }
   h4 {
-    @apply text-[12px] lg:text-[32px];
+    @apply text-[14px] lg:text-[32px];
+
+    &.font-display {
+      @apply text-[12px] lg:text-[32px];
+    }
   }
   h5 {
-    @apply text-[9px] lg:text-[28px];
+    @apply text-[12px] lg:text-[28px];
+
+    &.font-display {
+      @apply text-[10px] lg:text-[28px];
+    }
   }
   h6 {
-    @apply text-[8px] lg:text-[24px];
-  }
-  p, li {
-    @apply text-[12px] lg:text-[16px];
+    @apply text-[11px] lg:text-[24px] lg:font-light;
+
+    &.font-display {
+      @apply text-[8px] lg:text-[24px];
+    }
   }
   .subtitle {
     @apply text-[16px] lg:text-[20px];
+  }
+  p, li {
+    @apply text-[12px] lg:text-[16px];
   }
   /*-- FORM --*/
   label {
@@ -122,22 +152,12 @@
 
 @import "~slick-carousel/slick/slick.css";
 
+
+
 @layer utilities {
   /*-- TEXTO --*/
   .text-balance {
     text-wrap: balance;
-  }
-  h1.font-display, h2.font-display, .subtitle.font-display {
-    @apply font-black;
-  }
-  h1.font-display {
-    @apply text-[20px] lg:text-[72px];
-  }
-  h2.font-display {
-    @apply text-[16px] lg:text-[56px];
-  }
-  h3.font-display, h4.font-display, h5.font-display, h6.font-display, p.font-display {
-    @apply font-thin;
   }
   /*-- BOTÕES --*/
   .criar-produto, .editar-produto {
