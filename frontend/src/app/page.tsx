@@ -2,13 +2,19 @@ import { createClient } from '@/prismicio';
 import { SliceZone } from '@prismicio/react';
 import { components } from '@/slices';
 import { Metadata } from 'next';
+import ItemsCarousel from '@/components/ItemsCarousel';
 
 
 export default async function page() {
   const client = createClient()
   const home = await client.getSingle('home')
 
-  return <SliceZone slices={home.data.slices} components={components} />
+  return (
+    <>
+      <SliceZone slices={home.data.slices} components={components} />
+      <ItemsCarousel tipo="VocePodeGostar" />
+    </>
+  )
 }
 
 

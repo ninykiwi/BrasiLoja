@@ -1,10 +1,15 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { useFilter } from '@/contexts/FilterContexts';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import Produto from './Produto';
+
+import fone from '../public/images/fone.png';
+import nintendo0 from '../public/images/nintendo0.png';
+import nintendo5 from '../public/images/nintendo5.png';
+import nintendo4 from '../public/images/nintendo4.png';
+import nintendo2 from '../public/images/nintendo2.png';
 
 const calculateItemsToShow = (containerWidth) => {
   const itemWidth = 235;
@@ -34,135 +39,53 @@ const calculateItemsToShow = (containerWidth) => {
   };
 };
 
+const mockProducts = [
+  { id: 1, nome: 'Fone', imagem: fone.src, preco: 'R$ 100,00' },
+  { id: 2, nome: 'Nintendo 0', imagem: nintendo0.src, preco: 'R$ 200,00' },
+  { id: 3, nome: 'Nintendo 5', imagem: nintendo5.src, preco: 'R$ 300,00' },
+  { id: 4, nome: 'Nintendo 4', imagem: nintendo4.src, preco: 'R$ 400,00' },
+  { id: 5, nome: 'Nintendo 2', imagem: nintendo2.src, preco: 'R$ 500,00' },
+];
 
 interface ItemsCarouselProps {
-  className?: string
-  tipo?: 'VocePodeGostar' | 'VistosRecentemente' | 'OutrosProdutos' | 'ProdutosSimilares'
+  className?: string;
+  tipo?: 'VocePodeGostar' | 'VistosRecentemente' | 'OutrosProdutos' | 'ProdutosSimilares';
 }
-export default function ItemsCarousel({
-  className,
-  tipo
-}: ItemsCarouselProps) {
-  const { List } = useFilter()
 
-  const [containerWidth, setContainerWidth] = useState(window.innerWidth);
+export default function ItemsCarousel({ className, tipo }: ItemsCarouselProps) {
+  const [containerWidth, setContainerWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   useEffect(() => {
     const handleResize = () => {
       setContainerWidth(window.innerWidth);
     };
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   const responsive = calculateItemsToShow(containerWidth);
 
-  switch (tipo) {
-    default:
-      return (
-          <section className={clsx(
-            'flex flex-col mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] bg-[#E7E7E7] overflow-hidden',
-          className)}>
-            <h3> Você pode gostar </h3>   
-
-          <Carousel responsive={responsive} autoPlay={true} infinite={true}>
-              {/* Lista &&
-                Lista.map((item: any) => (
-                  <li key={item.id}>
-                    <Produto {...} />
-                  </li>
-                ))
-              */}
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-          </Carousel>
-
-
-          </section>
-        )
-        case 'VistosRecentemente':
-        return (
-          <section className={clsx(
-            'flex flex-col mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] bg-[#E7E7E7] overflow-hidden',
-          className)}>
-            <h3> Vistos Recentemente </h3>   
-
-          <Carousel responsive={responsive} autoPlay={true} infinite={true}>
-              {/* Lista &&
-                Lista.map((item: any) => (
-                  <li key={item.id}>
-                    <Produto {...} />
-                  </li>
-                ))
-              */}
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-          </Carousel>
-
-
-          </section>
-        )
-        case 'OutrosProdutos':
-        return (
-          <section className={clsx(
-            'flex flex-col mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] bg-[#E7E7E7] overflow-hidden',
-          className)}>
-            <h3> Outros Produtos </h3>   
-
-          <Carousel responsive={responsive} autoPlay={true} infinite={true}>
-              {/* Lista &&
-                Lista.map((item: any) => (
-                  <li key={item.id}>
-                    <Produto {...} />
-                  </li>
-                ))
-              */}
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-          </Carousel>
-
-
-          </section>
-        )
-      case 'ProdutosSimilares':
-        return (
-          <section className={clsx(
-            'flex flex-col mx-[20px] lg:mx-[108px] px-[14px] py-[17px] gap-[14px] bg-[#E7E7E7] overflow-hidden',
-          className)}>
-            <h3> Produtos Similares </h3>   
-
-          <Carousel responsive={responsive} autoPlay={true} infinite={true}>
-              {/* Lista &&
-                Lista.map((item: any) => (
-                  <li key={item.id}>
-                    <Produto {...} />
-                  </li>
-                ))
-              */}
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-              <Produto  />
-          </Carousel>
-
-
-          </section>
-        )
-  }
+  return (
+    <section
+      className={clsx(
+        'flex flex-col w-full px-[14px] py-[17px] gap-[14px] bg-[#E7E7E7] overflow-hidden',
+        className
+      )}
+    >
+      <h3>{tipo}</h3>
+      <Carousel responsive={responsive} autoPlay={true} infinite={true}>
+        {mockProducts.length > 0 ? (
+          mockProducts.map((item) => (
+            <div key={item.id}>
+              <Produto nome={item.nome} imagem={item.imagem} preco={item.preco} />
+            </div>
+          ))
+        ) : (
+          <p>Sem itens para mostrar</p>
+        )}
+      </Carousel>
+    </section>
+  );
 }

@@ -4,6 +4,7 @@ import frete from '@/public/icons/frete.svg'
 import cart from '@/public/icons/cart.svg'
 import etapas from '@/public/icons/etapas.svg'
 import { ProdutoCarrinho } from '@/components/Produto';
+import ItemsCarousel from '@/components/ItemsCarousel';
 
 export default function Cart() {
 
@@ -92,8 +93,8 @@ export default function Cart() {
                 </div>
             </div>
 
-            <p>outros produtos</p>
-            <p>vistos recentemente</p>
+            <ItemsCarousel tipo="OutrosProdutos" />
+            <ItemsCarousel tipo="ProdutosSimilares" />
         </div>
     </section>
   );
