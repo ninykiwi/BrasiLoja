@@ -19,6 +19,7 @@ import { getProductById } from '@/services/product';
 import { Icons } from '@/components/Icons';
 import { icon } from '@/lib/icons';
 import ListSection from '@/containers/ListSection';
+import ItemsCarousel from '@/components/ItemsCarousel';
 
 
 export default function Page({ params }: { params: { id: string } }) {
@@ -203,7 +204,7 @@ export default function Page({ params }: { params: { id: string } }) {
       </section>
 
 
-      <ListSection title='ProdutosSimilares' carousel />
+      <ItemsCarousel tipo="ProdutosSimilares" />
 
 
       {product.description && (
@@ -252,7 +253,7 @@ export default function Page({ params }: { params: { id: string } }) {
       )} */}
 
 
-      <ListSection title='OutrosProdutos' carousel />
+      <ItemsCarousel tipo="OutrosProdutos" />
 
     </section>
   )
