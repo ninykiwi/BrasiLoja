@@ -14,10 +14,13 @@ import nintendo2 from '../public/images/nintendo2.png';
 const calculateItemsToShow = (containerWidth) => {
   const itemWidth = 235;
   const spacing = 78;
+  const itemWidthMobile = 120;
+  const spacingMobile = 39;
   const availableWidth = containerWidth - spacing;
+  const availableWidthMobile = containerWidth - spacingMobile;
   let maxItemsDesktop = Math.floor(availableWidth / (itemWidth + spacing));
-  let maxItemsTablet = Math.floor(availableWidth / (itemWidth + spacing));
-  let maxItemsMobile = Math.floor(availableWidth / itemWidth);
+  let maxItemsTablet = Math.floor(availableWidthMobile / (itemWidthMobile + spacingMobile));
+  let maxItemsMobile = Math.floor(availableWidthMobile / itemWidthMobile);
 
   maxItemsDesktop = Math.max(maxItemsDesktop, 1);
   maxItemsTablet = Math.max(maxItemsTablet, 1);
@@ -40,11 +43,11 @@ const calculateItemsToShow = (containerWidth) => {
 };
 
 const mockProducts = [
-  { id: 1, nome: 'Fone', imagem: fone.src, preco: 'R$ 100,00' },
-  { id: 2, nome: 'Nintendo 0', imagem: nintendo0.src, preco: 'R$ 200,00' },
-  { id: 3, nome: 'Nintendo 5', imagem: nintendo5.src, preco: 'R$ 300,00' },
-  { id: 4, nome: 'Nintendo 4', imagem: nintendo4.src, preco: 'R$ 400,00' },
-  { id: 5, nome: 'Nintendo 2', imagem: nintendo2.src, preco: 'R$ 500,00' },
+  { id: 1, nome: 'Fone', imagem: fone.src, preco: '100,00' },
+  { id: 2, nome: 'Nintendo 0', imagem: nintendo0.src, preco: '200,00' },
+  { id: 3, nome: 'Nintendo 5', imagem: nintendo5.src, preco: '300,00' },
+  { id: 4, nome: 'Nintendo 4', imagem: nintendo4.src, preco: '00,00' },
+  { id: 5, nome: 'Nintendo 2', imagem: nintendo2.src, preco: '500,00' },
 ];
 
 interface ItemsCarouselProps {

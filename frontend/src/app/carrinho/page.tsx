@@ -94,7 +94,7 @@ export default function Cart() {
             </div>
 
             <ItemsCarousel tipo="OutrosProdutos" />
-            <ItemsCarousel tipo="ProdutosSimilares" />
+            <ItemsCarousel tipo="VistosRecentemente" />
         </div>
     </section>
   );

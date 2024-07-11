@@ -471,5 +471,5 @@ export default function Page({ params }: { params: { id: string } }) {
     <p className='font-regular text-[20px]'>Consulte as páginas dos produtos para ver outras opções de compra.</p>
   </div>
 
-  <p>voce pode gostar</p>
+  <ItemsCarousel tipo="VocePodeGostar" />
 </div>*/}

@@ -40,7 +40,7 @@ export default function Produto({ nome, imagem, preco, className }: ProdutoProps
   );
 };
 
-export const ProdutoHorizontal = () => {
+export const ProdutoHorizontal = ({ nome, imagem, preco, className }: ProdutoProps) => {
 
   const [isEditarProdutoVisible, setIsEditarProdutoVisible] = useState(false);
    
@@ -54,13 +54,13 @@ export const ProdutoHorizontal = () => {
   return (
     <>
     {isEditarProdutoVisible && <EditarProduto onClick={closeEditarProduto}/>}
-    <div className='flex items-end justify-between w-[1224px] lg:w-[1224px] h-[171px] lg:h-[260px] py-[53px] px-[27px] rounded-lg bg-white border-[#5D5D5D] border'>
+    <div className={clsx('flex items-end justify-between w-[1224px] lg:w-[1224px] h-[171px] lg:h-[260px] py-[53px] px-[27px] rounded-lg bg-white border-[#5D5D5D] border', className)}>
       <div className='flex gap-[55px] w-full h-full items-end'>
-        <Image className='self-center lg:w-[177px] lg:h-[175px]' src={squareFone} alt='Imagem do produto' width={70} height={70} />
+        <Image className='self-center lg:w-[177px] lg:h-[175px]' src={imagem} alt='Imagem do produto' width={70} height={70} />
         
         <div className='flex flex-col gap-[43px]'>
-            <p className='subtitle font-display'>Fone de ouvido</p>
-            <p className='subtitle font-display'>R$ 59,90</p>
+            <p className='subtitle font-display'>{nome}</p>
+            <p className='subtitle font-display'>R$ {preco}</p>
         </div>
       </div> 
 
@@ -76,11 +76,11 @@ export const ProdutoHorizontal = () => {
 };
 
 
-export function ProdutoCarrinho () {
+export function ProdutoCarrinho ({ nome, imagem, preco, className }: ProdutoProps) {
   
   return (
     <>
-    <div className="flex flex-col bg-white w-[912px] h-[226px] rounded-[10px] pt-[20px] pl-[74px] pr-[31px] mb-[34px]">
+    <div className={clsx("flex flex-col bg-white w-[912px] h-[226px] rounded-[10px] pt-[20px] pl-[74px] pr-[31px] mb-[34px]", className)}>
         <div className="flex w-full items-center justify-end">
             <p className='font-semibold text-[16px]'>Excluir item</p>
             <button className='bg-blue-500 w-[31px] h-[32px] rounded-[4px] py-[6] px-[7px] ml-[2px]'>
@@ -95,15 +95,22 @@ export function ProdutoCarrinho () {
 
         <div className="flex items-center h-full">
             <Image 
-            src={nintendo} 
+            src={imagem} 
             alt='produto'
             width={94}
             height={100}
              />
-            <p className='font-black text-[16px] ml-[54px] mr-[64px]'>Console Nintendo Switch Oled 64GB</p>
-            <div className="flex flex-col items-center font-semibold text-[16px]">
+
+            <p className='font-black text-[16px] ml-[54px] mr-[64px]'>{nome}</p>
+
+            <div className="flex flex-col items-center font-semibold text-[16px] mr-[114px]">
                 <p>Quantidade:</p>
                 <input type='number' className='w-[48px] h-[36px]'/>
+            </div>
+
+            <div className="flex flex-col font-semibold text-[16px] gap-[8px]">
+                <p>Preço:</p>
+                <p className='font-black'>R$ {preco}</p>
             </div>
         </div>
     </div>
