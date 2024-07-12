@@ -1,7 +1,6 @@
 import express, { Router, json } from "express"
 import cors from 'cors'
 import { get_product_by_name, get_product_by_category, make_product, delete_product,edit_product, get_product_by_id, get_all_products } from "../2-controllers/controllers"
-import { get_product_by_name, get_product_by_category, make_product, delete_product,edit_product, get_all, add_main_img} from "../2-controllers/controllers"
 import upload from "../2-controllers/multer"
 
 // Roteamento dos processos 
