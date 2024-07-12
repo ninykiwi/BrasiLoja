@@ -51,7 +51,7 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
 
     const submitCreateProduct = (event: any) => {
       event.preventDefault();
-      createProduct(prodName, prodPrice, prodQuant, prodCat, prodBrand);
+      createProduct(prodName, prodPrice, prodQuant, prodCat, prodBrand, images.fileUploadMain, images.fileUpload1, images.fileUpload2, images.fileUpload3, images.fileUpload4);
     }
 
 

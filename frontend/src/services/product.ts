@@ -13,14 +13,24 @@ export const createProduct = (
   prodPrice: number,
   prodQuant: number,
   prodCat: string,
-  prodBrand: string
+  prodBrand: string,
+  mainImg: any,
+  img1?: any,
+  img2?: any,
+  img3?: any,
+  img4?: any,
 ) => {
   axios.post(`${URL_BACK}/${URL_MP}`, {
     prod_name: prodName,
     prod_price: prodPrice,
     prod_quant: prodQuant,
     prod_cat: prodCat,
-    prod_brand: prodBrand
+    prod_brand: prodBrand,
+    main_img: mainImg,
+    img_1: img1,
+    img_2: img2,
+    img_3: img3,
+    img_4: img4
   })
     .then(response => {
       console.log(response.statusText)
