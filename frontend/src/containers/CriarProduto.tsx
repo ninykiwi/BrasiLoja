@@ -126,7 +126,7 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
                           <span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500'>
                               R$
                           </span>
-                          <input type='text' className='h-[62px] w-[184px] rounded-[10px] pl-10 pr-2' onChange={setInputs(setProdPrice)} required/>
+                          <input type='number' step={0.01} className='h-[62px] w-[184px] rounded-[10px] pl-10 pr-2' onChange={setInputs(setProdPrice)} required/>
                       </div>
                   </div>
 

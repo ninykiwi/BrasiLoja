@@ -23,7 +23,7 @@ export const filterByName = (
 }
 
 export const filterByTag = (
-  Tags: string[],
+  Tags: string[] | string,
   setList?: React.Dispatch<React.SetStateAction<{}[]>>
 ) => {
   axios.get(`${URL_BACK}/${URL_FBT}/${Tags}`, {

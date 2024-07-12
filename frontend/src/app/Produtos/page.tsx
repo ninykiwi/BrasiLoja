@@ -62,10 +62,14 @@ export default function Produtos() {
 
         <TagFilter onSelectedCategoria={handleCategoriaSelecionada} />
         
-        {categoriaSelecionada && (
+        {categoriaSelecionada ? (
           <ListSection
             title={categoriaSelecionada}
             produtos={produtos}
+            className='mt-[30px]'
+          />
+        ) : (
+          <ListSection
             className='mt-[30px]'
           />
         )}

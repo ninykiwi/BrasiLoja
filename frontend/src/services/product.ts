@@ -63,3 +63,16 @@ export const getProductById = (
       console.error('Erro ao encontrar produto: ', error)
     })
 }
+
+export const getAllProducts = (
+  setList: React.Dispatch<React.SetStateAction<{}[]>>
+) => {
+  axios.get(`${URL_BACK}/get_all`)
+    .then(response => {
+      setList(response.data.results)
+      console.log('Produtos encontrados com sucesso')
+    })
+    .catch(error => {
+      console.error('Erro ao encontrar produtos: ', error)
+    })
+}

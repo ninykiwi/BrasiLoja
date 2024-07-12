@@ -12,11 +12,12 @@ import clsx from 'clsx'
 interface ProdutoProps {
   nome: string;
   imagem: string;
-  preco: string;
+  preco: number | string;
   className?: string;
 }
-
 export default function Produto({ nome, imagem, preco, className }: ProdutoProps) {
+  const price = typeof preco === 'string'? parseFloat(preco).toFixed(2) : preco.toFixed(2);
+
   return (
     <div className={clsx('card', className)}>
       <Icons className='self-end' iconStyle='lg:w-[32px] lg:h-[32px]' src={icon.heart} width={14}/>
@@ -26,7 +27,7 @@ export default function Produto({ nome, imagem, preco, className }: ProdutoProps
         <div className='flex flex-col gap-[10px]'>
             <div className='flex flex-col gap-[8px]'>
                 <p className='font-display'>{nome}</p>
-                <p className='subtitle font-display'>R$ {preco}</p>
+                <p className='subtitle font-display'>R$ {price}</p>
             </div>
 
 
