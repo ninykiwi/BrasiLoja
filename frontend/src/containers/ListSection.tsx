@@ -6,7 +6,7 @@ import React from 'react';
 import Image from 'next/image';
 import ItemsCarousel from '@/components/ItemsCarousel'; 
 import { useFilter } from '@/contexts/FilterContexts';
-import { tagList } from '@/lib/lists';
+import { titleList } from '@/lib/lists';
 import { filterByTag } from '@/services/filters';
 import TagFilter from '@/components/TagFilter';
 
@@ -39,7 +39,6 @@ export default function ListSection({
 
   } else {
     const filteredProducts = produtos.filter((produto) => produto.categoria === title);
-    const list = tagList.some((tag) => tag === title) ? filterByTag(title) : false;
     const link = typeof title === 'string'
       ? title.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '-')
       : false;

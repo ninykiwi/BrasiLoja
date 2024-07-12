@@ -31,8 +31,8 @@ export default function Produto({ nome, imagem, preco, className }: ProdutoProps
 
 
             <div className='flex justify-center w-full gap-[7px] lg:gap-[15px]'>
-                <button className='flex items-center justify-center w-[60px] lg:w-[138px]  h-[28px] lg:h-[52px] rounded-[4px] lg:rounded-[8px] bg-blue-500 text-[11px] lg:font-display lg:text-[20px] font-black text-white leading-[-0.2em]'>COMPRAR</button>
-                <Icons className='flex items-center justify-center w-[28px] lg:w-[52px] h-[28px] lg:h-[52px] bg-yellow-500 rounded-[4px] lg:rounded-[10px]' iconStyle='lg:w-[36px] lg:h-[36px]' src={icon.addCart} width={17} />
+                <button className='flex items-center justify-center w-[60px] lg:w-[138px] h-[28px] lg:h-[52px] rounded-[4px] lg:rounded-[8px] bg-blue-500 text-[11px] lg:font-display lg:text-[20px] font-black text-white leading-[-0.2em] hover:bg-blue-700 transition-all duration-500'>COMPRAR</button>
+                <Icons className='flex items-center justify-center w-[28px] lg:w-[52px] h-[28px] lg:h-[52px] bg-yellow-500 rounded-[4px] lg:rounded-[10px] hover:bg-yellow-700 transition-all duration-500' iconStyle='lg:w-[36px] lg:h-[36px]' src={icon.addCart} width={17} />
             </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ export function ProdutoCarrinho ({ nome, imagem, preco, className }: ProdutoProp
     <div className={clsx("flex flex-col bg-white w-[912px] h-[226px] rounded-[10px] pt-[20px] pl-[74px] pr-[31px] mb-[34px]", className)}>
         <div className="flex w-full items-center justify-end">
             <p className='font-semibold text-[16px]'>Excluir item</p>
-            <button className='bg-blue-500 w-[31px] h-[32px] rounded-[4px] py-[6] px-[7px] ml-[2px]'>
+            <button className='bg-blue-500 w-[31px] h-[32px] rounded-[4px] py-[6] px-[7px] ml-[2px] hover:bg-blue-700 transition-all duration-500'>
                 <Image 
                     src={lixo} 
                     alt='excluir produto'
@@ -105,7 +105,7 @@ export function ProdutoCarrinho ({ nome, imagem, preco, className }: ProdutoProp
 
             <div className="flex flex-col items-center font-semibold text-[16px] mr-[114px]">
                 <p>Quantidade:</p>
-                <input type='number' className='w-[48px] h-[36px]'/>
+                <input type='number' className='w-[48px] h-[36px] p-[10px] border-[1px] rounded-[4px]' min={0}/>
             </div>
 
             <div className="flex flex-col font-semibold text-[16px] gap-[8px]">

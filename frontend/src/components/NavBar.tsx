@@ -45,7 +45,7 @@ export default async function NavBar() {
         
         {settings.data.navbar.map((item: any, index: number) => (
           <li key={index}>
-            <PrismicLink className='header-nav-list-items' field={item.link}>
+            <PrismicLink className='header-nav-list-items transition-all duration-500' field={item.link}>
               {item.name}
             </PrismicLink>
           </li>
