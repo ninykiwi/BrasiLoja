@@ -150,73 +150,76 @@ export default function Page({ params }: { params: { id: string } }) {
 
 
   return (
-    <section className='w-full'>
-      <h3 className='my-[24px] font-black'> Console Nintendo Switch Oled 64gb </h3>
+    <section className='w-full pt-[24px] lg:pt-[76px]'>
+      <h3 className='mb-[24px] font-black lg:hidden'> Console Nintendo Switch Oled 64gb </h3>
 
-      <section className='flex flex-col items-center gap-[7px]'>
+      <section className='flex flex-col lg:flex-row items-center lg:justify-between'>
+        <div className='flex flex-col lg:flex-row lg:max-w-[calc(100%-400px)] items-center gap-[7px] lg:gap-[54px] lg:order-first'>
+          <Image className='lg:w-[600px] lg:h-[602px] rounded-[8px] lg:rounded-[10px]' src={nintendo0} alt={`Imagem principal do produto`} width={211} height={216} />
 
-        <Image className='rounded-[8px]' src={nintendo0} alt={`Imagem principal do produto`} width={211} height={216} />
-
-        <div className='flex gap-[6px]'>
-          <Image className='rounded-[4px]' src={nintendo0} alt={`Imagem do produto`} width={64} height={45} />
-          <Image className='rounded-[4px]' src={nintendo1} alt={`Imagem do produto`} width={64} height={45} />
-          <Image className='rounded-[4px]' src={nintendo2} alt={`Imagem do produto`} width={64} height={45} />
-          <Image className='rounded-[4px]' src={nintendo3} alt={`Imagem do produto`} width={64} height={45} />
+          <div className='flex lg:flex-col gap-[6px] lg:gap-[26px] lg:order-first'>
+            <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={nintendo0} alt={`Imagem do produto`} width={64} height={45} />
+            <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={nintendo1} alt={`Imagem do produto`} width={64} height={45} />
+            <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={nintendo2} alt={`Imagem do produto`} width={64} height={45} />
+            <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={nintendo3} alt={`Imagem do produto`} width={64} height={45} />
+          </div>
         </div>
-      </section>
 
-      <section className='mt-[14px] mb-[14px]'>
-        <form>
-          <div className='flex items-center justify-between w-full'>
-            <legend className='w-fit h1 font-black'> R$ 2.253,60 </legend>
-            <fieldset className='flex flex-col gap-0'>
-              <label className='font-display font-light text-[12px] leading-[2px]'> Quantidade: </label>
-              <input className='w-[64px] h-[32px] py-[14px] px-[8px] rounded-[10px] text-[12px]' type="number" placeholder='1' />
+        <div className='flex flex-col lg:max-w-[380px] mt-[14px] mb-[14px]'>
+          <h3 className='hidden my-[24px] font-black lg:flex'> Console Nintendo Switch Oled 64gb </h3>
+
+          <form>
+            <div className='flex items-center justify-between w-full'>
+              <legend className='w-fit h1 font-black'> R$ 2.253,60 </legend>
+              <fieldset className='flex flex-col gap-0'>
+                <label className='font-display font-light text-[12px] leading-[2px]'> Quantidade: </label>
+                <input className='w-[64px] h-[32px] py-[14px] px-[8px] rounded-[10px] text-[12px]' type="number" placeholder='1' />
+              </fieldset>
+            </div>
+
+            <legend className='font-display font-light text-[12px]'>Modelos:</legend>
+            <fieldset className='flex gap-[20px] mt-[9px]'>
+              <label>
+                <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
+                <input className='hidden' type="radio" name="model" value={product.img5} />
+              </label>
+              <label>
+                <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
+                <input className='hidden' type="radio" name="model" value={product.img5} />
+              </label>
+              <label>
+                <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
+                <input className='hidden' type="radio" name="model" value={product.img5} />
+              </label>
             </fieldset>
+
+            <div className='flex gap-[23px]'>
+              <button className='flex items-center justify-center w-[205px] h-[44px] bg-blue-500 rounded-[10px] text-[20px] font-black text-white hover:bg-blue-600' type='submit'>COMPRAR</button>
+              <Icons className='flex items-center justify-center w-[50px] h-[46px] bg-yellow-500 rounded-[10px] hover:bg-yellow-600' src={icon.addCart}  width={36} onClick={() => setCart(product.id)} />
+            </div>
+          </form>
+
+          <form className='flex flex-col mt-[16px]'>
+            <label className='font-display text-[12px] font-light'>Calcular frente:</label>
+
+            <div className='flex'>
+              <input className='flex w-[225px] h-[42px] p-[12px] rounded-l-[10px]' type='text' placeholder='CEP...' minLength={10} maxLength={10} />
+              <button className='flex items-center justify-center w-[53px] h-[42px] bg-gray-500 rounded-r-[10px] text-[20px] font-semibold text-white hover:bg-gray-600' type='submit'> OK </button>
+            </div>
+
+            <Link className='mt-[6px] underline text-[12px] hover:text-blue-500' href=''> Não lembro meu CEP </Link>
+
+          </form>
+          
+          <div className='flex flex-col mt-[19px] mb-[60px] gap-[30px]'>
+            <p> Frete grátis para compras acima de R$199,99 </p>
+            <div className='flex justify-evenly'>
+              <Icons src={icon.heart} width={26} />
+              <Icons src={icon.share} width={26} />
+            </div>
           </div>
 
-          <legend className='font-display font-light text-[12px]'>Modelos:</legend>
-          <fieldset className='flex gap-[20px] mt-[9px]'>
-            <label>
-              <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
-              <input className='hidden' type="radio" name="model" value={product.img5} />
-            </label>
-            <label>
-              <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
-              <input className='hidden' type="radio" name="model" value={product.img5} />
-            </label>
-            <label>
-              <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
-              <input className='hidden' type="radio" name="model" value={product.img5} />
-            </label>
-          </fieldset>
-
-          <div className='flex gap-[23px]'>
-            <button className='flex items-center justify-center w-[205px] h-[44px] bg-blue-500 rounded-[10px] text-[20px] font-black text-white hover:bg-blue-600' type='submit'>COMPRAR</button>
-            <Icons className='flex items-center justify-center w-[50px] h-[46px] bg-yellow-500 rounded-[10px] hover:bg-yellow-600' src={icon.addCart}  width={36} onClick={() => setCart(product.id)} />
-          </div>
-        </form>
-
-        <form className='flex flex-col mt-[16px]'>
-          <label className='font-display text-[12px] font-light'>Calcular frente:</label>
-
-          <div className='flex'>
-            <input className='flex w-[225px] h-[42px] p-[12px] rounded-l-[10px]' type='number' placeholder='CEP...' minLength={8} maxLength={8} />
-            <button className='flex items-center justify-center w-[53px] h-[42px] bg-gray-500 rounded-r-[10px] text-[20px] font-semibold text-white hover:bg-gray-600' type='submit'> OK </button>
-          </div>
-
-          <Link className='mt-[6px] underline text-[12px] hover:text-blue-500' href=''> Não lembro meu CEP </Link>
-
-        </form>
-        
-        <div className='flex flex-col mt-[19px] mb-[60px] gap-[30px]'>
-          <p> Frete grátis para compras acima de R$199,99 </p>
-          <div className='flex justify-evenly'>
-            <Icons src={icon.heart} width={26} />
-            <Icons src={icon.share} width={26} />
-          </div>
         </div>
-
       </section>
 
 
@@ -224,7 +227,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
 
       <section className='flex flex-col mt-[60px] gap-[10px]'>
-        <h3 className='text-[14px] font-bold'>Descrição do Produto</h3>
+        <h3 className='text-[14px] lg:text-[20px] font-bold'>Descrição do Produto</h3>
         <div className='flex p-[16px] bg-white rounded-[8px]'>
           <p> Equipado com uma tela OLED vibrante de 7 polegadas, o console oferece cores mais ricas e um contraste nítido para uma experiência visual incrível. Com um armazenamento interno de 64 GB, suporte a modo portátil, mesa e TV, e um dock com porta LAN integrada, o Nintendo Switch OLED é perfeito para jogar em qualquer lugar e a qualquer momento. Aproveite ao máximo seus jogos favoritos com gráficos deslumbrantes e um som aprimorado. </p>
         </div>
@@ -232,16 +235,16 @@ export default function Page({ params }: { params: { id: string } }) {
 
 
       <section className='flex flex-col mt-[60px] gap-[10px]'>
-        <h3 className='text-[14px] font-bold'>Especificações Técnicas</h3>
-        <div className='flex p-[16px] bg-white rounded-[8px]'>
-          <p>
-            Nintendo Switch OLED  
+        <h3 className='text-[14px] lg:text-[20px] font-bold'>Especificações Técnicas</h3>
+        <div className='block p-[16px] bg-white rounded-[8px] lg:columns-2'>
+          <p className='whitespace-pre-wrap'>
+            - Nintendo Switch OLED  
             Resolução: 1280 x 720 (HD)
             Tela OLED de 7 polegadas
             <br/><br/>
-            Armazenamento Interno: 64 GB (expansível via cartão microSD)
+            - Armazenamento Interno: 64 GB (expansível via cartão microSD)
             <br/><br/>
-            Modos de Jogo:
+            - Modos de Jogo:
             Modo TV: Conecta-se à TV via dock
             Modo Mesa: Suporte traseiro ajustável para jogatina em superfícies planas
             Modo Portátil: Jogue em qualquer lugar com controles acoplados
@@ -287,16 +290,16 @@ export default function Page({ params }: { params: { id: string } }) {
       </section>
 
       <section className='flex flex-col mt-[60px] mb-[60px] gap-[10px]'>
-        <h3 className='text-[14px] font-bold'>Avaliação dos clientes</h3>
+        <h3 className='text-[14px] lg:text-[20px] font-bold'>Avaliação dos clientes</h3>
 
-        <ul>
-          <li className='flex flex-col p-[10px] gap-[8px] bg-white rounded-[8px]'>
+        <ul className='lg:columns-2'>
+          <li className='flex flex-col lg:w-[520px] lg:h-[89px] p-[10px] gap-[8px] bg-white rounded-[8px] overflow-hidden'>
             <div className='flex justify-between text-[12px] font-medium'>
               <div className='flex gap-[40px]'>
-                <h4>Luís H.</h4>
-                <h4>24 de março de 2023</h4>
+                <h4 className='text-[12px] lg:text-[16px] font-medium'>Luís H.</h4>
+                <h4 className='text-[12px] lg:text-[16px] font-medium'>24 de março de 2023</h4>
               </div>
-              <h4>stars</h4>
+              <h4 className='text-[12px] lg:text-[16px] font-medium'>stars</h4>
             </div>
 
             <p> Melhor compra da minha vida. Chegou antes do prazo e tudo certinho.</p>
