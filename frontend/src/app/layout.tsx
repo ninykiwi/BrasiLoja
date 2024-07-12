@@ -25,12 +25,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br" className={clsx(roboto.variable, inter.variable)}>
 
-        <body >
+        <body className="w-screen" >
           <Header />
           
-          <main>
-
-                {children}
+          <main className='flex flex-col w-[calc(100vw-50px)] mx-[20px] px-[15px] bg-[#F3F3F3]'>
+            {children}
           </main>
 
           <Footer />

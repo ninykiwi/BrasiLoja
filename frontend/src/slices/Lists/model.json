@@ -25,15 +25,21 @@
             "label": "Filter",
             "placeholder": "",
             "options": [
-              "None",
               "Ofertas",
-              "VejaTambem",
+              "ConhecaTambem",
               "VocePodeGostar",
               "VistosRecentemente",
               "OutrosProdutos",
               "ProdutosSimilares"
             ],
-            "default_value": "None"
+            "default_value": "Ofertas"
+          }
+        },
+        "color": {
+          "type": "Color",
+          "config": {
+            "label": "Color",
+            "placeholder": ""
           }
         }
       },

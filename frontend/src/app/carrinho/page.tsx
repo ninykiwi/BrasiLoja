@@ -4,11 +4,12 @@ import frete from '@/public/icons/frete.svg'
 import cart from '@/public/icons/cart.svg'
 import etapas from '@/public/icons/etapas.svg'
 import { ProdutoCarrinho } from '@/components/Produto';
+import ItemsCarousel from '@/components/ItemsCarousel';
 
 export default function Cart() {
 
   return (
-    <main className='w-full flex justify-center'>
+    <section className='w-full flex justify-center'>
         <div className="pt-[72px] bg-[#F0EFEF] rounded-[10px] flex flex-col w-[1224px] h-auto">
             <div className="flex flex-col mb-[128px]">
                 <div className="flex mb-[67px] mr-[58px] justify-between">
@@ -47,7 +48,7 @@ export default function Cart() {
                              />
                             <button 
                             type='submit'
-                            className='w-[160px] h-[63px] rounded-[10px] text-white bg-blue-500 items-center font-bold text-[20px]'>
+                            className='w-[160px] h-[63px] rounded-[10px] text-white bg-blue-500 items-center font-bold text-[20px] hover:bg-blue-700 transition-all duration-500'>
                                 APLICAR
                             </button>
                         </div>
@@ -80,11 +81,11 @@ export default function Cart() {
                         </div>
 
                         <div className='flex flex-col gap-[17px]'>
-                            <button className='bg-blue-500 w-[288] h-[53px] border border-1 rounded-[10px] border-blue-500 text-white font-bold text-[20px] items-center'>
+                            <button className='bg-blue-500 w-[288] h-[53px] border border-1 rounded-[10px] border-blue-500 text-white font-bold text-[20px] items-center hover:bg-blue-700 transition-all duration-500'>
                                 IR PARA O PAGAMENTO
                             </button>
 
-                            <button className='bg-white w-[288] h-[53px] border border-1 rounded-[10px] border-blue-500 text-black font-bold text-[20px] items-center'>
+                            <button className='bg-white w-[288] h-[53px] border border-1 rounded-[10px] border-blue-500 text-black font-bold text-[20px] items-center hover:bg-gray-200 transition-all duration-500'>
                                 CONTINUAR COMPRANDO
                             </button>
                         </div>
@@ -92,10 +93,10 @@ export default function Cart() {
                 </div>
             </div>
 
-            <p>outros produtos</p>
-            <p>vistos recentemente</p>
+            <ItemsCarousel tipo="OutrosProdutos" />
+            <ItemsCarousel tipo="VistosRecentemente" />
         </div>
-    </main>
+    </section>
   );
 };
 

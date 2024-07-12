@@ -8,24 +8,24 @@ import ReactPaginate from 'react-paginate';
 import clsx from 'clsx';
 
 
-const ListaEditar: React.FC = () => {
-  const [EditListModal, setEditListModal] = useState<boolean>(false)
-  const toggleEditListModal: () => void = () => {
-    setEditListModal(!EditListModal)
-  }
+interface EditListProps {
+  onClick?: () => void
+}
+export const ListaEditar = ({ onClick }: EditListProps) => {
+  
 
     const items = Array.from({ length: 10 }, (_, index) => <ProdutoHorizontal key={index} />);
 
     const [currentItems, setCurrentItems] = useState<any[]>([]);
     const [pageCount, setPageCount] = useState<number>(0);
     const [itemOffset, setItemOffset] = useState<number>(0);
-    const itemsPerPage = 8;
+    const itemsPerPage = 4;
 
-    // useEffect(() => {
-    //     const endOffset = itemOffset + itemsPerPage;
-    //     setCurrentItems(items.slice(itemOffset, endOffset));
-    //     setPageCount(Math.ceil(items.length / itemsPerPage));
-    // }, [items, itemOffset, itemsPerPage]);
+    useEffect(() => {
+        const endOffset = itemOffset + itemsPerPage;
+        setCurrentItems(items.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(items.length / itemsPerPage));
+    }, [items, itemOffset, itemsPerPage]);
     
       const handlePageClick = (event: any) => {
         const newOffset = (event.selected * itemsPerPage) % items.length;
@@ -33,14 +33,11 @@ const ListaEditar: React.FC = () => {
       };
 
     return (
-        <section className={clsx(
-          'z-20 inset-0 w-full justify-center',
-          EditListModal ? 'flex' : 'hidden',
-        )}>
-            <div className='flex top-0 absolute items-center justify-center w-[1440px] h-auto rounded-[20px] bg-white'>
+        <section className='z-20 flex inset-0 w-full justify-center'>
+            <div className='flex top-0 absolute items-center justify-center lg:w-full h-auto rounded-[20px] bg-white'>
                 <div className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-auto'>
                     <Image 
-                        onClick={toggleEditListModal}
+                        onClick={onClick}
                         src={close} 
                         className='self-end mr-[20px] mt-[45.9px] cursor-pointer' 
                         alt='...' 

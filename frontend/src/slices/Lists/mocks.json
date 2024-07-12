@@ -10,8 +10,13 @@
 			},
 			"filter": {
 				"__TYPE__": "FieldContent",
-				"value": "ProdutosSimilares",
+				"value": "VocePodeGostar",
 				"type": "Select"
+			},
+			"color": {
+				"__TYPE__": "FieldContent",
+				"value": "#9de095",
+				"type": "Color"
 			}
 		},
 		"items": []

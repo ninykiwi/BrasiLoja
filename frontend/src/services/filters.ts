@@ -10,7 +10,7 @@ export const filterByName = (
   name: string,
   setList: React.Dispatch<React.SetStateAction<{}[]>>
 ) => {
-  axios.get(`${URL_BACK}/${URL_SBN}`, {
+  axios.get(`${URL_BACK}/${URL_SBN}/${name}`, {
     params: { name }
   })
   .then(response => {
@@ -26,7 +26,7 @@ export const filterByTag = (
   Tags: string[],
   setList?: React.Dispatch<React.SetStateAction<{}[]>>
 ) => {
-  axios.get(`${URL_BACK}/${URL_FBT}`, {
+  axios.get(`${URL_BACK}/${URL_FBT}/${Tags}`, {
     params: { Tags }
   })
   .then(response => {

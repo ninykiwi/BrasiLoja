@@ -111,6 +111,7 @@ export async function add_main_img(req:Request, res: Response) {
         res.status(400).json({msg:'ERRO! A imagem não pode ser colocada no server!', err:error})
     }
 }
+
 // On Test - Rota de adicionar imagem N1
 export async function add_img_first(req:Request, res: Response) {
     try {
@@ -226,4 +227,37 @@ export async function get_img_4 (req:Request,res:Response) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
     }
+}
+
+
+export async function get_product_by_id (req:Request, res:Response) {
+  try {
+    const { id } = req.params
+
+    const idExists = await prisma.product.findUnique({
+      where: { id: Number(id) }
+    })
+
+    if (!idExists) {
+      return console.log('Id de produto inválida')
+    }
+    
+    return res.send(idExists)
+  } catch (error: any) {
+    console.error('Deu ruim na recuperação do produto pelo id: ', error)
+  }
+}
+
+export async function get_all_products (req:Request, res:Response) {
+  try {
+    const allProducts = await prisma.product.findMany()
+
+    if (!allProducts) {
+      return console.log('Não há produtos cadastrados')
+    }
+
+    return res.send(allProducts)
+  } catch (error: any) {
+    console.error('Deu ruim na recuperação de todos os produtos: ', error)
+  }
 }
