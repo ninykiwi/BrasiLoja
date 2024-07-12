@@ -73,11 +73,11 @@ export default function ItemsCarousel({ className, tipo }: ItemsCarouselProps) {
   return (
     <section
       className={clsx(
-        'flex flex-col w-full px-[14px] py-[17px] gap-[14px] bg-[#E7E7E7] overflow-hidden',
+        'flex flex-col w-full px-[14px] py-[17px] gap-[14px] overflow-hidden',
         className
       )}
     >
-      <h3>{tipo}</h3>
+      <h3 className='text-[16px] lg:text-[40px] font-bold'>{tipo}</h3>
       <Carousel responsive={responsive} autoPlay={true} infinite={true}>
         {mockProducts.length > 0 ? (
           mockProducts.map((item) => (

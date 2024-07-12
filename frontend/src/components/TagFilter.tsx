@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { SearchProduct, SearchBrand } from '@/components/SearchBar';
 import { useFilter } from '@/contexts/FilterContexts';
