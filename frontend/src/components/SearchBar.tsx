@@ -32,7 +32,7 @@ export const SearchBar = ({
 
       <input className='w-[80vw] lg:w-[416px] h-[30px] lg:h-[44px] bg-white rounded-[6px] lg:rounded-r-[0] lg:rounded-l-[10px] text-[1rem]' type='text' onChange={() => filterName} />
 
-      <Icons className='container flex items-center justify-center w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] bg-yellow-500 rounded-[6px] lg:rounded-l-[0] lg:rounded-r-[10px]' iconStyle='lg:w-[24px] lg:h-[24px]' src={icon.search} width={16} />
+      <Icons className='container flex items-center justify-center w-[30px] lg:w-[44px] h-[30px] lg:h-[44px] bg-yellow-500 rounded-[6px] lg:rounded-l-[0] lg:rounded-r-[10px] hover:bg-yellow-700 transition-all duration-500' iconStyle='lg:w-[24px] lg:h-[24px]' src={icon.search} width={16} />
     </form>
   )
 }

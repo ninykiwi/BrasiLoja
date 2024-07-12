@@ -33,12 +33,19 @@ export const userOptionsList = [
   'Cadastro'
 ]
 
-export const tagList = [
-  'Produtos',
-  'Ofertas',
-  'VejaTambem',
-  'VocePodeGostar',
-  'VistosRecentemente',
-  'OutrosProdutos',
-  'ProdutosSimilares'
-]
+export const titleList = (tipo: any) => {
+  switch (tipo) {
+    case 'VocePodeGostar':
+      return 'Você pode gostar'
+    case 'VistosRecentemente':
+      return 'Vistos recentemente'
+    case 'OutrosProdutos':
+      return 'Outros produtos'
+    case 'ProdutosSimilares':
+      return 'Produtos similares'
+    case 'ConhecaTambem':
+      return 'Conheça também'
+    case 'Ofertas':
+      return 'Ofertas e Promoções'
+  }
+}

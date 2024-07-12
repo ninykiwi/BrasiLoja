@@ -7,7 +7,7 @@ import { create } from 'domain';
 import { Icons } from '@/components/Icons';
 import { icon } from '@/lib/icons'
 import { createProduct } from '@/services/product';
-import { productCategories } from '@/types';
+import { ProductCategories } from '@/types';
 import { departmentsList } from '@/lib/lists';
 
 
@@ -25,7 +25,7 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
     const [prodName, setProdName] = useState<string>('')
     const [prodPrice, setProdPrice] = useState<number>(0)
     const [prodQuant, setProdQuant] = useState<number>(0)
-    const [prodCat, setProdCat] = useState<productCategories>("")
+    const [prodCat, setProdCat] = useState<ProductCategories>("")
     //const [prodCat, setProdCat] = useState<string>('')
     const [prodBrand, setProdBrand] = useState< string>('')
 
@@ -51,7 +51,6 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
 
     const submitCreateProduct = (event: any) => {
       event.preventDefault();
-      const form = new FormData(event.target);
       createProduct(prodName, prodPrice, prodQuant, prodCat, prodBrand);
     }
 
@@ -191,7 +190,7 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
               </div>
           </div>
 
-          <button type='submit' className='criar-produto'>
+          <button type='submit' className='criar-produto hover:bg-blue-600 transition-all duration-500'>
               CRIAR PRODUTO
           </button>
         </form>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { productCategories } from '@/types'
+import { ProductCategories } from '@/types'
 
 
 export const URL_BACK = `http://localhost:3005`

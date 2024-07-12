@@ -10,8 +10,9 @@ import nintendo0 from '../public/images/nintendo0.png';
 import nintendo5 from '../public/images/nintendo5.png';
 import nintendo4 from '../public/images/nintendo4.png';
 import nintendo2 from '../public/images/nintendo2.png';
+import { titleList } from '@/lib/lists';
 
-const calculateItemsToShow = (containerWidth) => {
+const calculateItemsToShow = (containerWidth: any) => {
   const itemWidth = 235;
   const spacing = 78;
   const availableWidth = containerWidth - spacing;
@@ -49,11 +50,12 @@ const mockProducts = [
 
 interface ItemsCarouselProps {
   className?: string;
-  tipo?: 'VocePodeGostar' | 'VistosRecentemente' | 'OutrosProdutos' | 'ProdutosSimilares';
+  tipo?: 'VocePodeGostar' | 'VistosRecentemente' | 'OutrosProdutos' | 'ProdutosSimilares' | 'Ofertas' | 'ConhecaTambem';
 }
 
 export default function ItemsCarousel({ className, tipo }: ItemsCarouselProps) {
   const [containerWidth, setContainerWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  const title = titleList(tipo);
 
   useEffect(() => {
     const handleResize = () => {
@@ -74,7 +76,7 @@ export default function ItemsCarousel({ className, tipo }: ItemsCarouselProps) {
         className
       )}
     >
-      <h3 className='text-[16px] lg:text-[40px] font-bold'>{tipo}</h3>
+      <h3 className='text-[16px] lg:text-[40px] font-bold'>{title}</h3>
       <Carousel responsive={responsive} autoPlay={true} infinite={true}>
         {mockProducts.length > 0 ? (
           mockProducts.map((item) => (

@@ -336,14 +336,13 @@ export interface ListsSliceDefaultPrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **Default Value**: None
+   * - **Default Value**: Ofertas
    * - **API ID Path**: lists.default.primary.filter
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   filter: prismic.SelectField<
-    | "None"
     | "Ofertas"
-    | "VejaTambem"
+    | "ConhecaTambem"
     | "VocePodeGostar"
     | "VistosRecentemente"
     | "OutrosProdutos"

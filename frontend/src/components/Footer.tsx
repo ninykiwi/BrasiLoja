@@ -26,7 +26,7 @@ export default async function Footer() {
 
               return (
                 <li key={index}> 
-                  <Link className='hover:underline hover:underline-offset-4' href={`/departamentos/${link}`}> {item} </Link>
+                  <Link className='hover:underline hover:underline-offset-4 transition-all duration-500' href={`/departamentos/${link}`}> {item} </Link>
                 </li>
               )
             })}
