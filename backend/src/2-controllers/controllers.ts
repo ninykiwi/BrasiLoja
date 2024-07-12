@@ -91,7 +91,7 @@ export async function get_product_by_category(req:Request, res:Response) {
 export async function get_all(req:Request,res:Response) {
     try {
         const GetAll = await prisma.product.findMany()
-        res.status(200).json({msg:'Seguem abaixo todos os produtos da database:', lista: GetAll})
+        res.status(200).send(GetAll)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg: "ERRO! Ocorreu um erro ao tentar pegar os produtos da categoria", err: error})
