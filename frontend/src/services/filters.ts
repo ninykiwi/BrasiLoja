@@ -14,7 +14,7 @@ export const filterByName = (
     params: { name }
   })
   .then(response => {
-    setList(response.data.results)
+    setList(response.data)
     console.log('Pesquisa por nome realizada com sucesso')
   })
   .catch(error => {
@@ -32,9 +32,9 @@ export const filterByTag = (
   .then(response => {
     if (!setList) {
       console.log('Pesquisa por categoria realizada com sucesso')
-      return (response.data.results)
+      return (response.data)
     } else {
-      setList(response.data.results)
+      setList(response.data)
     }
     console.log('Pesquisa por categoria realizada com sucesso')
   })

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { icon } from '@/lib/icons';
 import { Icons } from './Icons';
-
+import { useRouter } from 'next/navigation';
 
 
 export const DepartmentsMenu: React.FC = () => {
@@ -43,6 +43,15 @@ export const UserMenu = () => {
   const toggleUserModal: () => void = () => {
     setUserModal(!UserModal)
   }
+  const router = useRouter()
+
+  const userModalLinks = (link: string) => {
+    if (link === 'Entrar' || link === 'Cadastro') {
+      router.push(`/user/${link}`)
+    } else {
+      return alert('Você deve estar logado para acessar essa página')
+    }
+  }
 
   return (
     <div className='w-fit h-fit'>
@@ -57,9 +66,9 @@ export const UserMenu = () => {
 
           return (
             <li key={index}>
-              <Link className='flex items-center justify-center w-[277px] h-[60px] border-2 border-blue-500 rounded-[8px] text-gray-500 hover:bg-blue-500 active:bg-blue-500 hover:text-white active:text-white transition-all duration-500' href={`/user/${link}`}>
+              <button className='flex items-center justify-center w-[277px] h-[60px] border-2 border-blue-500 rounded-[8px] text-gray-500 hover:bg-blue-500 active:bg-blue-500 hover:text-white active:text-white transition-all duration-500' onClick={() => userModalLinks(link)}>
                 {item}
-              </Link>
+              </button>
             </li>
           )
         })}

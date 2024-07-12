@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { PrismicPreview } from "@prismicio/next";
 import clsx from "clsx";
+import { UserProvider } from "@/contexts/UserContext";
+import { FilterProvider } from "@/contexts/FilterContexts";
 
 
 const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], display:'swap', variable:'--font-inter' });
@@ -24,16 +26,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" className={clsx(roboto.variable, inter.variable)}>
+        <UserProvider>
+          <body className="w-screen" >
+            <Header />
+            
+            <FilterProvider>
+              <main className='flex flex-col w-[calc(100vw-50px)] mx-[20px] px-[15px] bg-[#F3F3F3]'>
+                {children}
+              </main>
+            </FilterProvider>
 
-        <body className="w-screen" >
-          <Header />
-          
-          <main className='flex flex-col w-[calc(100vw-50px)] mx-[20px] px-[15px] bg-[#F3F3F3]'>
-            {children}
-          </main>
-
-          <Footer />
-        </body>
+            <Footer />
+          </body>
+        </UserProvider>
 
     </html>
   );

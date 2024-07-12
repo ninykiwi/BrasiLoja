@@ -91,6 +91,9 @@ export async function get_product_by_category(req:Request, res:Response) {
 export async function get_all(req:Request,res:Response) {
     try {
         const GetAll = await prisma.product.findMany()
+        if (!GetAll) {
+          return console.log('Nenhum produto no banco de dados')
+        }
         res.status(200).send(GetAll)
     } catch (error:any) {
         console.log(error)

@@ -31,6 +31,7 @@ export default function ListSection({
   useEffect(() => {
     getAllProducts(setList)
   }, [])
+
   useEffect(() => {
     if (category) {
       filterByTag(category, setList);
@@ -64,9 +65,9 @@ export default function ListSection({
           <ItemsCarousel tipo={title} />
         ) : (
           <ul className='flex flex-row flex-wrap justify-between w-full h-max mx-[16px] mt-[12px] gap-[50px] lg:gap-[80px]'>
-            {list.map((produto, index) => (
+            {list.map((product, index) => (
               <li key={index}>
-                <Produto nome={produto.nome} imagem={produto.imagem} preco={produto.preco} />
+                <Produto id={product.id} nome={product.name} imagem={product.mainImg} preco={product.price} />
               </li>
             ))}
           </ul>

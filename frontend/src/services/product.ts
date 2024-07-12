@@ -56,7 +56,7 @@ export const getProductById = (
 ) => {
   axios.get(`${URL_BACK}/${URL_GPI}/${prodId}`)
     .then(response => {
-      setProductPageInfo(response.data.results)
+      setProductPageInfo(response.data)
       console.log('Produto encontrado com sucesso')
     })
     .catch(error => {
@@ -69,7 +69,7 @@ export const getAllProducts = (
 ) => {
   axios.get(`${URL_BACK}/get_all`)
     .then(response => {
-      setList(response.data.results)
+      setList(response.data)
       console.log('Produtos encontrados com sucesso')
     })
     .catch(error => {

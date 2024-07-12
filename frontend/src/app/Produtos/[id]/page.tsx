@@ -20,20 +20,25 @@ import { Icons } from '@/components/Icons';
 import { icon } from '@/lib/icons';
 import ListSection from '@/containers/ListSection';
 import ItemsCarousel from '@/components/ItemsCarousel';
+import { useUser } from '@/contexts/UserContext';
+import { useRouter } from 'next/navigation';
 
 
 export default function Page({ params }: { params: { id: string } }) {
-  const [cart, setCart] = useState<any>([])
+  const { addToCartList } = useUser()
   const [product, setProduct] = useState<any>([])
-  const id = Number(params.id)
-
-  const addToTheCart = (prodId: number) => {
-    setCart([...cart, prodId])
+  const router = useRouter()
+  
+  const comprar = (id: number | string) => {
+    addToCartList(id)
+    router.push('/carrinho')
   }
+  
+  useEffect(() => {
+    const id = Number(params.id)
 
-  // useEffect(() => {
-  //   getProductById(id, setProduct)
-  // }, [id])
+    getProductById(id, setProduct)
+  }, [params.id])
 
   const images = {
     imagem1: nintendo1,
@@ -130,54 +135,50 @@ export default function Page({ params }: { params: { id: string } }) {
 
   const comentariosExibidos = todosComentarios.slice(0, comentariosVisiveis);
 
-  useEffect(() => {
-    setProduct([{
-      id: 1,
-      name: 'Console Nintendo Switch Oled 64 GB',
-      mainImg: nintendo0,
-      img1: nintendo1,
-      img2: nintendo2,
-      img3: nintendo3,
-      img4: nintendo4,
-      img5: nintendo5,
-      img6: nintendo6,
-      img7: nintendo7,
-      price: 'R$ 2.253,60',
-      description: 'Equipado com uma tela OLED vibrante de 7 polegadas, o console oferece cores mais ricas e um contraste nítido para uma experiência visual incrível. Com um armazenamento interno de 64 GB, suporte a modo portátil, mesa e TV, e um dock com porta LAN integrada, o Nintendo Switch OLED é perfeito para jogar em qualquer lugar e a qualquer momento. Aproveite ao máximo seus jogos favoritos com gráficos deslumbrantes e um som aprimorado.',
-      spec: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor, nunc non ullamcorper pellentesque, massa turpis hendrerit ligula, a euismod nisi leo ut tortor. Integer a augue nec nulla lacinia interdum. Aenean venenatis, nisi nec fermentum aliquam, enim felis feugiat lectus, non ultrices ex augue at justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus elementum magna in neque pretium, ut egestas nisl sollicitudin. Integer mollis, dolor non bibendum scelerisque, velit nunc fermentum nisi, sit amet vulputate purus orci non lectus. Cras ac ex vitae nisi eleifend tincidunt. Aenean dapibus leo a ex efficitur, et hendrerit risus ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor, nunc non ullamcorper pellentesque, massa turpis hendrerit ligula, a euismod nisi leo ut tortor. Integer a augue nec nulla lacinia interdum. Aenean venenatis, nisi nec fermentum aliqua'
-    }])
-  }, [])
-
 
   return (
     <section className='w-full pt-[24px] lg:pt-[76px]'>
-      <h3 className='mb-[24px] font-black lg:hidden'> Console Nintendo Switch Oled 64gb </h3>
+      <h3 className='mb-[24px] font-black lg:hidden'> {product.name} </h3>
 
       <section className='flex flex-col lg:flex-row items-center lg:justify-between'>
         <div className='flex flex-col lg:flex-row lg:max-w-[calc(100%-400px)] items-center gap-[7px] lg:gap-[54px] lg:order-first'>
-          <Image className='lg:w-[600px] lg:h-[602px] rounded-[8px] lg:rounded-[10px]' src={nintendo0} alt={`Imagem principal do produto`} width={211} height={216} />
+          {product.mainImg !== null ? (
+            <Image className='self-center lg:w-[600px] lg:h-[572px] rounded-[10px]' src={product.mainImg} alt='Imagem do produto' width={234} height={194} />
+          ) : (
+            <div className='self-center flex flex-col items-center justify-center w-[194px] lg:w-[600px] h-[194px] lg:h-[572px] bg-white border-2 border-gray-200/50 rounded-[4px] shadow'>
+              <Icons src={icon.camera} width={23} />
+            </div>
+          )}
 
           <div className='flex lg:flex-col gap-[6px] lg:gap-[26px] lg:order-first'>
-            <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={nintendo0} alt={`Imagem do produto`} width={64} height={45} />
-            <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={nintendo1} alt={`Imagem do produto`} width={64} height={45} />
-            <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={nintendo2} alt={`Imagem do produto`} width={64} height={45} />
-            <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={nintendo3} alt={`Imagem do produto`} width={64} height={45} />
+            {product.img1 && (
+              <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={product.img1} alt={`Imagem do produto`} width={64} height={45} />
+            )}
+            {product.img2 && (
+              <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={product.img2} alt={`Imagem do produto`} width={64} height={45} />
+            )}
+            {product.img3 && (
+              <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={product.img3} alt={`Imagem do produto`} width={64} height={45} />
+            )}
+            {product.img4 && (
+              <Image className='lg:w-[123px] lg:h-[86px] rounded-[4px]' src={product.img4} alt={`Imagem do produto`} width={64} height={45} />
+            )}
           </div>
         </div>
 
         <div className='flex flex-col lg:max-w-[380px] mt-[14px] mb-[14px]'>
-          <h3 className='hidden my-[24px] font-black lg:flex'> Console Nintendo Switch Oled 64gb </h3>
+          <h3 className='hidden my-[24px] font-black lg:flex'> {product.name} </h3>
 
           <form>
             <div className='flex items-center justify-between w-full'>
-              <legend className='w-fit h1 font-black'> R$ 2.253,60 </legend>
+              <legend className='w-fit h1 font-black'> R$ {product.price} </legend>
               <fieldset className='flex flex-col gap-0'>
                 <label className='font-display font-light text-[12px] leading-[2px]'> Quantidade: </label>
-                <input className='w-[64px] h-[32px] py-[14px] px-[8px] rounded-[10px] text-[12px]' type="number" placeholder='1' />
+                <input className='w-[64px] h-[32px] py-[14px] px-[8px] rounded-[10px] text-[12px]' type="number" placeholder='1' min={0} />
               </fieldset>
             </div>
 
-            <legend className='font-display font-light text-[12px]'>Modelos:</legend>
+            <legend className='font-display font-light text-[12px]'> Modelos: </legend>
             <fieldset className='flex gap-[20px] mt-[9px]'>
               <label>
                 <Image src={product.img5} alt={`Imagem do produto`} width={54} height={44} />
@@ -194,13 +195,13 @@ export default function Page({ params }: { params: { id: string } }) {
             </fieldset>
 
             <div className='flex gap-[23px]'>
-              <button className='flex items-center justify-center w-[205px] h-[44px] bg-blue-500 rounded-[10px] text-[20px] font-black text-white hover:bg-blue-600' type='submit'>COMPRAR</button>
-              <Icons className='flex items-center justify-center w-[50px] h-[46px] bg-yellow-500 rounded-[10px] hover:bg-yellow-600' src={icon.addCart}  width={36} onClick={() => setCart(product.id)} />
+              <button className='flex items-center justify-center w-[205px] h-[44px] bg-blue-500 rounded-[10px] text-[20px] font-black text-white hover:bg-blue-600' type='submit' onClick={() => comprar(product.id)}>COMPRAR</button>
+              <Icons className='flex items-center justify-center w-[50px] h-[46px] bg-yellow-500 rounded-[10px] hover:bg-yellow-600' src={icon.addCart}  width={36} onClick={() => addToCartList(product.id)} />
             </div>
           </form>
 
           <form className='flex flex-col mt-[16px]'>
-            <label className='font-display text-[12px] font-light'>Calcular frente:</label>
+            <label className='font-display text-[12px] font-light'> Calcular frente: </label>
 
             <div className='flex'>
               <input className='flex w-[225px] h-[42px] p-[12px] rounded-l-[10px]' type='text' placeholder='CEP...' minLength={10} maxLength={10} />
@@ -229,7 +230,7 @@ export default function Page({ params }: { params: { id: string } }) {
       <section className='flex flex-col mt-[60px] gap-[10px]'>
         <h3 className='text-[14px] lg:text-[20px] font-bold'>Descrição do Produto</h3>
         <div className='flex p-[16px] bg-white rounded-[8px]'>
-          <p> Equipado com uma tela OLED vibrante de 7 polegadas, o console oferece cores mais ricas e um contraste nítido para uma experiência visual incrível. Com um armazenamento interno de 64 GB, suporte a modo portátil, mesa e TV, e um dock com porta LAN integrada, o Nintendo Switch OLED é perfeito para jogar em qualquer lugar e a qualquer momento. Aproveite ao máximo seus jogos favoritos com gráficos deslumbrantes e um som aprimorado. </p>
+          <p> {product.description} </p>
         </div>
       </section>
 
@@ -238,53 +239,7 @@ export default function Page({ params }: { params: { id: string } }) {
         <h3 className='text-[14px] lg:text-[20px] font-bold'>Especificações Técnicas</h3>
         <div className='block p-[16px] bg-white rounded-[8px] lg:columns-2'>
           <p className='whitespace-pre-wrap'>
-            - Nintendo Switch OLED  
-            Resolução: 1280 x 720 (HD)
-            Tela OLED de 7 polegadas
-            <br/><br/>
-            - Armazenamento Interno: 64 GB (expansível via cartão microSD)
-            <br/><br/>
-            - Modos de Jogo:
-            Modo TV: Conecta-se à TV via dock
-            Modo Mesa: Suporte traseiro ajustável para jogatina em superfícies planas
-            Modo Portátil: Jogue em qualquer lugar com controles acoplados
-            <br/><br/>
-            Controles: Joy-Con destacáveis
-            Inclui controles Joy-Con (L) e Joy-Con (R)
-            <br/><br/>
-            Bateria: Íon-lítio (4310mAh)
-            Duração da bateria: Aproximadamente 4,5 a 9 horas (varia conforme o uso e os jogos)    
-            <br/><br/>
-            Conectividade:
-            Wi-Fi (IEEE 802.11 a/b/g/n/ac)
-            Bluetooth 4.1
-            Dock com porta LAN integrada para conexão com fio à internet
-            <br/><br/>
-            Áudio:
-            Alto-falantes integrados aprimorados
-            Saída de áudio estéreo
-            <br/><br/>
-            Portas:
-            1x USB Type-C (para carregamento e conexão com o dock)
-            3x USB (na base do dock)
-            Slot para cartão microSD (compatível com microSDXC)
-            <br/><br/>
-            Dimensões:
-            Console: 102 mm x 242 mm x 13,9 mm (com Joy-Con acoplados)          
-            Dock: 104 mm x 173 mm x 54 mm
-            <br/><br/>
-            Peso:
-            Console: Aproximadamente 320g
-            Com Joy-Con acoplados: Aproximadamente 420g
-            <br/><br/>
-            Conteúdo da Embalagem:
-            Console Nintendo Switch OLED
-            Joy-Con (L) e Joy-Con (R)
-            Suporte para Joy-Con
-            Dock do Nintendo Switch com porta LAN
-            Adaptador AC
-            Cabo HDMI
-            Alças para Joy-Con
+            {product.spec}
           </p>
         </div>
       </section>
@@ -306,7 +261,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </li>
         </ul>
 
-        <Link className='self-center underline text-[11px] font-bold  hover:text-blue-500' href={`/Produtos/${id}/comentários`}>Ver mais</Link>
+        {/* <Link className='self-center underline text-[11px] font-bold  hover:text-blue-500' href={`/Produtos/${id}/comentários`}>Ver mais</Link> */}
       </section>
 
 

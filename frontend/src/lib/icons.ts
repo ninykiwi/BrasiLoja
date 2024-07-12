@@ -1,4 +1,5 @@
 import addCart from '@/public/icons/addCart.svg'
+import camera from '@/public/icons/camera.svg'
 import cart from '@/public/icons/cart.svg'
 import chat from '@/public/icons/chat.svg'
 import close from '@/public/icons/close.svg'
@@ -18,6 +19,7 @@ import user from '@/public/icons/user.svg'
 
 export const icon = {
   addCart: addCart,
+  camera: camera,
   cart: cart,
   chat: chat,
   close: close,
