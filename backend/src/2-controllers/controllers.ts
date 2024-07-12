@@ -1,25 +1,12 @@
 import prisma from './../prisma'
-import { Response, Request } from 'express'
-
+import { Response, Request } from 'express' 
+const path = require('path')
 /*  Funções do Servidor - Protocolo HTTP ---> Por enquanto são apenas as funções CRUD dos Produtos. 
     Feito (E por enquanto mantido) por Cristiano Santos Ribeiro Filho A.K.A. Cris - Find me on @cristiano-s-r-filho in Github 
     1 - Rota de Post de um Produto: */
 export async function make_product(req:Request, res:Response){
     try {
-        const {prod_name, prod_price, prod_quant, prod_cat, prod_brand} = req.body
-        // Validação - Nome, Preço, Quantidade, Categoria, Marca 
-        
-        /* if(String(prod_price).match(/[A-Z,a-z,*]/)){
-            throw new Error('O preço deve ser um valor numerico')
-        }
-        if(String(prod_quant).match(/[A-Z,a-z,*]/)){
-            throw new Error('O preço deve ser um valor numerico')
-        } */
-        // Validação - Existência do Produto :
-        /*const CheckProduct = await prisma.product.findMany({where:{name:prod_name, brand:prod_brand, category:prod_cat}})
-        if(CheckProduct !== null) {
-            throw new Error ('Produto já foi cadastrado!')
-        } */
+        const {prod_name, prod_price, prod_quant, prod_cat, prod_brand} = req.body 
         // Resposta padrão: 
         const MakeProduct = await prisma.product.create({
             data:{
@@ -39,11 +26,6 @@ export async function make_product(req:Request, res:Response){
 export async function get_product_by_name(req:Request, res:Response){
     try {
         const {prod_name} = req.body
-        // Validação - Existência do produto
-        /*const DoesNameCounts = await prisma.product.findFirst({where:{name:prod_name}})
-        if(DoesNameCounts == null){
-            throw new Error('Não há entrada deste produto na database')
-        }*/
         // Resposta Padrão 
         const GetProduct = await prisma.product.findMany({where:{name:prod_name}})
         res.status(200).json({msg:"Aqui estão os produtos com esse nome", list: GetProduct})
@@ -66,11 +48,6 @@ export async function edit_product(req:Request,res:Response) {
         if(String(prod_quant).match(/[A-Z,a-z,*]/)){
             throw new Error('O preço deve ser um valor numerico')
         }
-        // Validação - Existência do Registro
-        /*const DoesRegisterExist = await prisma.product.findFirst({where:{id:prod_id}})
-        if(DoesRegisterExist == null){
-            throw new Error('Registro de produto inexistente!')
-        }*/
         // Resposta Padrão 
         const UpdateProductRegister = await prisma.product.update({where:{id:prod_id},
             data:{
@@ -90,11 +67,6 @@ export async function edit_product(req:Request,res:Response) {
 export async function delete_product (req:Request, res:Response){
     try {
         const {prod_id} = req.body
-        //Validação - Existência do Registro 
-        /* const DoesRegisterExist = await prisma.product.findFirst({where:{id:prod_id}})
-        if(DoesRegisterExist == null){
-            throw new Error('Registro do produto inexistente!')
-        }*/ 
         // Resposta Padrão 
         const DeleteRegister = await prisma.product.delete({ where:{ id: Number(prod_id) } })
         res.status(200).json({msg:'Registro de Produto deletado com sucesso', register: DeleteRegister})
@@ -107,12 +79,6 @@ export async function delete_product (req:Request, res:Response){
 export async function get_product_by_category(req:Request, res:Response) {
     try {
         const {prod_cat} = req.body
-        //Validação - Existência da categoria 
-        /* const CategoryList = await prisma.product.findMany({select:{category:true}})
-        const DoesCategoryExists = CategoryList.find((category) => category == prod_cat)
-        if (DoesCategoryExists?.category == undefined){
-            throw new Error('Categoria Inexistente!')
-        }*/
         // Resposta Padrão 
         const GetProductList = await prisma.product.findMany({where:{category:prod_cat}})
         res.status(200).json({msg:`Segue abaixo a lista de todos os produtos da categoria ${prod_cat}`, list: GetProductList})
@@ -145,5 +111,119 @@ export async function add_main_img(req:Request, res: Response) {
         res.status(400).json({msg:'ERRO! A imagem não pode ser colocada no server!', err:error})
     }
 }
-
-
+// On Test - Rota de adicionar imagem N1
+export async function add_img_first(req:Request, res: Response) {
+    try {
+        const id_for_edit = req.body
+        const imagePathFst = req.file?.path
+        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+             img1:imagePathFst
+        }})
+        res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser colocada no server!', err:error})
+    }
+}
+// On Test - Rota de adicionar imagem N2 
+export async function add_img_second(req:Request, res: Response) {
+    try {
+        const id_for_edit = req.body
+        const imagePathSec = req.file?.path
+        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+            img2:imagePathSec
+        }})
+        res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser colocada no server!', err:error})
+    }
+}
+// On Test - Rota de adicionar imagem N3 
+export async function add_img_third(req:Request, res: Response) {
+    try {
+        const id_for_edit = req.body
+        const imagePathTrd = req.file?.path
+        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+            img3:imagePathTrd
+        }})
+        res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser colocada no server!', err:error})
+    }
+}
+// On Test - Rota de adicionar imagem N4 
+export async function add_img_fourth(req:Request, res: Response) {
+    try {
+        const id_for_edit = req.body
+        const imagePathFth = req.file?.path
+        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+            img4:imagePathFth
+        }})
+        res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser colocada no server!', err:error})
+    }
+}
+// On test - Rota de pegar a imagem Principal 
+export async function get_main_img (req:Request,res:Response) {
+    try {
+        const id_for_get = req.body
+        const GetMainImg = await prisma.product.findFirst({where:{id:id_for_get}, select:{mainImg:true}})
+        const Imgpath = path.join(__dirname,'1-model/uploads',GetMainImg)
+        res.status(200).send(Imgpath)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
+    }
+}
+// On test - Rota de Pegar a IMG 1: 
+export async function get_img_1 (req:Request,res:Response) {
+    try {
+        const id_for_get = req.body
+        const GetImgFst = await prisma.product.findFirst({where:{id:id_for_get}, select:{img1:true}})
+        const Imgpath = path.join(__dirname,'1-model/uploads',GetImgFst)
+        res.status(200).send(Imgpath)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
+    }
+}
+// On test - Rota de pegar a IMG 2: 
+export async function get_img_2 (req:Request,res:Response) {
+    try {
+        const id_for_get = req.body
+        const GetImgSec = await prisma.product.findFirst({where:{id:id_for_get}, select:{img2:true}})
+        const Imgpath = path.join(__dirname,'1-model/uploads',GetImgSec)
+        res.status(200).send(Imgpath)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
+    }
+}
+// On teste - Rota de pegar a IMG 3: 
+export async function get_img_3 (req:Request,res:Response) {
+    try {
+        const id_for_get = req.body
+        const GetImgTrd = await prisma.product.findFirst({where:{id:id_for_get}, select:{img3:true}})
+        const Imgpath = path.join(__dirname,'1-model/uploads',GetImgTrd)
+        res.status(200).send(Imgpath)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
+    }
+}
+// On teste - Rota de pegar a IMG 4: 
+export async function get_img_4 (req:Request,res:Response) {
+    try {
+        const id_for_get = req.body
+        const GetImgFth = await prisma.product.findFirst({where:{id:id_for_get}, select:{img4:true}})
+        const Imgpath = path.join(__dirname,'1-model/uploads',GetImgFth)
+        res.status(200).send(Imgpath)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
+    }
+}
