@@ -30,7 +30,7 @@ export async function make_product(req:Request, res:Response){
 //  2 - Rota de retornar um produto pelo nome 
 export async function get_product_by_name(req:Request, res:Response){
     try {
-        const { name } = req.params
+        const { name } = req.query
         // Resposta Padrão 
         const GetProductByName = await prisma.product.findMany({
           where: { name: { contains: String(name), }, },
@@ -303,7 +303,7 @@ export async function add_to_shopcar (req:Request, res: Response) {
 
 export async function get_from_shopcar (req:Request, res:Response){
     try {
-        const QueryList = await prisma.carrinho.findMany
+        const QueryList = await prisma.carrinho.findMany()
         res.status(200).send(QueryList)
     } catch (error:any) {
         console.log(error)
