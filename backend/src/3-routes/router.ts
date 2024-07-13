@@ -11,8 +11,8 @@ router.use('/1-model/uploads', express.static(path.join(__dirname,'1-model/uploa
 // Definir rotas dos produtos abaixo ->
 router.post('/make_product', make_product) 
 router.get('/get_product_by_id/:id', get_product_by_id)
-router.get('/search_by_name', get_product_by_name)
-router.get('/filter_by_tag', get_product_by_category) 
+router.get('/search_by_name/:name', get_product_by_name)
+router.get('/filter_by_category/:category', get_product_by_category) 
 router.get('/get_all', get_all)
 router.get('/get_main_img',get_main_img)
 router.get('/get_img_1',get_img_1)

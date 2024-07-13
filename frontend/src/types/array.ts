@@ -8,10 +8,10 @@ export interface CartItem {
 
 export interface FilterContextType {
   Name: string | null
-  Tags: any[]
+  Category: string
   MainList: any[] | null
-  filterName: (item: string) => void
-  filterTags: (item: any | any[]) => void
+  filterName: (item: any) => void
+  filterCategory: (item: any | any[]) => void
 }
 export interface UserContextType {
   UserMail: string,

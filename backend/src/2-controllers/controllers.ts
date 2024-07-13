@@ -30,10 +30,17 @@ export async function make_product(req:Request, res:Response){
 //  2 - Rota de retornar um produto pelo nome 
 export async function get_product_by_name(req:Request, res:Response){
     try {
-        const {prod_name} = req.body
+        const { name } = req.params
         // Resposta Padrão 
-        const GetProduct = await prisma.product.findMany({where:{name:prod_name}})
-        res.status(200).json({msg:"Aqui estão os produtos com esse nome", list: GetProduct})
+        const GetProductByName = await prisma.product.findMany({
+          where: { name: { contains: name, }, },
+        })
+
+        if (GetProductByName.length === 0) {
+          return console.log('Nenhum produto encontrado')
+        }
+
+        return res.status(200).send(GetProductByName)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
@@ -83,7 +90,7 @@ export async function delete_product (req:Request, res:Response){
 // 5 - Rota para retornar produtos por Categoria: 
 export async function get_product_by_category(req:Request, res:Response) {
     try {
-        const {prod_cat} = req.body
+        const {prod_cat} = req.params
         // Resposta Padrão 
         const GetProductList = await prisma.product.findMany({where:{category:prod_cat}})
         res.status(200).json({msg:`Segue abaixo a lista de todos os produtos da categoria ${prod_cat}`, list: GetProductList})
