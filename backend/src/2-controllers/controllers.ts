@@ -296,9 +296,8 @@ export async function add_to_shopcar (req:Request, res: Response) {
 
 export async function get_from_shopcar (req:Request, res:Response){
     try {
-        const prod_name = req.body.name
-        const QueryName = await prisma.carrinho.findFirst({where:{name:prod_name}})
-        res.status(200).send(QueryName)
+        const QueryList = await prisma.carrinho.findMany
+        res.status(200).send(QueryList)
     } catch (error:any) {
         console.log(error)
         res.status(400).send(error)
