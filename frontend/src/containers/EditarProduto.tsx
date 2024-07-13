@@ -175,7 +175,10 @@ const EditarProduto = ({ onClick }: EditarProdutoProps) => {
             </div>
         </div>
 
-        <button type='submit' className='editar-produto'>
+        <button 
+        type='submit' 
+        className='editar-produto'
+        onClick={onClick}>
             EDITAR PRODUTO
         </button>
       </form>

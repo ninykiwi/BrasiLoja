@@ -190,7 +190,10 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
               </div>
           </div>
 
-          <button type='submit' className='criar-produto hover:bg-blue-600 transition-all duration-500'>
+          <button 
+          type='submit' 
+          className='criar-produto hover:bg-blue-600 transition-all duration-500'
+          onClick={onClick}>
               CRIAR PRODUTO
           </button>
         </form>

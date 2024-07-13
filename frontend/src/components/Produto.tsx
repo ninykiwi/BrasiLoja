@@ -56,11 +56,18 @@ export default function Produto({ id, nome, imagem, preco, className }: ProdutoP
         <div className='flex flex-col gap-[10px]'>
 
             <div className='flex justify-center w-full gap-[7px] lg:gap-[15px]'>
-                <button className='flex items-center justify-center w-[60px] lg:w-[138px] h-[28px] lg:h-[52px] rounded-[4px] lg:rounded-[8px] bg-blue-500 text-[11px] lg:font-display lg:text-[20px] font-black text-white leading-[-0.2em] hover:bg-blue-700 transition-all duration-500' onClick={() => comprar(id)}>
+                <button 
+                className='flex items-center justify-center w-[60px] lg:w-[138px] h-[28px] lg:h-[52px] rounded-[4px] lg:rounded-[8px] bg-blue-500 text-[11px] lg:font-display lg:text-[20px] font-black text-white leading-[-0.2em] hover:bg-blue-700 transition-all duration-500' 
+                onClick={() => comprar(id)}>
                   COMPRAR
                 </button>
 
-                <Icons className='flex items-center justify-center w-[28px] lg:w-[52px] h-[28px] lg:h-[52px] bg-yellow-500 rounded-[4px] lg:rounded-[10px] hover:bg-yellow-700 transition-all duration-500' iconStyle='lg:w-[36px] lg:h-[36px]' src={icon.addCart} width={17} onClick={() => addToCartList(id)} />
+                <Icons 
+                className='flex items-center justify-center w-[28px] lg:w-[52px] h-[28px] lg:h-[52px] bg-yellow-500 rounded-[4px] lg:rounded-[10px] hover:bg-yellow-700 transition-all duration-500' 
+                iconStyle='lg:w-[36px] lg:h-[36px]' 
+                src={icon.addCart} 
+                width={17} 
+                onClick={() => addToCartList(id)} />
             </div>
         </div>
       </div>
