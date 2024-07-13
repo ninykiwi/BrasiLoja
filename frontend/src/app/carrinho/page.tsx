@@ -44,7 +44,7 @@ export default function Cart() {
                         <div className='h-auto gap-[20px]'>
                           { CartList.length > 1 ? 
                           CartList.map((product) => (
-                            <ProdutoCarrinho key={product.id && product.id} id={product.id} nome={product.name} preco={product.price} imagem={product.mainImg} />
+                            <ProdutoCarrinho key={product.id} id={product.id} nome={product.name} preco={product.price} imagem={product.mainImg} />
                           )) : (
                             <div className="flex flex-col items-center justify-center bg-white w-[912px] h-[226px] rounded-[10px] pt-[20px] pl-[74px] pr-[31px] mb-[34px]">
                               <h2>Não há itens no carinho</h2>

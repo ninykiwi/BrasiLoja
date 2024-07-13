@@ -1,38 +1,51 @@
 'use client'
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { FilterContextType } from '@/types/array';
 import { ContextProps } from '@/types/props';
-import { filterByName, filterByTag } from '@/services/filters';
+import { filterByName, filterByCategory } from '@/services/filters';
+import { getAllProducts } from '@/services/product';
 
 const initialState: FilterContextType = {
   Name: '',
-  Tags: [],
+  Category: '',
   MainList: [],
-  filterName: (item: string) => {},
-  filterTags: (item: any) => {},
+  filterName: (e: any) => {},
+  filterCategory: (item: any) => {},
 };
 
 const FilterContext = createContext<FilterContextType>(initialState);
 
 export const FilterProvider: React.FC<ContextProps> = ({ children }) => {
   const [Name, setName] = useState('');
-  const [Tags, setTags] = useState<string[]>([]);
+  const [Category, setCategory] = useState<string>('');
   const [MainList, setMainList] = useState<any[]>([]);
 
-  const filterName = (input: any) => {
-    setName(input.target.value);
+  const filterName = (e: any) => {
+    setName(e.target.value)
   };
 
-  const filterTags = (item: string) => {
-    if (!Tags.includes(item)) {
-      const newTags = [...Tags, item];
-      setTags(newTags);
-      filterByTag(newTags, setMainList); // Chama a função de filtro por tag com a nova lista de tags
-    }
+  const filterCategory = (item: string) => {
+    setCategory(item);
+    console.log(item)
   };
+
+  useEffect(() => {
+    getAllProducts(setMainList)
+  }, [])
+
+  useEffect(() => {
+    if (Name != '') {
+      console.log(Name)
+      filterByName(Name, setMainList)
+    } else if (Category !== '') {
+      filterByCategory
+    } else {
+      getAllProducts(setMainList)
+    }
+  }, [Name, Category])
 
   return (
-    <FilterContext.Provider value={{ Name, Tags, MainList, filterName, filterTags }}>
+    <FilterContext.Provider value={{ Name, Category, MainList, filterName, filterCategory }}>
       {children}
     </FilterContext.Provider>
   );

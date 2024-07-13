@@ -1,11 +1,11 @@
 import ItemsCarousel from '@/components/ItemsCarousel'
-import ListSection from '@/containers/ListSection'
+import FullPageList from '@/containers/FullPageList'
 import React from 'react'
 
 export default function Page({ params }: { params: { departments: string } }) {
   return (
     <section>
-      <ListSection category={params.departments} />
+      <FullPageList category={params.departments} />
 
       <ItemsCarousel tipo='VocePodeGostar' />
     </section>

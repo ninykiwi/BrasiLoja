@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import { getProductById } from '@/services/product';
 import { Icons } from '@/components/Icons';
 import { icon } from '@/lib/icons';
-import ListSection from '@/containers/ListSection';
+import FullPageList from '@/containers/FullPageList';
 import ItemsCarousel from '@/components/ItemsCarousel';
 import { useUser } from '@/contexts/UserContext';
 import { useRouter } from 'next/navigation';
