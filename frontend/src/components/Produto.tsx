@@ -21,9 +21,12 @@ export default function Produto({ id, nome, imagem, preco, className }: ProdutoP
   const router = useRouter()
   
   const makePriceFloat = (price: number) => {
-    return price.toFixed(2)
+    return price.toFixed(2);
   }
-  const price = parseFloat(makePriceFloat(preco))
+  
+  const precoNumerico = parseFloat(String(preco));
+  
+  const price = makePriceFloat(precoNumerico);
   
   const comprar = (id: number | string) => {
     addToCartList(id)
