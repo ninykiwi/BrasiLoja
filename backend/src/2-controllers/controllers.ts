@@ -33,7 +33,7 @@ export async function get_product_by_name(req:Request, res:Response){
         const { name } = req.params
         // Resposta Padrão 
         const GetProductByName = await prisma.product.findMany({
-          where: { name: { contains: name, }, },
+          where: { name: { contains: String(name), }, },
         })
 
         if (GetProductByName.length === 0) {
@@ -112,12 +112,12 @@ export async function get_all(req:Request,res:Response) {
         res.status(400).json({msg: "ERRO! Ocorreu um erro ao tentar pegar os produtos da categoria", err: error})
     }
 }
-// ON TEST - Rota de adicionar imagem a um produto pelo Multer 
+// Rota de adicionar imagem a um produto pelo Multer 
 export async function add_main_img(req:Request, res: Response) {
     try {
-        const id_for_edit = req.body
-        const imagePathMain = req.file?.path
-        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+        const id_for_edit = req.body.id 
+        const imagePathMain = String(req.file?.path)
+        const InjectImageonDB = await prisma.product.update({where:{id:Number(id_for_edit)}, data:{
             mainImg:imagePathMain
         }})
         res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
@@ -130,9 +130,9 @@ export async function add_main_img(req:Request, res: Response) {
 // On Test - Rota de adicionar imagem N1
 export async function add_img_first(req:Request, res: Response) {
     try {
-        const id_for_edit = req.body
+        const id_for_edit = req.body.id
         const imagePathFst = req.file?.path
-        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+        const InjectImageonDB = await prisma.product.update({where:{id:Number(id_for_edit)}, data:{
              img1:imagePathFst
         }})
         res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
@@ -146,7 +146,7 @@ export async function add_img_second(req:Request, res: Response) {
     try {
         const id_for_edit = req.body
         const imagePathSec = req.file?.path
-        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+        const InjectImageonDB = await prisma.product.update({where:{id:Number(id_for_edit)}, data:{
             img2:imagePathSec
         }})
         res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
@@ -160,7 +160,7 @@ export async function add_img_third(req:Request, res: Response) {
     try {
         const id_for_edit = req.body
         const imagePathTrd = req.file?.path
-        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+        const InjectImageonDB = await prisma.product.update({where:{id:Number(id_for_edit)}, data:{
             img3:imagePathTrd
         }})
         res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
@@ -174,7 +174,7 @@ export async function add_img_fourth(req:Request, res: Response) {
     try {
         const id_for_edit = req.body
         const imagePathFth = req.file?.path
-        const InjectImageonDB = await prisma.product.update({where:{id:id_for_edit}, data:{
+        const InjectImageonDB = await prisma.product.update({where:{id:Number(id_for_edit)}, data:{
             img4:imagePathFth
         }})
         res.status(200).json({msg:'Imagem Principal adicionada', obj:InjectImageonDB })
@@ -188,8 +188,8 @@ export async function get_main_img (req:Request,res:Response) {
     try {
         const id_for_get = req.body
         const GetMainImg = await prisma.product.findFirst({where:{id:id_for_get}, select:{mainImg:true}})
-        const Imgpath = path.join(__dirname,'1-model/uploads',GetMainImg)
-        res.status(200).send(Imgpath)
+        const ImagePath = path.join('/', GetMainImg)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -200,8 +200,8 @@ export async function get_img_1 (req:Request,res:Response) {
     try {
         const id_for_get = req.body
         const GetImgFst = await prisma.product.findFirst({where:{id:id_for_get}, select:{img1:true}})
-        const Imgpath = path.join(__dirname,'1-model/uploads',GetImgFst)
-        res.status(200).send(Imgpath)
+        const ImagePath = path.join('/', GetImgFst)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -212,8 +212,8 @@ export async function get_img_2 (req:Request,res:Response) {
     try {
         const id_for_get = req.body
         const GetImgSec = await prisma.product.findFirst({where:{id:id_for_get}, select:{img2:true}})
-        const Imgpath = path.join(__dirname,'1-model/uploads',GetImgSec)
-        res.status(200).send(Imgpath)
+        const ImagePath = path.join('/', GetImgSec)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -224,8 +224,8 @@ export async function get_img_3 (req:Request,res:Response) {
     try {
         const id_for_get = req.body
         const GetImgTrd = await prisma.product.findFirst({where:{id:id_for_get}, select:{img3:true}})
-        const Imgpath = path.join(__dirname,'1-model/uploads',GetImgTrd)
-        res.status(200).send(Imgpath)
+        const ImagePath = path.join('/', GetImgTrd)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -237,7 +237,8 @@ export async function get_img_4 (req:Request,res:Response) {
         const id_for_get = req.body
         const GetImgFth = await prisma.product.findFirst({where:{id:id_for_get}, select:{img4:true}})
         const Imgpath = path.join(__dirname,'1-model/uploads',GetImgFth)
-        res.status(200).send(Imgpath)
+        const ImagePath = path.join('/', GetImgFth)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -275,4 +276,48 @@ export async function get_all_products (req:Request, res:Response) {
   } catch (error: any) {
     console.error('Deu ruim na recuperação de todos os produtos: ', error)
   }
+}
+// Rota do Carrinho
+export async function add_to_shopcar (req:Request, res: Response) { 
+    try{
+        const id = req.body.id
+        const quant = req.body.quant
+        const GetProduct = await prisma.product.findFirst({where:{id:Number(id)}})
+        const productStock = GetProduct?.quantity
+        const prodName = String(GetProduct?.name)
+        const prodPrice = Number(GetProduct?.price)
+        if(quant > Number(productStock)){
+            throw new Error(`O estoque do produto é limitado, temos apenas ${productStock} unidades`)
+        }
+        const AddProdToShopCar = await prisma.carrinho.create({data:{
+            name:prodName,
+            quantity:quant,
+            price:prodPrice
+        }})
+        res.status(200).send(AddProdToShopCar)
+    }catch(error:any){
+        console.log(error)
+        res.status(400).send(error)
+    }
+}
+
+export async function get_from_shopcar (req:Request, res:Response){
+    try {
+        const QueryList = await prisma.carrinho.findMany
+        res.status(200).send(QueryList)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).send(error)
+    }
+}
+
+export async function delete_from_shopcar (req:Request, res:Response){
+    try {
+        const prod_id = req.body.id
+        const DelProdFromShopCar = await prisma.carrinho.delete({where:{id: prod_id}})
+        res.status(200).send(DelProdFromShopCar)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).send(error)
+    }
 }
