@@ -2,7 +2,7 @@
 import TagFilter from '@/components/TagFilter'
 import CriarProduto from '@/containers/CriarProduto'
 import ListaEditar from '@/containers/ListaEditar'
-import ListSection from '@/containers/ListSection'
+import FullPageList from '@/containers/FullPageList'
 import { createProduct, editProduct } from '@/services/product'
 import React, { useState } from 'react'
 import fone from '../../public/images/fone.png'
@@ -85,7 +85,7 @@ export default function Produtos() {
       <TagFilter onSelectedCategoria={handleCategoriaSelecionada} />
         
         {categoriaSelecionada && (
-          <ListSection
+          <FullPageList
             title={categoriaSelecionada}
             produtos={produtos}
             className='mt-[30px]'

@@ -7,40 +7,29 @@ import Image from 'next/image';
 import ItemsCarousel from '@/components/ItemsCarousel'; 
 import { useFilter } from '@/contexts/FilterContexts';
 import { titleList } from '@/lib/lists';
-import { filterByTag } from '@/services/filters';
+import { filterByCategory, filterByName } from '@/services/filters';
 import TagFilter from '@/components/TagFilter';
 import { getAllProducts } from '@/services/product';
 
-export interface ListSectionProps {
+
+export interface FullPageListProps {
   className?: string;
   title?: any;
   carousel?: boolean;
-  category?: string | string[];
+  category?: string
   produtos?: any[];
 }
-
-export default function ListSection({
+export default function FullPageList({
   className,
   title,
   carousel = false,
   category,
   produtos,
-}: ListSectionProps) {
-  const [list, setList] = useState<any[]>([])
+}: FullPageListProps) {
+  const { Name, filterName, Category, filterCategory, MainList } = useFilter()
 
-  useEffect(() => {
-    getAllProducts(setList)
-  }, [])
 
-  useEffect(() => {
-    if (category) {
-      filterByTag(category, setList);
-    } else {
-      getAllProducts(setList)
-    }
-  }, [category])
-
-  if (!list) {
+  if (!MainList) {
     return (
       <section className={clsx('flex flex-col items-center mx-[53px] lg:mx-[230px]', className)}>
         {category ? (
@@ -51,7 +40,6 @@ export default function ListSection({
         <p className='text-[16px] lg:text-[20px]'>Consulte as páginas dos produtos para ver outras opções de compra.</p>
       </section>
     )
-
   } else {
     const link = typeof title === 'string'
       ? title.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '-')
@@ -65,10 +53,11 @@ export default function ListSection({
           <ItemsCarousel tipo={title} />
         ) : (
           <ul className='flex flex-row flex-wrap justify-between w-full h-max mx-[16px] mt-[12px] gap-[50px] lg:gap-[80px]'>
-            {list.map((product, index) => (
-              <li key={index}>
-                <Produto id={product.id} nome={product.name} imagem={product.mainImg} preco={product.price} />
-              </li>
+            { MainList.length > 0 &&
+              MainList.map((product, index) => (
+                <li key={index}>
+                  <Produto id={product.id} nome={product.name} imagem={product.mainImg} preco={product.price} />
+                </li>
             ))}
           </ul>
         )}

@@ -6,7 +6,7 @@ import { ContextProps } from '@/types/props';
 const initialState: UserContextType = {
   UserMail: '',
   UserPassword: '',
-  CartList: [{}],
+  CartList: [{id: 0, name: '', price: 0, mainImg: null}],
   LogStatus: false,
   authUser: (mail: string, password: string) => {},
   addToCartList: (item: any) => {},
@@ -19,7 +19,7 @@ const UserContext = createContext<UserContextType>(initialState);
 export const UserProvider: React.FC<ContextProps> = ({ children }) => {
   const [UserMail, setUserMail] = useState('');
   const [UserPassword, setUserPassword] = useState('');
-  const [CartList, setCartList] = useState([{}]);
+  const [CartList, setCartList] = useState([{id: 0, name: '', price: 0, mainImg: null}]);
   const [LogStatus, setLogStatus] = useState(false);
 
   const authUser = (input: any) => {
@@ -53,7 +53,7 @@ export const UserProvider: React.FC<ContextProps> = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ UserMail, UserPassword, CartList,  LogStatus, addToCartList, removeFromCartList, authUser, changeLogStatus }}>
+    <UserContext.Provider value={{ UserMail, UserPassword, CartList, LogStatus, addToCartList, removeFromCartList, authUser, changeLogStatus }}>
       {children}
     </UserContext.Provider>
   );

@@ -3,14 +3,14 @@ import axios from 'axios'
 
 export const URL_BACK = `http://localhost:3005`
 export const URL_SBN = `search_by_name`
-export const URL_FBT = `filter_by_tag`
+export const URL_FBC = `filter_by_category`
 
 
 export const filterByName = (
   name: string,
   setList: React.Dispatch<React.SetStateAction<{}[]>>
 ) => {
-  axios.get(`${URL_BACK}/${URL_SBN}/${name}`, {
+  axios.get(`${URL_BACK}/${URL_SBN}`, {
     params: { name }
   })
   .then(response => {
@@ -22,12 +22,12 @@ export const filterByName = (
   })
 }
 
-export const filterByTag = (
-  Tags: string[] | string,
+export const filterByCategory = (
+  Category: string,
   setList?: React.Dispatch<React.SetStateAction<{}[]>>
 ) => {
-  axios.get(`${URL_BACK}/${URL_FBT}/${Tags}`, {
-    params: { Tags }
+  axios.get(`${URL_BACK}/${URL_FBC}/${Category}`, {
+    params: { Category }
   })
   .then(response => {
     if (!setList) {
