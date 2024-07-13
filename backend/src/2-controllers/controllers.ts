@@ -181,7 +181,8 @@ export async function get_main_img (req:Request,res:Response) {
     try {
         const id_for_get = req.body
         const GetMainImg = await prisma.product.findFirst({where:{id:id_for_get}, select:{mainImg:true}})
-        res.status(200).send(GetMainImg)
+        const ImagePath = path.join('/', GetMainImg)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -192,7 +193,8 @@ export async function get_img_1 (req:Request,res:Response) {
     try {
         const id_for_get = req.body
         const GetImgFst = await prisma.product.findFirst({where:{id:id_for_get}, select:{img1:true}})
-        res.status(200).send(GetImgFst)
+        const ImagePath = path.join('/', GetImgFst)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -203,7 +205,8 @@ export async function get_img_2 (req:Request,res:Response) {
     try {
         const id_for_get = req.body
         const GetImgSec = await prisma.product.findFirst({where:{id:id_for_get}, select:{img2:true}})
-        res.status(200).send(GetImgSec)
+        const ImagePath = path.join('/', GetImgSec)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -214,7 +217,8 @@ export async function get_img_3 (req:Request,res:Response) {
     try {
         const id_for_get = req.body
         const GetImgTrd = await prisma.product.findFirst({where:{id:id_for_get}, select:{img3:true}})
-        res.status(200).send(GetImgTrd)
+        const ImagePath = path.join('/', GetImgTrd)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -226,7 +230,8 @@ export async function get_img_4 (req:Request,res:Response) {
         const id_for_get = req.body
         const GetImgFth = await prisma.product.findFirst({where:{id:id_for_get}, select:{img4:true}})
         const Imgpath = path.join(__dirname,'1-model/uploads',GetImgFth)
-        res.status(200).send(Imgpath)
+        const ImagePath = path.join('/', GetImgFth)
+        res.status(200).send(ImagePath)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! A imagem não pode ser retornada do servidor', err: error})
@@ -264,4 +269,49 @@ export async function get_all_products (req:Request, res:Response) {
   } catch (error: any) {
     console.error('Deu ruim na recuperação de todos os produtos: ', error)
   }
+}
+// Rota do Carrinho
+export async function add_to_shopcar (req:Request, res: Response) { 
+    try{
+        const id = req.body.id
+        const quant = req.body.quant
+        const GetProduct = await prisma.product.findFirst({where:{id:Number(id)}})
+        const productStock = GetProduct?.quantity
+        const prodName = String(GetProduct?.name)
+        const prodPrice = Number(GetProduct?.price)
+        if(quant > Number(productStock)){
+            throw new Error(`O estoque do produto é limitado, temos apenas ${productStock} unidades`)
+        }
+        const AddProdToShopCar = await prisma.carrinho.create({data:{
+            name:prodName,
+            quantity:quant,
+            price:prodPrice
+        }})
+        res.status(200).send(AddProdToShopCar)
+    }catch(error:any){
+        console.log(error)
+        res.status(400).send(error)
+    }
+}
+
+export async function get_from_shopcar (req:Request, res:Response){
+    try {
+        const prod_name = req.body.name
+        const QueryName = await prisma.carrinho.findFirst({where:{name:prod_name}})
+        res.status(200).send(QueryName)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).send(error)
+    }
+}
+
+export async function delete_from_shopcar (req:Request, res:Response){
+    try {
+        const prod_id = req.body.id
+        const DelProdFromShopCar = await prisma.carrinho.delete({where:{id: prod_id}})
+        res.status(200).send(DelProdFromShopCar)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).send(error)
+    }
 }
