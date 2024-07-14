@@ -10,6 +10,7 @@ const port = 3005
 server.use(express.json())
 server.use('/uploads', express.static(path.join(__dirname,'uploads')))
 server.use('/',router)
+server.setMaxListeners(22)
 // Lancamento do Servidor 
 server.listen(port, () => {
     console.log(`Servidor lançado e ativo na porta ${port}! Pronto pra receber requisições!`)

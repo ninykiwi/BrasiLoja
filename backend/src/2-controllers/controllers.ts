@@ -40,8 +40,8 @@ export async function get_product_by_name(req:Request, res:Response){
         // Resposta Padrão 
         const GetProductByName = await prisma.product.findMany({
           where: { OR: [
-            { name: { contains: name } },
-            { brand: { contains: name } }
+            { name: { contains: String(name) } },
+            { brand: { contains: String(name) } }
           ] }
         })
 
@@ -49,58 +49,38 @@ export async function get_product_by_name(req:Request, res:Response){
           return res.status(404).json({ msg: 'Nenhum produto encontrado pela busca:', name })
         }
 
-        return res.status(200).send(GetProductByName)
+        res.status(200).send(GetProductByName)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
     }
 }
-export async function get_product_by_prod_name(req:Request, res:Response){
+/*export async function get_product_by_prod_name(req:Request, res:Response) {
     try {
-        const { prod_name } = req.query
-
-        if (typeof prod_name !== 'string') {
-          return console.log('Nome do produto inválido')
-        }
-
+        const prod_name  = req.query.name
         // Resposta Padrão 
         const GetProductByProdName = await prisma.product.findMany({
-          where: { name: { contains: prod_name  } }
+          where: { name: { contains: String(prod_name)  } }
         })
-
-        if (GetProductByProdName.length === 0) {
-          return res.status(404).json({ msg: 'Nenhum produto encontrado pela busca:', prod_name })
-        }
-
-        return res.status(200).send(GetProductByProdName)
+        res.status(200).send(GetProductByProdName)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
     }
-}
-export async function get_product_by_brand_name(req:Request, res:Response){
+}*/
+/*export async function get_product_by_brand_name(req:Request, res:Response) {
     try {
-        const { brand_name } = req.query
-
-        if (typeof brand_name !== 'string') {
-          return console.log('Nome da marca inválido')
-        }
-
+        const brand_name  = req.query.brand
         // Resposta Padrão 
         const GetProductByBrandName = await prisma.product.findMany({
-          where: { brand: { contains: brand_name  } }
+          where: { brand: { contains: String(brand_name) } }
         })
-
-        if (GetProductByBrandName.length === 0) {
-          return res.status(404).json({ msg: `Nenhum produto da marca ${brand_name} encontrado!` })
-        }
-
-        return res.status(200).send(GetProductByBrandName)
+        res.status(200).send(GetProductByBrandName)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
     }
-}
+}*/
 //  3 - Rota de Editar um Produto 
 export async function edit_product(req:Request,res:Response) {
     try {
