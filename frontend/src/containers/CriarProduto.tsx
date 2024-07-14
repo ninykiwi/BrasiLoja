@@ -56,18 +56,18 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
 
 
   return (
-    <section className='z-30 flex inset-0 w-full justify-center'>
-      <div className='flex top-0 absolute items-center justify-center lg:w-full h-auto rounded-[20px] bg-white'>
+    <section className='z-30 flex inset-0 w-full justify-center bg-white'>
+      <div className='flex top-0 absolute items-center justify-center lg:w-full h-full rounded-[20px] bg-white'>
+        
+        <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-full max-w-4xl h-auto lg:h-[2566px] p-6' onSubmit={submitCreateProduct}>
 
-        <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[320px] lg:w-[1224px] h-auto lg:h-[2566px]' onSubmit={submitCreateProduct}>
-
-          <Icons src={icon.close} className='self-end mr-[24 px] mt-[34.5px] cursor-pointer' width={45} onClick={onClick}/>
+          <Icons src={icon.close} className='self-end mr-[24px] mt-[34.5px] cursor-pointer' width={45} onClick={onClick}/>
           
           <p className='px-8 mb-[30px] lg:mb-[74px] text-[16px] lg:text-[40px] font-black'>Criar Produto</p>
 
-          <div className='flex px-10 mb-[100px]'>
-              <div className='flex gap-[20px]'>
-                  <div className='flex flex-col gap-8 mr-[63px]'>
+          <div className='flex flex-col lg:flex-row px-10 '>
+              <div className='flex flex-col lg:flex-row gap-[20px]'>
+                  <div className='flex lg:flex-col gap-8 mr-[63px]'>
                     {['fileUpload1', 'fileUpload2', 'fileUpload3', 'fileUpload4'].map((inputId) => (
                       <label key={inputId}>
                         <div className='upload_area'>
@@ -91,7 +91,7 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
                   </div>
 
                   <label>
-                      <div className='flex items-center justify-center w-[600px] h-[572px] bg-white rounded-[10px]'>
+                      <div className='flex items-center justify-center w-[234px] h-[194px] lg:w-[600px] lg:h-[572px] bg-white rounded-[10px]'>
 
                           {images.fileUploadMain ? (
                             <div className='image_preview'>
@@ -114,10 +114,10 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
 
 
 
-              <div className='flex flex-col gap-8 ml-6'>
+              <div className='flex flex-col gap-8 lg:ml-6'>
                   <div className='flex flex-col'>
                       <label>Nome do produto</label>
-                      <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-1' onChange={setInputs(setProdName)} required/>
+                      <input type='text' className='w-full h-[62px] lg:w-[392px]  rounded-[10px] px-1' onChange={setInputs(setProdName)} required/>
                   </div>
 
                   <div className='flex flex-col'>
@@ -126,16 +126,16 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
                           <span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500'>
                               R$
                           </span>
-                          <input type='number' step={0.01} className='h-[62px] w-[184px] rounded-[10px] pl-10 pr-2' onChange={setInputs(setProdPrice)} required/>
+                          <input type='number' step={0.01} className='h-[62px] w-[130px] lg:w-[184px] rounded-[10px] pl-10 pr-2' onChange={setInputs(setProdPrice)} required/>
                       </div>
                   </div>
 
                   <div className='flex flex-col'>
                       <label>Quantidade disponivel</label>
-                      <input type='number' className='h-[51px] w-[104px] rounded-[10px] px-2' onChange={setInputs(setProdQuant)} required/>
+                      <input type='number' min='1' className='w-[55px] h-[51px] lg:w-[104px] rounded-[10px] px-2' onChange={setInputs(setProdQuant)} required/>
                   </div>
 
-                  <select name='product-category' className='w-[392px] h-[62px] rounded-[10px] px-2' onChange={setInputs(setProdCat)}>
+                  <select name='product-category' className='w-full lg:w-[392px] h-[62px] rounded-[10px] pl-[20px]' onChange={setInputs(setProdCat)}>
                       <option value=''>Categorias</option>
 
                       {departmentsList.map((item, index) => {
@@ -173,12 +173,12 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
                   
                   <div className='flex flex-col'>
                       <label>Marca:</label>
-                      <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-2' placeholder='Marca...' onChange={setInputs(setProdBrand)} required/>
+                      <input type='text' className='w-full lg:w-[392px] h-[62px] rounded-[10px] px-2' placeholder='Marca...' onChange={setInputs(setProdBrand)} required/>
                   </div>
               </div>
           </div>
 
-          <div className='flex flex-col w-[100%] gap-[20px]'>
+          <div className='flex flex-col w-[100%] gap-[20px] mt-[100px]'>
               <div className='flex flex-col'>
                   <label>Descrição do produto</label>
                   <textarea className='w-full h-[143px] rounded-[10px] py-2 px-2' placeholder='Escreva aqui...'/>
@@ -190,7 +190,10 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
               </div>
           </div>
 
-          <button type='submit' className='criar-produto hover:bg-blue-600 transition-all duration-500'>
+          <button 
+          type='submit' 
+          className='criar-produto hover:bg-blue-600 transition-all duration-500'
+          onClick={onClick}>
               CRIAR PRODUTO
           </button>
         </form>

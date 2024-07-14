@@ -43,41 +43,28 @@ const EditarProduto = ({
       console.log(e.target.value)
     }
 
-    const [images, setImages] = useState({
-        fileUpload1: null,
-        fileUpload2: null,
-        fileUpload3: null,
-        fileUpload4: null,
-        fileUploadMain: null,
-      });
+  const [images, setImages] = useState<any>({
+    fileUpload1: null,
+    fileUpload2: null,
+    fileUpload3: null,
+    fileUpload4: null,
+    fileUploadMain: null,
+});
 
-    useEffect(() => {
-        const savedImages = {
-          fileUpload1: localStorage.getItem('fileUpload1'),
-          fileUpload2: localStorage.getItem('fileUpload2'),
-          fileUpload3: localStorage.getItem('fileUpload3'),
-          fileUpload4: localStorage.getItem('fileUpload4'),
-          fileUploadMain: localStorage.getItem('fileUploadMain'),
-        };
-        setImages(savedImages);
-      }, []);
 
-    const handleImageUpload = (event: any, inputId: any) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const imageUrl = typeof reader.result === 'string' && reader.result;
-          if (!imageUrl) return;
-          setImages((prevImages) => ({
-            ...prevImages,
-            [inputId]: imageUrl,
-          }));
-          localStorage.setItem(inputId, imageUrl);
-        };
-        reader.readAsDataURL(file);
-      }
+const handleImageUpload = (event: any, inputId: any) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImages((prevImages: any) => ({
+        ...prevImages,
+        [inputId]: reader.result,
+      }));
     };
+    reader.readAsDataURL(file);
+  }
+};
 
     const handleSubmit = (event: any) => {
       event.preventDefault();
@@ -92,7 +79,7 @@ const EditarProduto = ({
   return (
     <section className='z-30 flex inset-0 w-full justify-center'>
     <div className='flex top-0 absolute items-center justify-center lg:w-full h-auto rounded-[20px] bg-white'>
-      <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]' onSubmit={handleSubmit} >
+    <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-full max-w-4xl h-auto lg:h-[2566px] p-6' onSubmit={handleSubmit} >
 
         <Image 
         onClick={onClick}
@@ -102,11 +89,11 @@ const EditarProduto = ({
         width={45} 
         height={45}
          />
-        <p className='px-8 mb-[30px] lg:mb-[74px] text-[40px] font-black self-start'>Editar Produto</p>
+        <p className='px-8 mb-[30px] lg:mb-[74px] text-[16px] lg:text-[40px] font-black self-start'>Editar Produto</p>
 
-        <div className='flex px-10 mb-[100px]'>
-            <div className='flex gap-[20px]'>
-                <div className='flex flex-col gap-8 mr-[63px]'>
+        <div className='flex flex-col lg:flex-row px-10 mb-[100px]'>
+            <div className='flex flex-col lg:flex-row gap-[20px]'>
+                <div className='flex lg:flex-col gap-8 mr-[63px]'>
                 {['fileUpload1', 'fileUpload2', 'fileUpload3', 'fileUpload4'].map((inputId) => (
                     <label key={inputId}>
                       <div className='upload_area'>
@@ -130,7 +117,7 @@ const EditarProduto = ({
                 </div>
 
                 <label>
-                    <div className='flex items-center justify-center w-[600px] h-[572px] bg-white rounded-[10px]'>
+                    <div className='flex items-center justify-center w-[234px] h-[194px] lg:w-[600px] lg:h-[572px] bg-white rounded-[10px]'>
                         {images.fileUploadMain ? (
                           <div className='image_preview'>
                             <Image src={images.fileUploadMain} alt='Selected' width={600} height={572} />
@@ -151,7 +138,7 @@ const EditarProduto = ({
 
 
 
-            <div className='flex flex-col gap-8 ml-6'>
+            <div className='flex flex-col gap-8 lg:ml-6'>
                 <div className='flex flex-col'>
                     <label>Nome do produto</label>
                     <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-2' placeholder={prodName} value={prodName} onChange={setInputs(setProdName)} />
@@ -170,9 +157,10 @@ const EditarProduto = ({
                 <div className='flex flex-col'>
                     <label>Quantidade disponivel</label>
                     <input type='number' className='h-[51px] w-[104px] rounded-[10px] px-2' placeholder={`${prodQuantity}`} value={prodQuantity} onChange={setInputs(setProdQuantity)} />
+
                 </div>
 
-                <select name='product-category' className='w-[392px] h-[62px] rounded-[10px] px-2'>
+                <select name='product-category' className='w-full lg:w-[392px] h-[62px] rounded-[10px] px-2'>
                     <option value=''>Categorias</option>
                     <option value='hardware'>Hardware</option>
                     <option value='celular_e_smartphone'>Celular e Smartphone</option>
@@ -218,7 +206,10 @@ const EditarProduto = ({
             </div>
         </div>
 
-        <button type='submit' className='editar-produto'>
+        <button 
+        type='submit' 
+        className='editar-produto'
+        onClick={onClick}>
             EDITAR PRODUTO
         </button>
       </form>

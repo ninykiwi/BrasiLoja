@@ -61,11 +61,18 @@ export default function Produto({ id, name, imagem, price, className }: ProdutoP
         <div className='flex flex-col gap-[10px]'>
 
             <div className='flex justify-center w-full gap-[7px] lg:gap-[15px]'>
-                <button className='flex items-center justify-center w-[60px] lg:w-[138px] h-[28px] lg:h-[52px] rounded-[4px] lg:rounded-[8px] bg-blue-500 text-[11px] lg:font-display lg:text-[20px] font-black text-white leading-[-0.2em] hover:bg-blue-700 transition-all duration-500' onClick={() => comprar(id)}>
+                <button 
+                className='flex items-center justify-center w-[60px] lg:w-[138px] h-[28px] lg:h-[52px] rounded-[4px] lg:rounded-[8px] bg-blue-500 text-[11px] lg:font-display lg:text-[20px] font-black text-white leading-[-0.2em] hover:bg-blue-700 transition-all duration-500' 
+                onClick={() => comprar(id)}>
                   COMPRAR
                 </button>
 
-                <Icons className='flex items-center justify-center w-[28px] lg:w-[52px] h-[28px] lg:h-[52px] bg-yellow-500 rounded-[4px] lg:rounded-[10px] hover:bg-yellow-700 transition-all duration-500' iconStyle='lg:w-[36px] lg:h-[36px]' src={icon.addCart} width={17} onClick={() => addToCartList(id)} />
+                <Icons 
+                className='flex items-center justify-center w-[28px] lg:w-[52px] h-[28px] lg:h-[52px] bg-yellow-500 rounded-[4px] lg:rounded-[10px] hover:bg-yellow-700 transition-all duration-500' 
+                iconStyle='lg:w-[36px] lg:h-[36px]' 
+                src={icon.addCart} 
+                width={17} 
+                onClick={() => addToCartList(id)} />
             </div>
         </div>
       </div>
@@ -88,7 +95,7 @@ export const ProdutoHorizontal = ({ id, name, price, quantity, category, brand, 
   return (
     <>
     {isEditarProdutoVisible && <EditarProduto id={id} price={price} name={name} category={category} brand={brand} quantity={quantity} description={description} spec={spec} onClick={closeEditarProduto}/>}
-    <div className={clsx('flex items-end justify-between w-[1224px] lg:w-[1224px] h-[171px] lg:h-[260px] py-[53px] px-[27px] rounded-lg bg-white border-[#5D5D5D] border', className)}>
+    <div className={clsx('flex flex-col lg:flex-row items-end justify-between w-[280px] lg:w-[1224px] h-[197px] lg:h-[260px] py-[53px] px-[27px] rounded-lg bg-white border-[#5D5D5D] border', className)}>
       <div className='flex gap-[55px] w-full h-full items-end'>
 
         {imagem !== null ? (
@@ -121,7 +128,7 @@ export const ProdutoCarrinho = ({ id, name, imagem, price, className }: ProdutoP
   const { removeFromCartList } = useUser()
 
   return (
-    <div className={clsx("flex flex-col bg-white w-[912px] h-[226px] rounded-[10px] pt-[20px] pl-[74px] pr-[31px] mb-[34px]", className)}>
+    <div className={clsx("flex flex-col bg-white w-[280px] lg:w-[912px] h-[256px] lg:h-[226px] rounded-[10px] pt-[20px] pl-[74px] pr-[31px] mb-[34px]", className)}>
         <div className="flex w-full items-center justify-end">
             <p className='font-semibold text-[16px]'>Excluir item</p>
             <Icons className='bg-blue-500 w-[31px] h-[32px] rounded-[4px] py-[6] px-[7px] ml-[2px] hover:bg-blue-700 transition-all duration-500' src={icon.lixo} width={17} onClick={() => removeFromCartList(id)} />
@@ -136,16 +143,18 @@ export const ProdutoCarrinho = ({ id, name, imagem, price, className }: ProdutoP
               </div>
             )}
 
-            <p className='font-black text-[16px] ml-[54px] mr-[64px]'>{name} </p>
+            <div className='flex flex-col gap-[12px] lg:flex-row lg:ml-[54px]'>
+              <p className='font-black text-[16px] lg:mr-[64px]'>{name} </p>
 
-            <div className="flex flex-col items-center font-semibold text-[16px] mr-[114px]">
-                <p>Quantidade:</p>
-                <input type='number' className='w-[48px] h-[36px] p-[10px] border-[1px] rounded-[4px]' min={0}/>
-            </div>
+              <div className="flex flex-col items-center font-semibold text-[16px] lg:mr-[114px]">
+                  <p>Quantidade:</p>
+                  <input type='number' className='w-[48px] h-[36px] p-[10px] border-[1px] rounded-[4px]' min={0}/>
+              </div>
 
-            <div className="flex flex-col font-semibold text-[16px] gap-[8px]">
-                <p>Preço:</p>
-                <p className='font-black'>R$ {price} </p>
+              <div className="flex flex-col font-semibold text-[16px] gap-[8px]">
+                  <p>Preço:</p>
+                  <p className='font-black'>R$ {price} </p>
+              </div>
             </div>
         </div>
     </div>
