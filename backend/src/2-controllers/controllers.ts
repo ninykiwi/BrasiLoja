@@ -1,12 +1,13 @@
 import prisma from './../prisma'
 import { Response, Request } from 'express' 
 const path = require('path')
+import { json } from 'body-parser'
 /*  Funções do Servidor - Protocolo HTTP ---> Por enquanto são apenas as funções CRUD dos Produtos. 
     Feito (E por enquanto mantido) por Cristiano Santos Ribeiro Filho A.K.A. Cris - Find me on @cristiano-s-r-filho in Github 
     1 - Rota de Post de um Produto: */
 export async function make_product(req:Request, res:Response){
     try {
-        const {prod_name, prod_price, prod_quant, prod_cat, prod_brand, main_img, img_1, img_2, img_3, img_4} = req.body 
+        const {prod_name, prod_price, prod_quant, prod_cat, prod_brand, prod_description, prod_spec, main_img, img_1, img_2, img_3, img_4} = req.body 
         // Resposta padrão: 
         const MakeProduct = await prisma.product.create({
             data:{
@@ -15,6 +16,8 @@ export async function make_product(req:Request, res:Response){
                 quantity: Number(prod_quant),
                 category: prod_cat,
                 brand: prod_brand,
+                description: prod_description,
+                spec: prod_spec,
                 mainImg: main_img,
                 img1: img_1,
                 img2: img_2,
@@ -30,26 +33,62 @@ export async function make_product(req:Request, res:Response){
 //  2 - Rota de retornar um produto pelo nome 
 export async function get_product_by_name(req:Request, res:Response){
     try {
-        const { name } = req.params
+        const { name } = req.query
+
+        if (typeof name !== 'string') {
+          return console.log('Nome do produto inválido')
+        }
+        
         // Resposta Padrão 
         const GetProductByName = await prisma.product.findMany({
-          where: { name: { contains: String(name), }, },
+          where: { OR: [
+            { name: { contains: String(name) } },
+            { brand: { contains: String(name) } }
+          ] }
         })
 
         if (GetProductByName.length === 0) {
-          return console.log('Nenhum produto encontrado')
+          return res.status(404).json({ msg: 'Nenhum produto encontrado pela busca:', name })
         }
 
-        return res.status(200).send(GetProductByName)
+        res.status(200).send(GetProductByName)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
     }
 }
+/*export async function get_product_by_prod_name(req:Request, res:Response) {
+    try {
+        const prod_name  = req.query.name
+        // Resposta Padrão 
+        const GetProductByProdName = await prisma.product.findMany({
+          where: { name: { contains: String(prod_name)  } }
+        })
+        res.status(200).send(GetProductByProdName)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
+    }
+}*/
+/*export async function get_product_by_brand_name(req:Request, res:Response) {
+    try {
+        const brand_name  = req.query.brand
+        // Resposta Padrão 
+        const GetProductByBrandName = await prisma.product.findMany({
+          where: { brand: { contains: String(brand_name) } }
+        })
+        res.status(200).send(GetProductByBrandName)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
+    }
+}*/
 //  3 - Rota de Editar um Produto 
 export async function edit_product(req:Request,res:Response) {
     try {
-        const {prod_id, prod_name,prod_price,prod_quant,prod_cat,prod_brand} = req.body
+        const { prod_id } = req.params
+        const id = Number(prod_id)
+        const { prod_name, prod_price, prod_quant, prod_cat, prod_brand, prod_description, prod_spec } = req.body
         // Validação - Nome, Preço, Quantidade, Categoria, Marca 
         if(String(prod_name).match(/[*,!,@,#,$,%]/) != null ){
             throw new Error('Nome do produto não pode conter Caracteres Especiais')
@@ -61,13 +100,15 @@ export async function edit_product(req:Request,res:Response) {
             throw new Error('O preço deve ser um valor numerico')
         }
         // Resposta Padrão 
-        const UpdateProductRegister = await prisma.product.update({where:{id:prod_id},
+        const UpdateProductRegister = await prisma.product.update({ where: { id: id },
             data:{
                 name:prod_name,
                 category:prod_cat,
                 brand:prod_brand,
                 price:prod_price,
-                quantity:prod_quant
+                quantity:prod_quant,
+                description:prod_description,
+                spec:prod_spec
             }})
         res.status(200).json({msg:'Produto Atualizado com Sucesso!', register:UpdateProductRegister})
     } catch (error:any) {
@@ -303,7 +344,7 @@ export async function add_to_shopcar (req:Request, res: Response) {
 
 export async function get_from_shopcar (req:Request, res:Response){
     try {
-        const QueryList = await prisma.carrinho.findMany
+        const QueryList = await prisma.carrinho.findMany()
         res.status(200).send(QueryList)
     } catch (error:any) {
         console.log(error)

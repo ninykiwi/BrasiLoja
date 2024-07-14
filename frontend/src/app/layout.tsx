@@ -15,7 +15,7 @@ const roboto = Roboto({ subsets: ["latin"], weight: ["100", "300", "400", "500",
 
 export const metadata: Metadata = {
   title: "BrasiLoja",
-  description: "...",
+  description: "A melhor loja chamada 'BrasiLoja' do Brasil!",
 };
 
 

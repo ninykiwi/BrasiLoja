@@ -11,10 +11,12 @@ export const URL_GPI = `get_product_by_id`
 export const createProduct = (
   prodName: string,
   prodPrice: number,
-  prodQuant: number,
-  prodCat: string,
-  prodBrand: string,
   mainImg: any,
+  prodQuant?: number,
+  prodCat?: string,
+  prodBrand?: string,
+  prodDescription?: string,
+  prodSpec?: string,
   img1?: any,
   img2?: any,
   img3?: any,
@@ -26,6 +28,8 @@ export const createProduct = (
     prod_quant: prodQuant,
     prod_cat: prodCat,
     prod_brand: prodBrand,
+    prod_description: prodDescription,
+    prod_spec: prodSpec,
     main_img: mainImg,
     img_1: img1,
     img_2: img2,
@@ -41,8 +45,31 @@ export const createProduct = (
 }
 
 
-export const editProduct = () => {
-
+export const editProduct = (
+  prodId: number,
+  prodName?: string,
+  prodPrice?: number,
+  prodQuant?: number,
+  prodCat?: string,
+  prodBrand?: string,
+  prodDescription?: string,
+  prodSpec?: string,
+) => {
+  axios.put(`${URL_BACK}/${URL_EP}/${prodId}`, {
+    prod_name: prodName,
+    prod_price: prodPrice,
+    prod_quant: prodQuant,
+    prod_cat: prodCat,
+    prod_brand: prodBrand,
+    prod_description: prodDescription,
+    prod_spec: prodSpec
+  })
+    .then(response => {
+      console.log(response.statusText)
+    })
+    .catch(error => {
+      console.error('Erro ao editar produto: ', error)
+    })
 }
 
 

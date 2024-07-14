@@ -3,18 +3,50 @@ import axios from 'axios'
 
 export const URL_BACK = `http://localhost:3005`
 export const URL_SBN = `search_by_name`
+export const URL_SBNP = `search_by_name_product`
+export const URL_SBNB = `search_by_name_brand`
 export const URL_FBC = `filter_by_category`
 
 
 export const filterByName = (
-  name: string,
-  setList: React.Dispatch<React.SetStateAction<{}[]>>
+  Name: string,
+  setMainList: (list: any[]) => void
 ) => {
   axios.get(`${URL_BACK}/${URL_SBN}`, {
-    params: { name }
+    params: { name: Name }
   })
   .then(response => {
-    setList(response.data)
+    setMainList(response.data)
+    console.log('Pesquisa por nome realizada com sucesso')
+  })
+  .catch(error => {
+    console.error('Pesquisa por nome deu ruim: ', error)
+  })
+}
+export const filterByProductName = (
+  ProductName: string,
+  setMainList: (list: any[]) => void
+) => {
+  axios.get(`${URL_BACK}/${URL_SBNP}`, {
+    params: { prod_name: ProductName }
+  })
+  .then(response => {
+    setMainList(response.data)
+    console.log('Pesquisa por nome realizada com sucesso')
+  })
+  .catch(error => {
+    console.error('Pesquisa por nome deu ruim: ', error)
+  })
+}
+export const filterByBrandName = (
+  BrandName: string,
+  setMainList: (list: any[]) => void
+) => {
+  axios.get(`${URL_BACK}/${URL_SBNB}`, {
+    params: { brand_name: BrandName }
+  })
+  .then(response => {
+    setMainList(response.data)
     console.log('Pesquisa por nome realizada com sucesso')
   })
   .catch(error => {
@@ -24,17 +56,15 @@ export const filterByName = (
 
 export const filterByCategory = (
   Category: string,
-  setList?: React.Dispatch<React.SetStateAction<{}[]>>
+  setMainList?: (list: any[]) => void
 ) => {
-  axios.get(`${URL_BACK}/${URL_FBC}/${Category}`, {
-    params: { Category }
-  })
+  axios.get(`${URL_BACK}/${URL_FBC}/${Category}`)
   .then(response => {
-    if (!setList) {
+    if (!setMainList) {
       console.log('Pesquisa por categoria realizada com sucesso')
       return (response.data)
     } else {
-      setList(response.data)
+      setMainList(response.data)
     }
     console.log('Pesquisa por categoria realizada com sucesso')
   })
