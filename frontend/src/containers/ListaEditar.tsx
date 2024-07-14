@@ -14,7 +14,7 @@ interface EditListProps {
 export const ListaEditar = ({ onClick }: EditListProps) => {
   
 
-    const items = Array.from({ length: 10 }, (_, index) => <ProdutoHorizontal key={index} />);
+    const items = Array.from({ length: 10 }, (_, index) => <ProdutoHorizontal id={} key={index} />);
 
     const [currentItems, setCurrentItems] = useState<any[]>([]);
     const [pageCount, setPageCount] = useState<number>(0);

@@ -3,12 +3,45 @@ import close from '@/public/icons/close.svg'
 import camera from '@/public/images/camera.png'
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { editProduct } from '@/services/product';
 
 
 interface EditarProdutoProps {
   onClick?: () => void
+  id: number | string
+  name: string
+  price: number
+  quantity?: number
+  category?: string
+  brand?: string
+  description?: string
+  spec?: string
 }
-const EditarProduto = ({ onClick }: EditarProdutoProps) => {
+const EditarProduto = ({
+  onClick,
+  id,
+  name,
+  price,
+  quantity,
+  category,
+  brand,
+  description,
+  spec,
+}: EditarProdutoProps) => {
+    const [prodName, setProdName] = useState(name)
+    const [prodPrice, setProdPrice] = useState(price)
+    const [prodQuantity, setProdQuantity] = useState(quantity)
+    const [prodCategory, setProdCategory] = useState(category)
+    const [prodBrand, setProdBrand] = useState(brand)
+    const [prodDescription, setProdDescription] = useState(description)
+    const [prodSpec, setProdSpec] = useState(spec)
+
+    const prodId = Number(id)
+
+    const setInputs = (setter: React.Dispatch<React.SetStateAction<any>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setter(e.target.value)
+      console.log(e.target.value)
+    }
 
     const [images, setImages] = useState({
         fileUpload1: null,
@@ -46,10 +79,20 @@ const EditarProduto = ({ onClick }: EditarProdutoProps) => {
       }
     };
 
+    const handleSubmit = (event: any) => {
+      event.preventDefault();
+      editProduct(prodId, prodName, prodPrice, prodQuantity, prodCategory, prodBrand, prodDescription, prodSpec);
+      // Object.entries(images).forEach(([key, value]) => {
+      //   if (value) {
+      //     formData.append(key, value);
+      //   }
+      // });
+    }
+
   return (
     <section className='z-30 flex inset-0 w-full justify-center'>
     <div className='flex top-0 absolute items-center justify-center lg:w-full h-auto rounded-[20px] bg-white'>
-      <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]'>
+      <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]' onSubmit={handleSubmit} >
 
         <Image 
         onClick={onClick}
@@ -111,7 +154,7 @@ const EditarProduto = ({ onClick }: EditarProdutoProps) => {
             <div className='flex flex-col gap-8 ml-6'>
                 <div className='flex flex-col'>
                     <label>Nome do produto</label>
-                    <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-2'/>
+                    <input type='text' value={prodName} className='w-[392px] h-[62px] rounded-[10px] px-2' onChange={setInputs(setProdName)} />
                 </div>
 
                 <div className='flex flex-col'>
@@ -120,13 +163,13 @@ const EditarProduto = ({ onClick }: EditarProdutoProps) => {
                         <span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500'>
                             R$
                         </span>
-                        <input type='text' className='h-[62px] w-[184px] rounded-[10px] pl-10 pr-2'/>
+                        <input type='number' step={0.1} className='h-[62px] w-[184px] rounded-[10px] pl-10 pr-2' value={prodPrice} onChange={setInputs(setProdPrice)} />
                     </div>
                 </div>
 
                 <div className='flex flex-col'>
                     <label>Quantidade disponivel</label>
-                    <input type='number' className='h-[51px] w-[104px] rounded-[10px] px-2'/>
+                    <input type='number' className='h-[51px] w-[104px] rounded-[10px] px-2'value={prodQuantity} onChange={setInputs(setProdQuantity)} />
                 </div>
 
                 <select name='product-category' className='w-[392px] h-[62px] rounded-[10px] px-2'>
@@ -158,7 +201,7 @@ const EditarProduto = ({ onClick }: EditarProdutoProps) => {
                 
                 <div className='flex flex-col'>
                     <label>Marca:</label>
-                    <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-2' placeholder='Marca...'/>
+                    <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-2' placeholder={`${prodBrand}`} value={prodBrand} onChange={setInputs(setProdBrand)} />
                 </div>
             </div>
         </div>
@@ -166,12 +209,12 @@ const EditarProduto = ({ onClick }: EditarProdutoProps) => {
         <div className='flex flex-col w-[100%] gap-[20px]'>
             <div className='flex flex-col'>
                 <label>Descrição do produto</label>
-                <textarea className='w-full h-[143px] rounded-[10px] py-2 px-2'placeholder='Escreva aqui...'/>
+                <input type='text' className='w-full h-[143px] rounded-[10px] py-2 px-2' placeholder='Escreva aqui...' value={prodDescription} onChange={setInputs(setProdDescription)} />
             </div>
 
             <div className='flex flex-col'>
                 <label>Especificações Técnicas</label>
-                <textarea className='w-full h-[449px] rounded-[10px] px-2 py-2' placeholder='Escreva aqui...'/>
+                <input type='text' className='w-full h-[449px] rounded-[10px] px-2 py-2'  placeholder='Escreva aqui...' value={prodSpec} onChange={setInputs(setProdSpec)} />
             </div>
         </div>
 
