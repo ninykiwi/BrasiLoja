@@ -31,7 +31,7 @@ router.put('/add_img_1',upload.single('image'), add_img_first)
 router.put('/add_img_2',upload.single('image'), add_img_second)
 router.put('/add_img_3',upload.single('image'), add_img_third)
 router.put('/add_img_4',upload.single('image'), add_img_fourth)
-router.put('/edit_product', edit_product)
+router.put('/edit_product/:id', edit_product)
 // Rotas Delete
 router.delete('/delete_product', delete_product)
 router.delete('/delete_from_shopcar', delete_from_shopcar)

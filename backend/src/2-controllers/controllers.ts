@@ -7,7 +7,7 @@ import { json } from 'body-parser'
     1 - Rota de Post de um Produto: */
 export async function make_product(req:Request, res:Response){
     try {
-        const {prod_name, prod_price, prod_quant, prod_cat, prod_brand, main_img, img_1, img_2, img_3, img_4} = req.body 
+        const {prod_name, prod_price, prod_quant, prod_cat, prod_brand, prod_description, prod_spec, main_img, img_1, img_2, img_3, img_4} = req.body 
         // Resposta padrão: 
         const MakeProduct = await prisma.product.create({
             data:{
@@ -16,6 +16,8 @@ export async function make_product(req:Request, res:Response){
                 quantity: Number(prod_quant),
                 category: prod_cat,
                 brand: prod_brand,
+                description: prod_description,
+                spec: prod_spec,
                 mainImg: main_img,
                 img1: img_1,
                 img2: img_2,
@@ -84,7 +86,9 @@ export async function get_product_by_name(req:Request, res:Response){
 //  3 - Rota de Editar um Produto 
 export async function edit_product(req:Request,res:Response) {
     try {
-        const {prod_id, prod_name,prod_price,prod_quant,prod_cat,prod_brand} = req.body
+        const { prod_id } = req.params
+        const id = Number(prod_id)
+        const { prod_name, prod_price, prod_quant, prod_cat, prod_brand, prod_description, prod_spec } = req.body
         // Validação - Nome, Preço, Quantidade, Categoria, Marca 
         if(String(prod_name).match(/[*,!,@,#,$,%]/) != null ){
             throw new Error('Nome do produto não pode conter Caracteres Especiais')
@@ -96,13 +100,15 @@ export async function edit_product(req:Request,res:Response) {
             throw new Error('O preço deve ser um valor numerico')
         }
         // Resposta Padrão 
-        const UpdateProductRegister = await prisma.product.update({where:{id:prod_id},
+        const UpdateProductRegister = await prisma.product.update({ where: { id: id },
             data:{
                 name:prod_name,
                 category:prod_cat,
                 brand:prod_brand,
                 price:prod_price,
-                quantity:prod_quant
+                quantity:prod_quant,
+                description:prod_description,
+                spec:prod_spec
             }})
         res.status(200).json({msg:'Produto Atualizado com Sucesso!', register:UpdateProductRegister})
     } catch (error:any) {
