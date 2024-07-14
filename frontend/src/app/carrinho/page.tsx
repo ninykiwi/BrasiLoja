@@ -39,7 +39,7 @@ export default function Cart() {
                     </div>
                 </div>
 
-                <div className="flex gap-[24px]">
+                <div className="flex flex-col lg:flex-row gap-[24px]">
                     <div className="flex flex-col">
                         <div className='h-auto gap-[20px]'>
                           { CartList.length > 1 ? 

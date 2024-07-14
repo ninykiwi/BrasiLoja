@@ -79,7 +79,7 @@ const handleImageUpload = (event: any, inputId: any) => {
   return (
     <section className='z-30 flex inset-0 w-full justify-center'>
     <div className='flex top-0 absolute items-center justify-center lg:w-full h-auto rounded-[20px] bg-white'>
-    <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-[1224px] h-[2566px]' onSubmit={handleSubmit} >
+    <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-full max-w-4xl h-auto lg:h-[2566px] p-6' onSubmit={handleSubmit} >
 
         <Image 
         onClick={onClick}
@@ -89,7 +89,7 @@ const handleImageUpload = (event: any, inputId: any) => {
         width={45} 
         height={45}
          />
-        <p className='px-8 mb-[30px] lg:mb-[74px] text-[40px] font-black self-start'>Editar Produto</p>
+        <p className='px-8 mb-[30px] lg:mb-[74px] text-[16px] lg:text-[40px] font-black self-start'>Editar Produto</p>
 
         <div className='flex flex-col lg:flex-row px-10 mb-[100px]'>
             <div className='flex flex-col lg:flex-row gap-[20px]'>

@@ -56,9 +56,9 @@ export const CriarProduto = ({ onClick }: CriarProdutoProps) => {
 
 
   return (
-    <section className='z-30 flex inset-0 w-full justify-center p-4'>
-      <div className='flex top-0 absolute items-center justify-center lg:w-full h-auto rounded-[20px] bg-white'>
-
+    <section className='z-30 flex inset-0 w-full justify-center bg-white'>
+      <div className='flex top-0 absolute items-center justify-center lg:w-full h-full rounded-[20px] bg-white'>
+        
         <form className='bg-[#F0EFEF] flex flex-col rounded-[10px] w-full max-w-4xl h-auto lg:h-[2566px] p-6' onSubmit={submitCreateProduct}>
 
           <Icons src={icon.close} className='self-end mr-[24px] mt-[34.5px] cursor-pointer' width={45} onClick={onClick}/>
