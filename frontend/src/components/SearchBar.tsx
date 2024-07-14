@@ -36,30 +36,30 @@ export const SearchBar = ({
 }
 
 export const SearchProduct = () => {
-  const { ProductName, filterProductName } = useFilter()
+  const { Name, filterName } = useFilter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    filterProductName(e);
+    filterName(e);
   };
 
   return (
     <form className='flex justify-between w-full h-[32px] -py-[9px] px-[12px] bg-white shadow-lg rounded-[10px]'>
-      <input className='w-[calc(100%-20px)]' type='text' placeholder='Produto...' value={ProductName} onChange={handleChange} />
+      <input className='w-[calc(100%-20px)]' type='text' placeholder='Produto...' value={Name} onChange={handleChange} />
       <Icons src={icon.search} width={16} />
     </form>
   )
 }
 
 export const SearchBrand = () => {
-  const { BrandName, filterBrandName } = useFilter()
+  const { Name, filterName } = useFilter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    filterBrandName(e);
+    filterName(e);
   };
 
   return (
     <form className='flex justify-between w-full h-[32px] -py-[9px] px-[12px] bg-white shadow-lg rounded-[10px]'>
-      <input className='w-[calc(100%-20px)]' type='text' placeholder='Marca...' value={BrandName} onChange={handleChange} />
+      <input className='w-[calc(100%-20px)]' type='text' placeholder='Marca...' value={Name} onChange={handleChange} />
       <Icons src={icon.search} width={16} />
     </form>
   )
