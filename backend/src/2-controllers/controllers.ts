@@ -1,6 +1,7 @@
 import prisma from './../prisma'
 import { Response, Request } from 'express' 
 const path = require('path')
+import { json } from 'body-parser'
 /*  Funções do Servidor - Protocolo HTTP ---> Por enquanto são apenas as funções CRUD dos Produtos. 
     Feito (E por enquanto mantido) por Cristiano Santos Ribeiro Filho A.K.A. Cris - Find me on @cristiano-s-r-filho in Github 
     1 - Rota de Post de um Produto: */
@@ -30,17 +31,71 @@ export async function make_product(req:Request, res:Response){
 //  2 - Rota de retornar um produto pelo nome 
 export async function get_product_by_name(req:Request, res:Response){
     try {
-        const { name } = req.params
+        const { name } = req.query
+
+        if (typeof name !== 'string') {
+          return console.log('Nome do produto inválido')
+        }
+        
         // Resposta Padrão 
         const GetProductByName = await prisma.product.findMany({
-          where: { name: { contains: String(name), }, },
+          where: { OR: [
+            { name: { contains: name } },
+            { brand: { contains: name } }
+          ] }
         })
 
         if (GetProductByName.length === 0) {
-          return console.log('Nenhum produto encontrado')
+          return res.status(404).json({ msg: 'Nenhum produto encontrado pela busca:', name })
         }
 
         return res.status(200).send(GetProductByName)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
+    }
+}
+export async function get_product_by_prod_name(req:Request, res:Response){
+    try {
+        const { prod_name } = req.query
+
+        if (typeof prod_name !== 'string') {
+          return console.log('Nome do produto inválido')
+        }
+
+        // Resposta Padrão 
+        const GetProductByProdName = await prisma.product.findMany({
+          where: { name: { contains: prod_name  } }
+        })
+
+        if (GetProductByProdName.length === 0) {
+          return res.status(404).json({ msg: 'Nenhum produto encontrado pela busca:', prod_name })
+        }
+
+        return res.status(200).send(GetProductByProdName)
+    } catch (error:any) {
+        console.log(error)
+        res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })
+    }
+}
+export async function get_product_by_brand_name(req:Request, res:Response){
+    try {
+        const { brand_name } = req.query
+
+        if (typeof brand_name !== 'string') {
+          return console.log('Nome da marca inválido')
+        }
+
+        // Resposta Padrão 
+        const GetProductByBrandName = await prisma.product.findMany({
+          where: { brand: { contains: brand_name  } }
+        })
+
+        if (GetProductByBrandName.length === 0) {
+          return res.status(404).json({ msg: `Nenhum produto da marca ${brand_name} encontrado!` })
+        }
+
+        return res.status(200).send(GetProductByBrandName)
     } catch (error:any) {
         console.log(error)
         res.status(400).json({msg:'ERRO! Ocorreu um erro ao pegar o seu produto na database', err:error })

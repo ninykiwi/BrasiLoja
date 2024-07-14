@@ -2,14 +2,18 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { FilterContextType } from '@/types/array';
 import { ContextProps } from '@/types/props';
-import { filterByName, filterByCategory } from '@/services/filters';
+import { filterByName, filterByCategory, filterByProductName, filterByBrandName } from '@/services/filters';
 import { getAllProducts } from '@/services/product';
 
 const initialState: FilterContextType = {
   Name: '',
+  ProductName: '',
+  BrandName: '',
   Category: '',
   MainList: [],
   filterName: (e: any) => {},
+  filterProductName: (e: any) => {},
+  filterBrandName: (e: any) => {},
   filterCategory: (item: any) => {},
 };
 
@@ -17,11 +21,19 @@ const FilterContext = createContext<FilterContextType>(initialState);
 
 export const FilterProvider: React.FC<ContextProps> = ({ children }) => {
   const [Name, setName] = useState('');
+  const [ProductName, setProductName] = useState('');
+  const [BrandName, setBrandName] = useState('');
   const [Category, setCategory] = useState<string>('');
   const [MainList, setMainList] = useState<any[]>([]);
 
-  const filterName = (e: any) => {
-    setName(e.target.value)
+  const filterName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+  const filterProductName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductName(e.target.value);
+  };
+  const filterBrandName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBrandName(e.target.value);
   };
 
   const filterCategory = (item: string) => {
@@ -34,18 +46,24 @@ export const FilterProvider: React.FC<ContextProps> = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (Name != '') {
+    if (Name !== '') {
       console.log(Name)
       filterByName(Name, setMainList)
+    } else if (ProductName !== '') {
+      console.log(ProductName)
+      filterByProductName(ProductName, setMainList)
+    } else if (BrandName !== '') {
+      console.log(BrandName)
+      filterByBrandName(BrandName, setMainList)
     } else if (Category !== '') {
-      filterByCategory
+      filterByCategory(Category, setMainList)
     } else {
       getAllProducts(setMainList)
     }
-  }, [Name, Category])
+  }, [Name, Category, ProductName, BrandName])
 
   return (
-    <FilterContext.Provider value={{ Name, Category, MainList, filterName, filterCategory }}>
+    <FilterContext.Provider value={{ Name, ProductName, BrandName, Category, MainList, filterName, filterProductName, filterBrandName, filterCategory }}>
       {children}
     </FilterContext.Provider>
   );

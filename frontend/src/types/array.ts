@@ -7,10 +7,14 @@ export interface CartItem {
 }
 
 export interface FilterContextType {
-  Name: string | null
+  Name: any
+  ProductName: any
+  BrandName: any
   Category: string
-  MainList: any[] | null
-  filterName: (item: any) => void
+  MainList: any[]
+  filterName: (e: any) => void
+  filterProductName: (e: any) => void
+  filterBrandName: (e: any) => void
   filterCategory: (item: any | any[]) => void
 }
 export interface UserContextType {
