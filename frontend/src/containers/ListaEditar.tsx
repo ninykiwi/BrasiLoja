@@ -6,15 +6,33 @@ import leftArrow from '@/public/icons/rightArrow.svg'
 import { ProdutoHorizontal } from '@/components/Produto';
 import ReactPaginate from 'react-paginate';
 import clsx from 'clsx';
+import { getAllProducts } from '@/services/product';
 
 
 interface EditListProps {
   onClick?: () => void
 }
 export const ListaEditar = ({ onClick }: EditListProps) => {
-  
+    const [products, setProducts] = useState<any[]>([])
+    
+    useEffect(() => {
+      getAllProducts(setProducts)
+    }, [])
 
-    const items = Array.from({ length: 10 }, (_, index) => <ProdutoHorizontal id={} key={index} />);
+    const items = products.map((product) => (
+      <ProdutoHorizontal
+        key={product.id}
+        id={product.id}
+        imagem={product.mainImg}
+        name={product.name}
+        price={product.price}
+        quantity={product.quantity}
+        category={product.category}
+        brand={product.brand}
+        description={product.description}
+        spec={product.spec}
+      />
+    ))
 
     const [currentItems, setCurrentItems] = useState<any[]>([]);
     const [pageCount, setPageCount] = useState<number>(0);

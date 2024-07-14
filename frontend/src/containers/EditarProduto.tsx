@@ -28,13 +28,13 @@ const EditarProduto = ({
   description,
   spec,
 }: EditarProdutoProps) => {
-    const [prodName, setProdName] = useState(name)
-    const [prodPrice, setProdPrice] = useState(price)
-    const [prodQuantity, setProdQuantity] = useState(quantity)
-    const [prodCategory, setProdCategory] = useState(category)
-    const [prodBrand, setProdBrand] = useState(brand)
-    const [prodDescription, setProdDescription] = useState(description)
-    const [prodSpec, setProdSpec] = useState(spec)
+    const [prodName, setProdName] = useState<string>(name)
+    const [prodPrice, setProdPrice] = useState<number>(price)
+    const [prodQuantity, setProdQuantity] = useState<number|undefined>(quantity)
+    const [prodCategory, setProdCategory] = useState<string|undefined>(category)
+    const [prodBrand, setProdBrand] = useState<string|undefined>(brand)
+    const [prodDescription, setProdDescription] = useState<string|undefined>(description)
+    const [prodSpec, setProdSpec] = useState<string|undefined>(spec)
 
     const prodId = Number(id)
 
@@ -141,8 +141,7 @@ const handleImageUpload = (event: any, inputId: any) => {
             <div className='flex flex-col gap-8 lg:ml-6'>
                 <div className='flex flex-col'>
                     <label>Nome do produto</label>
-                    <input type='text' value={prodName} className='w-[392px] h-[62px] rounded-[10px] px-2' onChange={setInputs(setProdName)} />
-
+                    <input type='text' className='w-[392px] h-[62px] rounded-[10px] px-2' placeholder={prodName} value={prodName} onChange={setInputs(setProdName)} />
                 </div>
 
                 <div className='flex flex-col'>
@@ -151,14 +150,13 @@ const handleImageUpload = (event: any, inputId: any) => {
                         <span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500'>
                             R$
                         </span>
-                        <input type='number' step={0.1} className='h-[62px] w-[184px] rounded-[10px] pl-10 pr-2' value={prodPrice} onChange={setInputs(setProdPrice)} />
-
+                        <input type='number' step={0.1} className='h-[62px] w-[184px] rounded-[10px] pl-10 pr-2' placeholder={`${prodPrice}`} value={prodPrice} onChange={setInputs(setProdPrice)} />
                     </div>
                 </div>
 
                 <div className='flex flex-col'>
                     <label>Quantidade disponivel</label>
-                    <input type='number' className='h-[51px] w-[104px] rounded-[10px] px-2'value={prodQuantity} onChange={setInputs(setProdQuantity)}></input>
+                    <input type='number' className='h-[51px] w-[104px] rounded-[10px] px-2' placeholder={`${prodQuantity}`} value={prodQuantity} onChange={setInputs(setProdQuantity)} />
 
                 </div>
 

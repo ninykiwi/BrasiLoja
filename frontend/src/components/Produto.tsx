@@ -11,12 +11,17 @@ import Link from 'next/link'
 
 interface ProdutoProps {
   id: number | string;
-  nome: string;
+  name: string;
   imagem: string | null;
-  preco: number;
+  price: number;
+  quantity?: number;
+  category?: string;
+  brand?: string;
+  description?: string;
+  spec?: string;
   className?: string;
 }
-export default function Produto({ id, nome, imagem, preco, className }: ProdutoProps) {
+export default function Produto({ id, name, imagem, price, className }: ProdutoProps) {
   const { addToCartList } = useUser()
   const router = useRouter()
   
@@ -24,9 +29,9 @@ export default function Produto({ id, nome, imagem, preco, className }: ProdutoP
     return price.toFixed(2);
   }
   
-  const precoNumerico = parseFloat(String(preco));
+  const priceNumerico = parseFloat(String(price));
   
-  const price = makePriceFloat(precoNumerico);
+  const preco = makePriceFloat(priceNumerico);
   
   const comprar = (id: number | string) => {
     addToCartList(id)
@@ -48,8 +53,8 @@ export default function Produto({ id, nome, imagem, preco, className }: ProdutoP
           )}
 
           <div className='flex flex-col gap-[8px]'>
-              <p className='font-display'>{nome}</p>
-              <p className='subtitle font-display'>R$ {price} </p>
+              <p className='font-display'>{name}</p>
+              <p className='subtitle font-display'>R$ {preco} </p>
           </div>
         </Link>
 
@@ -76,7 +81,7 @@ export default function Produto({ id, nome, imagem, preco, className }: ProdutoP
 };
 
 
-export const ProdutoHorizontal = ({ nome, imagem, preco, className }: ProdutoProps) => {
+export const ProdutoHorizontal = ({ id, name, price, quantity, category, brand, description, spec, imagem, className }: ProdutoProps) => {
 
   const [isEditarProdutoVisible, setIsEditarProdutoVisible] = useState(false);
    
@@ -89,7 +94,7 @@ export const ProdutoHorizontal = ({ nome, imagem, preco, className }: ProdutoPro
 
   return (
     <>
-    {isEditarProdutoVisible && <EditarProduto onClick={closeEditarProduto}/>}
+    {isEditarProdutoVisible && <EditarProduto id={id} price={price} name={name} category={category} brand={brand} quantity={quantity} description={description} spec={spec} onClick={closeEditarProduto}/>}
     <div className={clsx('flex items-end justify-between w-[1224px] lg:w-[1224px] h-[171px] lg:h-[260px] py-[53px] px-[27px] rounded-lg bg-white border-[#5D5D5D] border', className)}>
       <div className='flex gap-[55px] w-full h-full items-end'>
 
@@ -102,8 +107,8 @@ export const ProdutoHorizontal = ({ nome, imagem, preco, className }: ProdutoPro
         )}
         
         <div className='flex flex-col gap-[43px]'>
-            <p className='subtitle font-display'>{nome}</p>
-            <p className='subtitle font-display'>R$ {preco}</p>
+            <p className='subtitle font-display'>{name}</p>
+            <p className='subtitle font-display'>R$ {price}</p>
         </div>
       </div> 
 
@@ -119,7 +124,7 @@ export const ProdutoHorizontal = ({ nome, imagem, preco, className }: ProdutoPro
 };
 
 
-export const ProdutoCarrinho = ({ id, nome, imagem, preco, className }: ProdutoProps) => {
+export const ProdutoCarrinho = ({ id, name, imagem, price, className }: ProdutoProps) => {
   const { removeFromCartList } = useUser()
 
   return (
@@ -138,7 +143,7 @@ export const ProdutoCarrinho = ({ id, nome, imagem, preco, className }: ProdutoP
               </div>
             )}
 
-            <p className='font-black text-[16px] ml-[54px] mr-[64px]'>{nome} </p>
+            <p className='font-black text-[16px] ml-[54px] mr-[64px]'>{name} </p>
 
             <div className="flex flex-col items-center font-semibold text-[16px] mr-[114px]">
                 <p>Quantidade:</p>
@@ -147,7 +152,7 @@ export const ProdutoCarrinho = ({ id, nome, imagem, preco, className }: ProdutoP
 
             <div className="flex flex-col font-semibold text-[16px] gap-[8px]">
                 <p>Preço:</p>
-                <p className='font-black'>R$ {preco} </p>
+                <p className='font-black'>R$ {price} </p>
             </div>
         </div>
     </div>

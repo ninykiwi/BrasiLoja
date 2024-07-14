@@ -56,7 +56,7 @@ export default function FullPageList({
             { MainList.length > 0 &&
               MainList.map((product, index) => (
                 <li key={index}>
-                  <Produto id={product.id} nome={product.name} imagem={product.mainImg} preco={product.price} />
+                  <Produto id={product.id} name={product.name} imagem={product.mainImg} price={product.price} />
                 </li>
             ))}
           </ul>
